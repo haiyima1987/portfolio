@@ -1,0 +1,40 @@
+/* other colors */
+$green-main: #7ED321;
+$green-secondary: #7AC142;
+$green-dark: #2EC350;
+$green-light: #C6E5AA;
+$red-main: #FF2151;
+$brown-main: #9C652C;
+$white-opaque: rgba(255, 255, 255, 0.6);
+
+/* grey colors */
+$grey-title: #1B263B;
+$grey-dark: #231F20;
+$grey-text: #4A4B4C;
+$grey-text-input: #979797;
+$grey-text-medium: #666567;
+$grey-opaque-1: rgba(151, 140, 159, 0.4);
+$grey-opaque-2: rgba(192, 192, 192, 0.5);
+$grey-shadow-opaque: rgba(215, 215, 215, 0.5);
+$grey-light-opaque: rgba(247, 247, 247, 0.5);
+$grey-line: #CFD3DE;
+$grey-pale: #DEDEDE;
+$grey-pale-light: #ABACAD;
+
+/* starting point for XS */
+$screen-xs: 320px !default;
+/* starting point for SM */
+$screen-sm: 576px !default;
+$screen-sm-minus: 575px !default;
+/* starting point for MD */
+$screen-md: 768px !default;
+$screen-md-minus: 767px !default;
+/* starting point for LG */
+$screen-lg: 992px !default;
+$screen-lg-minus: 991px !default;
+/* starting point for XL */
+$screen-xl: 1200px !default;
+$screen-xl-minus: 1199px !default;
+/* starting point for XXL */
+$screen-xxl: 1600px !default;
+$screen-xxl-minus: 1599px !default;

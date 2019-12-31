@@ -1,0 +1,32 @@
+{
+  "name": "Portfolio",
+  "version": "1.0.0",
+  "description": "This is the portfolio of Haiyi",
+  "author": "Haiyi",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-brands-svg-icons": "^5.10.2",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
+    "@nuxtjs/axios": "^5.3.6",
+    "bootstrap-vue": "^2.1.0",
+    "dotenv": "^8.2.0",
+    "nuxt": "^2.11.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "nuxt-validate": "^1.0.1",
+    "vee-validate": "^3.2.1",
+    "vue": "^2.6.11",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.3.1"
+  }
+}

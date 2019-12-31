@@ -1,0 +1,91 @@
+@import "./base.variables";
+@import "./base.mixins";
+
+/** basic transitions fading **/
+.basic-enter-active {
+    @include transition(all, .2s, ease);
+}
+
+.basic-leave-active {
+    @include transition(all, .1s, ease);
+}
+
+.basic-enter {
+    opacity: 0;
+}
+
+/** sliding transition fading **/
+.prev-fade-enter-active {
+    transition: 0.5s ease-in-out;
+}
+
+.prev-fade-leave-active {
+    transition: 0.2s ease-in-out;
+}
+
+.prev-fade-enter,
+.next-fade-leave-to {
+    opacity: 0;
+    @include translate(100px, 0);
+}
+
+.prev-fade-move {
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+}
+
+.next-fade-enter-active {
+    transition: 0.5s ease-in-out;
+}
+
+.next-fade-leave-active {
+    transition: 0.2s ease-in-out;
+}
+
+.next-fade-enter,
+.prev-fade-leave-to {
+    opacity: 0;
+    @include translate(-100px, 0);
+}
+
+.next-fade-move {
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+}
+
+/** sliding transition without fading **/
+.prev-enter-active {
+    transition: 0.5s ease-in-out;
+}
+
+.prev-leave-active {
+    transition: 0.2s ease-in-out;
+}
+
+.prev-enter,
+.next-leave-to {
+    @include translate(180px, 0);
+}
+
+.prev-move {
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+}
+
+.next-enter-active {
+    transition: 0.5s ease-in-out;
+}
+
+.next-leave-active {
+    transition: 0.2s ease-in-out;
+}
+
+.next-enter,
+.prev-leave-to {
+    @include translate(-180px, 0);
+}
+
+.next-move {
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+}
