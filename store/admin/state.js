@@ -1,4 +1,5 @@
 export default () => ({
+  projects: undefined,
   skills: undefined,
-  projects: undefined
+  scopes: undefined
 })

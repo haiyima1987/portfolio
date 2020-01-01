@@ -138,12 +138,11 @@
 
   /* custom checkbox */
   .check-label {
-    margin-top: 8px;
+    margin: 10px 0;
     display: block;
     position: relative;
     cursor: pointer;
     padding-left: 35px;
-    margin-bottom: 12px;
     color: $titleColor;
     @include user-select(none);
 
@@ -155,6 +154,7 @@
       position: absolute;
       opacity: 0;
       cursor: pointer;
+      width: 0;
 
       &:checked ~ .check-mark {
         background-color: $mainColor;
@@ -194,24 +194,24 @@
 
   .check-label-round {
     @extend .check-label;
-    margin-top: 0;
+    /*margin-top: 0;*/
 
-    input {
-      @include position(absolute, $right: 100%);
-      opacity: 0;
-    }
+    //input {
+    //  @include position(absolute, $right: 100%);
+    //  opacity: 0;
+    //}
 
     .check-mark {
       @include border-radius(50%);
-      height: 30px;
-      width: 30px;
+      /*height: 30px;*/
+      /*width: 30px;*/
 
-      &:after {
-        @include position(absolute, $top: 5px, $left: 10px);
-        width: 10px;
-        height: 16px;
-        border-width: 0 3px 3px 0;
-      }
+      //&:after {
+      //  @include position(absolute, $top: 5px, $left: 10px);
+      //  width: 10px;
+      //  height: 16px;
+      //  border-width: 0 3px 3px 0;
+      //}
     }
   }
 

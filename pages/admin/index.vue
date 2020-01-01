@@ -17,8 +17,8 @@
         :placeholder="'Enter your password'">
       </InputField>
       <p v-show="isAuthError" class="text-error">Login failed</p>
-      <div class="button-wrapper">
-        <button type="submit" class="button-green-main button-login">
+      <div class="button-submit-wrapper">
+        <button type="submit" class="button-green button-login">
           LOGIN
         </button>
       </div>
@@ -54,8 +54,8 @@
   }
 </script>
 
-<style scoped>
-  .button-wrapper {
+<style scoped lang="scss">
+  .button-submit-wrapper {
     text-align: right;
   }
 </style>

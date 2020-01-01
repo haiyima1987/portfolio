@@ -50,7 +50,7 @@
   }
 
   .icon-logo-wrapper {
-    padding: 20px;
+    padding: 0 20px;
     @include flex-center-horizontal($left: true);
     flex-grow: 1;
   }

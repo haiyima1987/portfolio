@@ -1,8 +1,9 @@
 <template>
   <div class="project-list-wrapper">
     <div v-for="project in projects" :key="project.id" class="card-project">
-      <div class="image-wrapper">
-        <img :src="project.mediaLink" :alt="project.name" class="image-preview">
+      <div class="image-wrapper" :class="{ 'no-image-wrapper': !project.mediaLink }">
+        <img v-if="project.mediaLink" :src="project.mediaLink" :alt="project.name"
+             class="image-preview">
         <div class="scope-project">{{ project.type.name }}</div>
       </div>
       <div class="content-wrapper">
@@ -22,13 +23,13 @@
       <div class="button-group-wrapper">
         <div class="button-wrapper">
           <a :href="project.link" class="button-left">
-            <font-awesome-icon :icon="['fa', 'home']" class="icon-menu"/>
+            <font-awesome-icon :icon="['fa', 'home']"/>
             Website
           </a>
         </div>
         <div class="button-wrapper">
           <a :href="project.repository" class="button-right">
-            <font-awesome-icon :icon="['fab', 'github']" class="icon-menu"/>
+            <font-awesome-icon :icon="['fab', 'github']"/>
             GitHub
           </a>
         </div>
@@ -47,7 +48,7 @@
         projects: 'getProjects'
       })
     },
-    async fetch({store, params}) {
+    async fetch({store}) {
       return store.dispatch(GET_PROJECTS);
     }
   }
@@ -67,6 +68,10 @@
   /* image content */
   .image-wrapper {
     position: relative;
+  }
+
+  .no-image-wrapper {
+    height: 26px;
   }
 
   .scope-project {

@@ -4,12 +4,12 @@
     <p class="text-description">My name is Haiyi. I am a full-stack developer.</p>
     <div class="button-group">
       <div class="button-wrapper">
-        <nuxt-link to="/resume" class="btn button-green-main button-home">
+        <nuxt-link to="/resume" class="btn button-green button-home">
           Resume
         </nuxt-link>
       </div>
       <div class="button-wrapper">
-        <nuxt-link to="/portfolio" class="btn button-green-main button-home">
+        <nuxt-link to="/portfolio" class="btn button-green button-home">
           Projects
         </nuxt-link>
       </div>

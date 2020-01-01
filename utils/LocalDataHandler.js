@@ -130,19 +130,8 @@ class LocalDataHandler {
 
   getTokenByHeader(cookies) {
     let cookieArray = cookies.split(';')
-    // console.log(cookieArray);
     let needle = 'access_token='
-    let token = null
     let cookieString = cookieArray.find(cookie => cookie.includes(needle))
-    //   // console.log(cookie);
-    //   // console.log(cookie.includes(needle))
-    //   if (cookie.includes(needle)) {
-    //     console.log(cookie.indexOf(needle.length));
-    //     console.log('abcde'.substr(3));
-    //     // console.log(cookie.substr(needle.length))
-    //     token = cookie.substr(needle.length)
-    //   }
-    // })
     return cookieArray ? cookieString.substr(needle.length) : null
   }
 

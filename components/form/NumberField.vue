@@ -53,7 +53,7 @@
         required: false
       },
       step: {
-        required: false
+        default: 1
       },
       rule: {
         default: 'required'

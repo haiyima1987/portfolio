@@ -1,16 +1,39 @@
 import Project from "~/models/Project";
+import AppMessage from "~/models/AppMessage";
 
 export const SET_PROJECTS = 'setProjects';
 export const SET_FORM_DATA = 'setFormData';
+export const SET_MODAL_DATA = 'setModalData';
+export const RESET_MODAL_DATA = 'resetModalData';
 export const REMOVE_FORM_DATA_BY_NAME = 'removeFormDataByName';
 export const CLEAR_FORM_DATA = 'clearFormData';
+export const SET_ERROR_MESSAGE = 'setErrorMessage';
+export const SET_SUCCESS_MESSAGE = 'setSuccessMessage';
+export const CLEAR_APP_MESSAGE = 'clearAppMessage';
 
 export default {
+  setLoading: function (state, isLoading) {
+    state.isLoading = isLoading
+  },
+  increaseActiveCalls: function (state) {
+    state.activeCalls++
+  },
+  decreaseActiveCalls: function (state) {
+    state.activeCalls--
+  },
   setProjects: function (state, projects) {
     state.projects = projects.map(project => Project.parseFromDataObject(project))
   },
+  setModalData: function (state, data) {
+    state.modalOptions = data
+    state.isModalShown = true
+  },
+  resetModalData: function (state) {
+    state.modalOptions = {}
+    state.isModalShown = false
+  },
   // form related mutations
-  setFormData(state, {fieldName, data, groupIndex, groupName}) {
+  setFormData: function (state, {fieldName, data, groupIndex, groupName}) {
     // add group field
     if (groupName) {
       // if the key is not there yet, add it with an array value
@@ -33,13 +56,24 @@ export default {
       // add regular field
       state.formData[fieldName] = data
     }
+    // console.log(state.formData)
   },
-  removeFormDataByName(state, {groupName, index}) {
+  removeFormDataByName: function (state, {groupName, index}) {
     if (state.formData && state.formData[groupName]) {
       state.formData[groupName].splice(index, 1)
     }
   },
-  clearFormData(state) {
+  clearFormData: function (state) {
     state.formData = {}
+  },
+  // for app messages
+  setErrorMessage(state, errorData) {
+    state.appMessage = new AppMessage(errorData.error, false, true)
+  },
+  setSuccessMessage(state, message = null) {
+    state.appMessage = new AppMessage(message ? message : 'Success')
+  },
+  clearAppMessage(state) {
+    state.appMessage = null
   }
 }

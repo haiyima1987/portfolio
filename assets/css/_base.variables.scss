@@ -3,6 +3,7 @@ $green-main: #7ED321;
 $green-secondary: #7AC142;
 $green-dark: #2EC350;
 $green-light: #C6E5AA;
+$blue-main: #0069D9;
 $red-main: #FF2151;
 $brown-main: #9C652C;
 $white-opaque: rgba(255, 255, 255, 0.6);
@@ -13,13 +14,13 @@ $grey-dark: #231F20;
 $grey-text: #4A4B4C;
 $grey-text-input: #979797;
 $grey-text-medium: #666567;
-$grey-opaque-1: rgba(151, 140, 159, 0.4);
-$grey-opaque-2: rgba(192, 192, 192, 0.5);
-$grey-shadow-opaque: rgba(215, 215, 215, 0.5);
-$grey-light-opaque: rgba(247, 247, 247, 0.5);
 $grey-line: #CFD3DE;
 $grey-pale: #DEDEDE;
 $grey-pale-light: #ABACAD;
+$grey-dark-opaque: rgba(151, 140, 159, 0.4);
+$grey-medium-opaque: rgba(192, 192, 192, 0.5);
+$grey-light-opaque: rgba(247, 247, 247, 0.5);
+$grey-shadow-opaque: rgba(215, 215, 215, 0.5);
 
 /* starting point for XS */
 $screen-xs: 320px !default;

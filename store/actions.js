@@ -8,7 +8,8 @@ export const GET_PROJECTS = 'getProjects';
 export default {
   async getProjects({commit}) {
     try {
-      let response = await apiHandler.get('/projects')
+      let response = await this.$axios.get('/projects')
+      console.log(response)
       if (apiHandler.isSuccess(response.status)) {
         commit(SET_PROJECTS, response.data.data.projects)
         return true
