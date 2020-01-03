@@ -2,8 +2,8 @@ export default {
   isLoading: function (state) {
     return state.isLoading
   },
-  getProjects: function (state) {
-    return state.projects
+  getPublished: function (state) {
+    return state.publishedProjects
   },
   getFormData: function (state) {
     return state.formData

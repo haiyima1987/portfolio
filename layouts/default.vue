@@ -13,7 +13,7 @@
 
 <script>
   import Header from '~/components/Header.vue'
-  import MessageModal from "../components/MessageModal.vue";
+  import MessageModal from "../components/element/MessageModal.vue";
   import {mapGetters} from "vuex";
 
   export default {

@@ -2,14 +2,14 @@
   <div class="form-group">
     <h3 v-if="!!fieldTitle" class="form-input-title">{{fieldTitle}}</h3>
     <ValidationProvider :rules="rule" v-slot="{ errors }">
-      <label class="check-label"
-             v-for="(option, index) in options" :key="index"
-             :for="option.value">
+      <label v-for="(option, index) in options" :key="index"
+             :for="`${fieldName}-${option.value}`"
+             class="check-label label-checkbox">
         <input type="checkbox"
-               class="filter-option"
-               :id="option.value"
+               class="input-check"
+               :id="`${fieldName}-${option.value}`"
                :value="option.value"
-               @click="emitValue(option)"
+               @change="emitValue(option)"
                v-model="input">
         <span class="check-mark"/>
         <span class="option-text">{{option.text}}</span>
@@ -58,7 +58,6 @@
     }),
     methods: {
       emitValue: function (option) {
-        this.addValue(option)
         // if callback is passed, it means the radio is not a form value, it's just a helper to trigger another action
         if (this.$props.callback) {
           this.$props.callback(option.value)
@@ -68,13 +67,6 @@
           this.setFormData()
         }
       },
-      addValue: function (option) {
-        if (this.input.includes(option.value)) {
-          this.input.splice(this.input.indexOf(option.value), 1)
-        } else {
-          this.input.push(option.value)
-        }
-      },
       setFormData: function () {
         let data = {fieldName: this.$props.fieldName, data: this.input}
         this.$store.commit(SET_FORM_DATA, data, {root: true})
@@ -82,11 +74,8 @@
       assignValue: function () {
         if (this.$props.value) {
           this.input = this.$props.value
-          // } else {
-          //   this.input.push(this.$props.options[0].value)
-          //   // this.setFormData()
-          // }
         }
+        this.setFormData()
       }
     },
     created() {
@@ -96,4 +85,7 @@
 </script>
 
 <style scoped lang="scss">
+  .label-checkbox {
+    margin-left: 15px;
+  }
 </style>

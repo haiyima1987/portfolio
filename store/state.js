@@ -1,7 +1,7 @@
 export default () => ({
   isLoading: false,
   activeCalls: 0,
-  projects: [],
+  publishedProjects: [],
   types: [],
   // form related props
   formData: {},

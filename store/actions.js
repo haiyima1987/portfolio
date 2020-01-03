@@ -1,22 +1,21 @@
 import apiHandler from "~/utils/ApiHandler";
-import {SET_PROJECTS} from "~/store/mutations";
+import {SET_ERROR_MESSAGE, SET_PUBLISHED} from "~/store/mutations";
 import LocalDataHandler from "~/utils/LocalDataHandler";
 import {SET_ACCESS_TOKEN} from "~/store/auth/mutations";
 
-export const GET_PROJECTS = 'getProjects';
+export const GET_PUBLISHED = 'getPublished';
 
 export default {
-  async getProjects({commit}) {
+  async getPublished({commit}) {
     try {
-      let response = await this.$axios.get('/projects')
-      console.log(response)
+      let response = await this.$axios.get('/published')
       if (apiHandler.isSuccess(response.status)) {
-        commit(SET_PROJECTS, response.data.data.projects)
+        commit(SET_PUBLISHED, response.data.data)
         return true
       }
       return false
     } catch (e) {
-      console.log(e)
+      commit(SET_ERROR_MESSAGE, e.response.data)
       return false
     }
   },

@@ -1,8 +1,9 @@
 <template>
   <div class="project-list-wrapper">
     <div v-for="project in projects" :key="project.id" class="card-project">
-      <div class="image-wrapper" :class="{ 'no-image-wrapper': !project.mediaLink }">
-        <img v-if="project.mediaLink" :src="project.mediaLink" :alt="project.name"
+      <div class="image-wrapper"
+           :class="{ 'no-image-wrapper': !project.previewLink }">
+        <img v-if="project.previewLink" :src="project.previewLink" :alt="project.name"
              class="image-preview">
         <div class="scope-project">{{ project.type.name }}</div>
       </div>
@@ -22,7 +23,7 @@
       </div>
       <div class="button-group-wrapper">
         <div class="button-wrapper">
-          <a :href="project.link" class="button-left">
+          <a :href="project.siteLink" class="button-left">
             <font-awesome-icon :icon="['fa', 'home']"/>
             Website
           </a>
@@ -40,16 +41,16 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {GET_PROJECTS} from "../../store/actions";
+  import {GET_PUBLISHED} from "../../store/actions";
 
   export default {
     computed: {
       ...mapGetters({
-        projects: 'getProjects'
+        projects: 'getPublished'
       })
     },
     async fetch({store}) {
-      return store.dispatch(GET_PROJECTS);
+      return store.dispatch(GET_PUBLISHED);
     }
   }
 </script>
@@ -74,6 +75,11 @@
     height: 26px;
   }
 
+  .image-preview {
+    width: 100%;
+    @include border-radius-separate(10px, 10px, 0, 0);
+  }
+
   .scope-project {
     padding: 0 8px 0 4px;
     background-color: $green-main;
@@ -92,11 +98,6 @@
       border-top: 26px solid transparent;
       border-right: 15px solid $green-main;
     }
-  }
-
-  .image-preview {
-    width: 100%;
-    @include border-radius-separate(10px, 10px, 0, 0);
   }
 
   /* text content */

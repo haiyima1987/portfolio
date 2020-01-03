@@ -1,12 +1,11 @@
 <template>
   <div class="check-wrapper">
-    <label :for="fieldName"
-           :class="{ 'no-margin': noMargin }"
-           class="check-label">
+    <label :for="fieldName" class="check-label label-checkbox">
       <input type="checkbox"
              :id="fieldName"
              :name="fieldName"
-             v-model="input">{{placeholder}}
+             v-model="input">
+      {{placeholder}}
       <span class="check-mark"/>
     </label>
   </div>
@@ -32,9 +31,6 @@
       fieldWidth: {
         default: '100%'
       },
-      noMargin: {
-        default: false,
-      },
       groupIndex: {
         required: false
       },
@@ -43,12 +39,32 @@
       },
       callback: {
         required: false
-      },
+      }
     },
     data: () => ({
       input: undefined
     }),
-    inject: ['$validator'],
+    methods: {
+      setInputTimeout: function () {
+        clearTimeout(this.timeOut)
+        this.timeOut = setTimeout(() => {
+          this.setFormData()
+        }, 500)
+      },
+      // send the form data to the store
+      setFormData: function () {
+        let data = {fieldName: this.$props.fieldName, data: this.input}
+        // if it's a group value, we need to send the value with index (id in form data) and field name
+        if (this.$props.groupIndex) {
+          data.groupIndex = this.$props.groupIndex
+          data.groupName = this.$props.groupName
+          // add field name, the name is name-{index}, so get the first value from array
+          let name = this.$props.fieldName
+          data.fieldName = name.split('-')[0]
+        }
+        this.$store.commit(SET_FORM_DATA, data)
+      },
+    },
     created() {
       if (this.$props.value != undefined) {
         this.input = this.$props.value
@@ -57,27 +73,15 @@
       }
     },
     watch: {
-      input: function (newVal) {
-        clearTimeout(this.timeOut)
-        this.timeOut = setTimeout(() => {
-          let data = {fieldName: this.$props.fieldName, data: newVal}
-          // if it's a group value, we need to send the value with index (id in form data) and field name
-          if (this.$props.groupIndex != undefined) {
-            data.groupIndex = this.$props.groupIndex
-            data.groupName = this.$props.groupName
-            // add field name, the name is name-{index}, so get the first value from array
-            let name = this.$props.fieldName
-            data.fieldName = name.split('-')[0]
-          }
-          this.$store.commit(SET_FORM_DATA, data)
-        }, 500)
+      input: function () {
+        this.setInputTimeout()
       }
     }
   }
 </script>
 
 <style scoped>
-  .no-margin {
-    margin: 0;
+  .label-checkbox {
+    margin-left: 15px;
   }
 </style>

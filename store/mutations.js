@@ -1,7 +1,7 @@
 import Project from "~/models/Project";
 import AppMessage from "~/models/AppMessage";
 
-export const SET_PROJECTS = 'setProjects';
+export const SET_PUBLISHED = 'setPublished';
 export const SET_FORM_DATA = 'setFormData';
 export const SET_MODAL_DATA = 'setModalData';
 export const RESET_MODAL_DATA = 'resetModalData';
@@ -21,8 +21,8 @@ export default {
   decreaseActiveCalls: function (state) {
     state.activeCalls--
   },
-  setProjects: function (state, projects) {
-    state.projects = projects.map(project => Project.parseFromDataObject(project))
+  setPublished: function (state, projects) {
+    state.publishedProjects = projects.map(project => Project.parseFromDataObject(project))
   },
   setModalData: function (state, data) {
     state.modalOptions = data

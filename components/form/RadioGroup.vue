@@ -3,10 +3,11 @@
     <h3 v-if="!!fieldTitle" class="form-input-title">{{fieldTitle}}</h3>
     <ValidationProvider :rules="rule" v-slot="{ errors }">
       <label v-for="(option, index) in options" :key="index"
-             class="check-label-round">
+             :for="`${fieldName}-${option.value}`"
+             class="check-label-round label-radio">
         <input type="radio"
-               class="radio-input"
-               :id="option.value"
+               class="input-radio"
+               :id="`${fieldName}-${option.value}`"
                :value="option.value"
                v-model="input"
                @click="emitValue(option)">
@@ -90,12 +91,7 @@
   @import "../../assets/css/base.variables";
   @import "../../assets/css/base.mixins";
 
-  .radio-input {
-    //width: 50px;
-  }
-
-  .option-text {
-    //padding-left: 15px;
-    //@include position(relative, $top: 1px);
+  .label-radio {
+    margin-left: 15px;
   }
 </style>

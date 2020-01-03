@@ -26,7 +26,7 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {RESET_MODAL_DATA} from "../store/mutations";
+  import {RESET_MODAL_DATA} from "../../store/mutations";
 
   export default {
     name: 'DynamicModal',
@@ -52,8 +52,8 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../assets/css/base.variables";
-  @import "../assets/css/base.mixins";
+  @import "../../assets/css/base.variables";
+  @import "../../assets/css/base.mixins";
 
   .overlay-panel-background {
     background-color: $grey-medium-opaque;

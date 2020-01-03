@@ -13,7 +13,7 @@
   import {ValidationObserver} from "vee-validate";
 
   export default {
-    name: 'Form',
+    name: 'FormWrapper',
     components: {
       ValidationObserver
     },
@@ -29,20 +29,9 @@
     },
     methods: {
       validateFormData: function () {
-        // let the objects in group value sorted by their id
-        // this.sortArrayData()
         // send the data to the parent
         this.$props.sendFormData(this.formData)
-      },
-      // sortArrayData: function () {
-      //   for (let key in this.formData) {
-      //     if (this.formData.hasOwnProperty(key) && Array.isArray(this.formData[key])) {
-      //       this.formData[key].sort((objectX, objectY) => {
-      //         return objectX.id - objectY.id
-      //       })
-      //     }
-      //   }
-      // },
+      }
     }
   }
 </script>
@@ -126,14 +115,18 @@
     border: 1px solid $borderColor;
     border-radius: 8px;
     background-color: $backgroundColor;
-    font-size: 18px;
+    font-size: 1rem;
     color: $textColor;
   }
 
-  .form-file-select {
-    border: 1px solid $borderColor;
-    border-radius: 8px;
-    background-color: $backgroundColor;
+  /* button submit */
+  .button-submit-wrapper {
+    padding-top: 40px;
+    text-align: right;
+  }
+
+  .button-save {
+    padding: 0 40px;
   }
 
   /* custom checkbox */
@@ -144,6 +137,7 @@
     cursor: pointer;
     padding-left: 35px;
     color: $titleColor;
+    line-height: 24px;
     @include user-select(none);
 
     &:checked {
@@ -194,24 +188,9 @@
 
   .check-label-round {
     @extend .check-label;
-    /*margin-top: 0;*/
-
-    //input {
-    //  @include position(absolute, $right: 100%);
-    //  opacity: 0;
-    //}
 
     .check-mark {
       @include border-radius(50%);
-      /*height: 30px;*/
-      /*width: 30px;*/
-
-      //&:after {
-      //  @include position(absolute, $top: 5px, $left: 10px);
-      //  width: 10px;
-      //  height: 16px;
-      //  border-width: 0 3px 3px 0;
-      //}
     }
   }
 

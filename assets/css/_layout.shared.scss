@@ -86,6 +86,10 @@ a, button {
   }
 }
 
+.button-main {
+  @extend .button-green;
+}
+
 .button-green-text {
   color: $green-main;
   font-weight: 600;
@@ -109,6 +113,7 @@ a, button {
 }
 
 .button-red {
+  padding: 0 20px;
   background-color: $red-main;
   color: white;
   font-weight: 600;

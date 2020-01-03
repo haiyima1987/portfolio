@@ -1,6 +1,6 @@
 <template>
   <div class="admin-wrapper">
-    <Form :send-form-data="login"
+    <FormWrapper :send-form-data="login"
           class="create-account-form">
       <InputField
         :field-title="'Username'"
@@ -22,12 +22,12 @@
           LOGIN
         </button>
       </div>
-    </Form>
+    </FormWrapper>
   </div>
 </template>
 
 <script>
-  import Form from "../../components/form/Form";
+  import FormWrapper from "../../components/form/FormWrapper";
   import InputField from "../../components/form/InputField";
   import {LOGIN} from "../../store/auth/actions";
   import {mapGetters} from "vuex";
@@ -35,7 +35,7 @@
   export default {
     name: "index",
     components: {
-      Form, InputField
+      FormWrapper, InputField
     },
     computed: {
       ...mapGetters('auth', {
@@ -43,12 +43,11 @@
       })
     },
     methods: {
-      login: function (data) {
-        this.$store.dispatch(LOGIN, data).then(response => {
-          if (response) {
-            this.$router.push({path: '/admin/skill'})
-          }
-        })
+      async login(data) {
+        let response = await this.$store.dispatch(LOGIN, data)
+        if (response) {
+          return this.$router.push({path: '/admin/skills'})
+        }
       }
     }
   }

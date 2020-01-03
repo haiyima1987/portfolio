@@ -1,25 +1,32 @@
 <template>
-  <div class="form-group"
-       :style="{'width': fieldWidth}">
-    <h3 :class="titleClass">{{fieldTitle}}</h3>
-    <label :for="fieldName">
-      <textarea :id="fieldName"
-                :class="getInputClass()"
-                :name="fieldName"
-                :placeholder="placeholder"
-                :rows="rows"
-                v-validate="rule"
-                v-model="input"/>
-    </label>
-    <p class="error-text-right" v-show="errors.has(fieldName)">{{ errors.first(fieldName) }}</p>
+  <div class="form-group" :style="{'width': fieldWidth}">
+    <ValidationProvider :rules="rule" v-slot="{ errors }">
+      <h3 class="form-input-title" :class="{ 'text-error': errors[0] }">
+        {{fieldTitle}}
+      </h3>
+      <label :for="fieldName">
+        <textarea :id="fieldName"
+                  class="form-input-textarea"
+                  :class="{ 'field-error': errors[0] }"
+                  :name="fieldName"
+                  :placeholder="placeholder"
+                  :rows="rows"
+                  v-model="input"/>
+      </label>
+      <p v-show="errors[0]" class="text-error">{{ errors[0] }}</p>
+    </ValidationProvider>
   </div>
 </template>
 
 <script>
+  import {ValidationProvider} from "vee-validate";
   import {SET_FORM_DATA} from '../../store/mutations'
 
   export default {
     name: 'TextField',
+    components: {
+      ValidationProvider
+    },
     props: {
       // required
       fieldTitle: {
@@ -41,12 +48,6 @@
       fieldWidth: {
         default: '100%'
       },
-      titleClass: {
-        default: 'form-input-title'
-      },
-      inputClass: {
-        default: 'form-input-textarea'
-      },
       groupIndex: {
         required: false
       },
@@ -60,18 +61,29 @@
         default: 4
       }
     },
-    inject: ['$validator'],
     data: () => ({
       input: '',
     }),
     methods: {
-      getInputClass: function () {
-        let className = this.$props.inputClass
-        if (this.errors.has(this.$props.fieldName)) {
-          className = `${className} error-field error`
+      setInputTimeout: function () {
+        clearTimeout(this.timeOut)
+        this.timeOut = setTimeout(() => {
+          this.setFormData()
+        }, 500)
+      },
+      // send the form data to the store
+      setFormData: function () {
+        let data = {fieldName: this.$props.fieldName, data: this.input}
+        // if it's a group value, we need to send the value with index (id in form data) and field name
+        if (this.$props.groupIndex) {
+          data.groupIndex = this.$props.groupIndex
+          data.groupName = this.$props.groupName
+          // add field name, the name is name-{index}, so get the first value from array
+          let name = this.$props.fieldName
+          data.fieldName = name.split('-')[0]
         }
-        return className
-      }
+        this.$store.commit(SET_FORM_DATA, data)
+      },
     },
     created() {
       if (this.$props.value) {
@@ -79,20 +91,8 @@
       }
     },
     watch: {
-      input: function (newVal) {
-        clearTimeout(this.timeOut)
-        this.timeOut = setTimeout(() => {
-          let data = {fieldName: this.$props.fieldName, data: newVal}
-          // if it's a group value, we need to send the value with index (id in form data) and field name
-          if (this.$props.groupIndex != undefined) {
-            data.groupIndex = this.$props.groupIndex
-            data.groupName = this.$props.groupName
-            // add field name, the name is name-{index}, so get the first value from array
-            let name = this.$props.fieldName
-            data.fieldName = name.split('-')[0]
-          }
-          this.$store.commit(SET_FORM_DATA, data)
-        }, 500)
+      input: function () {
+        this.setInputTimeout()
       }
     }
   }

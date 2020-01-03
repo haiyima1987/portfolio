@@ -8,7 +8,7 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {CLEAR_APP_MESSAGE} from "../store/mutations";
+  import {CLEAR_APP_MESSAGE} from "../../store/mutations";
 
   export default {
     name: 'MessageModal',
@@ -37,8 +37,8 @@
 </script>
 
 <style scoped lang="scss">
-  @import "../assets/css/base.variables";
-  @import "../assets/css/base.mixins";
+  @import "../../assets/css/base.variables";
+  @import "../../assets/css/base.mixins";
 
   .message-modal {
     padding: 10px 20px;
