@@ -1,32 +1,30 @@
 <template>
   <div>
     <FormWrapper :send-form-data="createSkill" class="update-skill-form">
-      <div class="skill-wrapper">
-        <InputField
-          class="name-wrapper"
-          :field-title="'Name'"
-          :field-name="`name`"
-          :rule="'required'"
-          :type="'text'"
-          :placeholder="'Enter your skill'">
-        </InputField>
-        <NumberField
-          class="level-wrapper"
-          :field-title="'Level'"
-          :field-width="'150px'"
-          :field-name="`level`"
-          :rule="'required'"
-          :min="0"
-          :max="100"
-          :placeholder="'Level'">
-        </NumberField>
-        <RadioGroup
-          :field-title="'Scope'"
-          :field-name="'scopeId'"
-          :options="scopeOptions"
-          :rule="'required'">
-        </RadioGroup>
-      </div>
+      <InputField
+        class="name-wrapper"
+        :field-title="'Name'"
+        :field-name="`name`"
+        :rule="'required'"
+        :type="'text'"
+        :placeholder="'Enter your skill'">
+      </InputField>
+      <NumberField
+        class="level-wrapper"
+        :field-title="'Level'"
+        :field-width="'150px'"
+        :field-name="`level`"
+        :rule="'required'"
+        :min="0"
+        :max="100"
+        :placeholder="'Level'">
+      </NumberField>
+      <RadioGroup
+        :field-title="'Scope'"
+        :field-name="'scopeId'"
+        :options="scopeOptions"
+        :rule="'required'">
+      </RadioGroup>
       <div class="button-submit-wrapper">
         <button type="submit" class="button-green button-save">
           SAVE

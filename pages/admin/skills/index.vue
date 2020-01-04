@@ -50,7 +50,7 @@
           </button>
         </template>
         <template v-slot:buttonDelete>
-          <button class="button button-red">
+          <button type="button" class="button button-red">
             <font-awesome-icon :icon="['fas', 'trash-alt']"/>
           </button>
         </template>
@@ -85,8 +85,7 @@
     }),
     computed: {
       ...mapGetters('admin', {
-        skills: 'getSkills',
-        scrollY: 'getScrollY'
+        skills: 'getSkills'
       })
     },
     methods: {
@@ -138,6 +137,7 @@
   @import "../../../assets/css/base.mixins";
 
   .title-wrapper {
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
   }
@@ -147,7 +147,6 @@
   }
 
   .input-wrapper {
-    margin-top: 10px;
     display: flex;
     align-items: center;
   }

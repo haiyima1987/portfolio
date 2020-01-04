@@ -15,6 +15,7 @@
   import Header from '~/components/Header.vue'
   import MessageModal from "../components/element/MessageModal.vue";
   import {mapGetters} from "vuex";
+  import {CLEAR_FORM_DATA} from "../store/mutations";
 
   export default {
     components: {
@@ -24,6 +25,11 @@
       ...mapGetters({
         isLoading: 'isLoading'
       })
+    },
+    watch: {
+      $route: function () {
+        this.$store.commit(CLEAR_FORM_DATA)
+      }
     }
   }
 </script>

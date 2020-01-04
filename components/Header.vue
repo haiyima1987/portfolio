@@ -5,6 +5,7 @@
         <img class="logo" src="../assets/img/logo-haiyi-inverse.svg" alt="logo">
       </nuxt-link>
     </div>
+    <div class="text-white">{{ isAuthenticated }}</div>
     <div class="icon-menu-wrapper">
       <font-awesome-icon :icon="['fas', 'bars']"
                          @click="toggleOverlay"
@@ -18,8 +19,16 @@
                              @click="toggleOverlay"
                              class="icon-menu"/>
         </div>
-        <div class="item-mobile-wrapper">
-          <nuxt-link v-for="(mobileItem, index) in mobileItems" :key="index"
+        <div v-if="!isAuthenticated" class="item-mobile-wrapper">
+          <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
+                     @click.native="closeOverlay"
+                     :to="mobileItem.link"
+                     class="button-green-text item-mobile">
+            {{ mobileItem.name }}
+          </nuxt-link>
+        </div>
+        <div v-else class="item-mobile-wrapper">
+          <nuxt-link v-for="(mobileItem, index) in authItems" :key="index"
                      @click.native="closeOverlay"
                      :to="mobileItem.link"
                      class="button-green-text item-mobile">
@@ -32,18 +41,30 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
     name: "Header",
     data: () => ({
       isOverlayShown: false,
-      mobileItems: [{
+      publicItems: [{
+        name: 'Portfolio',
+        link: '/portfolio'
+      },{
+        name: 'Resume',
+        link: '/resume'
+      },{
+        name: 'About',
+        link: '/about'
+      }],
+      authItems: [{
         name: 'Projects',
         link: '/admin/projects'
       }, {
         name: 'Skills',
         link: '/admin/skills'
       }, {
-        name: 'Scopes',
+        name: 'Skill scopes',
         link: '/admin/scopes'
       }, {
         name: 'Types',
@@ -53,6 +74,11 @@
         link: '/admin/categories'
       },]
     }),
+    computed: {
+      ...mapGetters('auth', {
+        isAuthenticated: 'isAuthenticated'
+      })
+    },
     methods: {
       toggleOverlay: function () {
         this.isOverlayShown = !this.isOverlayShown

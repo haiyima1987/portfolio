@@ -12,6 +12,7 @@ export default {
     state.authError = false
   },
   setAccessToken: function (state, token) {
+    state.isAuthenticated = true
     state.accessToken = token
   },
   onLoginFailure: function (state, {error}) {
