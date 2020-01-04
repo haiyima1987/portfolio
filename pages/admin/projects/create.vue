@@ -95,6 +95,8 @@
   import CheckField from "../../../components/form/CheckField";
 
   export default {
+    name: 'create',
+    middleware: 'authenticated',
     components: {
       FormWrapper, FileUploader, InputField, NumberField, RadioGroup, CheckBoxGroup, TextField, CheckField
     },

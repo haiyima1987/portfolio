@@ -62,6 +62,8 @@
   import FormWrapper from "../../../components/form/FormWrapper";
 
   export default {
+    name: 'create',
+    middleware: 'authenticated',
     components: {
       DragList, FormWrapper, DynamicModal
     },

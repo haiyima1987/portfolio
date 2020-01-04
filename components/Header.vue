@@ -72,7 +72,10 @@
       }, {
         name: 'Categories',
         link: '/admin/categories'
-      },]
+      }, {
+        name: 'Logout',
+        link: '/admin/logout'
+      }]
     }),
     computed: {
       ...mapGetters('auth', {

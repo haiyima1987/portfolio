@@ -25,6 +25,7 @@
 
   export default {
     name: "create",
+    middleware: 'authenticated',
     components: {
       FormWrapper, InputField
     },

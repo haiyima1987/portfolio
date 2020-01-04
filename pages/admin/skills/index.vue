@@ -77,6 +77,8 @@
   import DragList from "../../../components/element/DragList";
 
   export default {
+    name: 'index',
+    middleware: 'authenticated',
     components: {
       FormWrapper, InputField, NumberField, DragList, DynamicModal
     },
@@ -143,6 +145,7 @@
   }
 
   .title-page {
+    margin: 0;
     flex-grow: 1;
   }
 

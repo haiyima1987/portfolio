@@ -64,6 +64,7 @@
 
   export default {
     name: "index",
+    middleware: 'authenticated',
     components: {
       FormWrapper, InputField, DragList, DynamicModal
     },
@@ -128,6 +129,7 @@
   }
 
   .title-page {
+    margin: 0;
     flex-grow: 1;
   }
 
