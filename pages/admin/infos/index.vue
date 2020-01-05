@@ -7,40 +7,51 @@
       </nuxt-link>
     </div>
     <FormWrapper :send-form-data="updateInfos" class="update-info-form">
-      <DragList :drag-items="domInfos"
-                :header-height="60"
-                :on-edit-click="editInfo"
-                :on-delete-click="showDeleteModal">
-        <template v-slot:item="{ item }">
-          <h5 class="title-item">{{ item.info.key }}: {{ item.info.value }}</h5>
-          <div class="text-item">{{ item.info.infoType.name }}</div>
-        </template>
-        <template v-slot:buttonUp>
-          <button type="button" class="button-mobile button-blue">
-            <font-awesome-icon :icon="['fa', 'arrow-up']"/>
-          </button>
-        </template>
-        <template v-slot:buttonDown>
-          <button type="button" class="button-mobile button-blue">
-            <font-awesome-icon :icon="['fa', 'arrow-down']"/>
-          </button>
-        </template>
-        <template v-slot:buttonDrag>
-          <button type="button" class="button button-blue">
-            <font-awesome-icon :icon="['fas', 'arrows-alt']"/>
-          </button>
-        </template>
-        <template v-slot:buttonEdit>
-          <button type="button" class="button button-green">
-            <font-awesome-icon :icon="['fas', 'edit']"/>
-          </button>
-        </template>
-        <template v-slot:buttonDelete>
-          <button type="button" class="button button-red">
-            <font-awesome-icon :icon="['fas', 'trash-alt']"/>
-          </button>
-        </template>
-      </DragList>
+      <div v-for="(dataItem, index) in infoData" class="info-data-wrapper">
+        <button @click="showSelectedInfos(index)"
+                type="button" class="button button-blue button-info-type">
+          {{ dataItem.name }}
+        </button>
+        <DragList v-if="index == selectedIndex && dataItem.infos.length > 0"
+                  :drag-items="dataItem.infos"
+                  :header-height="60"
+                  :on-edit-click="editInfo"
+                  :on-delete-click="showDeleteModal">
+          <template v-slot:item="{ item }">
+            <h5 v-if="item.info.key" class="title-item">{{ item.info.key }}: {{ item.info.value }}</h5>
+            <h5 v-else class="title-item">{{ item.info.value }}</h5>
+          </template>
+          <template v-slot:buttonUp>
+            <button type="button" class="button-mobile button-blue">
+              <font-awesome-icon :icon="['fa', 'arrow-up']"/>
+            </button>
+          </template>
+          <template v-slot:buttonDown>
+            <button type="button" class="button-mobile button-blue">
+              <font-awesome-icon :icon="['fa', 'arrow-down']"/>
+            </button>
+          </template>
+          <template v-slot:buttonDrag>
+            <button type="button" class="button button-blue">
+              <font-awesome-icon :icon="['fas', 'arrows-alt']"/>
+            </button>
+          </template>
+          <template v-slot:buttonEdit>
+            <button type="button" class="button button-green">
+              <font-awesome-icon :icon="['fas', 'edit']"/>
+            </button>
+          </template>
+          <template v-slot:buttonDelete>
+            <button type="button" class="button button-red">
+              <font-awesome-icon :icon="['fas', 'trash-alt']"/>
+            </button>
+          </template>
+        </DragList>
+        <div v-else-if="index == selectedIndex && dataItem.infos.length == 0"
+             class="text-no-info">
+          No information here
+        </div>
+      </div>
       <div class="button-submit-wrapper">
         <button type="submit" class="button-green button-save">
           SAVE
@@ -70,17 +81,16 @@
       FormWrapper, InputField, NumberField, DragList, DynamicModal
     },
     data: () => ({
-      domInfos: []
+      infoData: [],
+      selectedIndex: 0
     }),
-    computed: {
-      ...mapGetters('info', {
-        infos: 'getInfos'
-      })
-    },
     methods: {
+      showSelectedInfos: function (index) {
+        this.selectedIndex = index
+      },
       async updateInfos() {
         // update display indexes
-        let updatedInfos = this.domInfos.map((domInfo, index) => ({
+        let updatedInfos = this.infoData[this.selectedIndex].infos.map((domInfo, index) => ({
           id: domInfo.id,
           displayIndex: index + 1
         }))
@@ -92,25 +102,30 @@
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
-          modalContent: 'info',
+          modalContent: 'information',
           data: id,
           callback: this.deleteInfo
         })
       },
       async deleteInfo(id) {
-        let infos = await this.$store.dispatch(DELETE_INFO, id)
-        if (infos) {
+        let response = await this.$store.dispatch(DELETE_INFO, id)
+        if (response) {
           // update local infos
-          this.domInfos = infos.map(info => new DomInfo(info.id, info))
+          this.infoData[this.selectedIndex].infos = this.infoData[this.selectedIndex].infos
+            .filter(domInfo => domInfo.id != id)
           // close the modal and reset the options
           this.$store.commit(RESET_MODAL_DATA)
         }
       }
     },
     async asyncData({store}) {
-      let infos = await store.dispatch(GET_INFOS);
-      if (infos) {
-        return {domInfos: infos.map(info => new DomInfo(info.id, info))}
+      let infoData = await store.dispatch(GET_INFOS);
+      if (infoData) {
+        infoData = infoData.map(data => ({
+          name: data.name,
+          infos: data.infos.map(info => new DomInfo(info.id, info))
+        }))
+        return {infoData}
       }
     }
   }
@@ -131,5 +146,19 @@
 
   .text-item {
     margin-bottom: 5px;
+  }
+
+  .button-info-type {
+    margin-bottom: 10px;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .text-no-info {
+    margin-bottom: 10px;
+    padding-left: 15px;
+    color: $red-main;
+    font-weight: bold;
   }
 </style>

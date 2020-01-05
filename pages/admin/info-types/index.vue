@@ -13,6 +13,11 @@
                 :on-delete-click="showDeleteModal">
         <template v-slot:item="{ item }">
           <h5 class="title-item">{{ item.infoType.name }}</h5>
+          <div class="tag-wrapper">
+            <div v-for="info in item.infoType.infos" :key="info.id" class="tag">
+              {{ info.key ? info.key : info.value }}
+            </div>
+          </div>
         </template>
         <template v-slot:buttonUp>
           <button type="button" class="button-mobile button-blue">
@@ -91,7 +96,7 @@
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
-          modalContent: 'infoType',
+          modalContent: 'information type',
           data: id,
           callback: this.deleteInfoType
         })
@@ -130,5 +135,21 @@
 
   .text-item {
     margin-bottom: 5px;
+  }
+
+  /* tags */
+  .tag-wrapper {
+    padding: 5px 0 10px 0;
+  }
+
+  .tag {
+    margin: 0 8px 4px 0;
+    padding: 2px 8px;
+    display: inline-block;
+    background-color: $green-main;
+    color: white;
+    @include border-radius(4px);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 </style>

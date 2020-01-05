@@ -27,8 +27,8 @@ export default {
     try {
       let response = await this.$axios.get('/info/infos')
       if (apiHandler.isSuccess(response.status)) {
-        commit(SET_INFOS, response.data.data);
-        return state.infos
+        commit(SET_SUCCESS_MESSAGE, undefined, {root: true})
+        return response.data.data
       }
       return false
     } catch (e) {
@@ -93,9 +93,9 @@ export default {
     try {
       let response = await this.$axios.delete(`/info/infos/delete/${id}`)
       if (apiHandler.isSuccess(response.status)) {
-        commit(REMOVE_INFO_BY_ID, id);
+        // commit(REMOVE_INFO_BY_ID, id);
         commit(SET_SUCCESS_MESSAGE, undefined, {root: true})
-        return state.infos
+        return true
       }
       return false
     } catch (e) {

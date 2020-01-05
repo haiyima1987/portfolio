@@ -29,7 +29,7 @@
         required: false
       },
       isValueNumeric: {
-        default: false
+        default: true
       },
       fieldWidth: {
         default: '100%'

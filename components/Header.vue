@@ -18,20 +18,39 @@
                              @click="toggleOverlay"
                              class="icon-menu"/>
         </div>
-        <div v-if="!isAuthenticated" class="item-mobile-wrapper">
-          <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
-                     @click.native="closeOverlay"
-                     :to="mobileItem.link"
-                     class="button-green-text item-mobile">
-            {{ mobileItem.name }}
-          </nuxt-link>
-        </div>
-        <div v-else class="item-mobile-wrapper">
-          <nuxt-link v-for="(mobileItem, index) in authItems" :key="index"
-                     @click.native="closeOverlay"
-                     :to="mobileItem.link"
-                     class="button-green-text item-mobile">
-            {{ mobileItem.name }}
+        <transition name="basic">
+          <div v-if="!isAuthenticated" class="item-mobile-wrapper">
+            <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
+                       @click.native="closeOverlay"
+                       :to="mobileItem.link"
+                       class="button-green-text item-mobile">
+              {{ mobileItem.name }}
+            </nuxt-link>
+          </div>
+        </transition>
+        <transition name="basic">
+          <div v-if="isAuthenticated">
+            <div v-for="(itemData, index) in authItems">
+              <button @click="showSelectedItems(index)"
+                      type="button" class="button button-green button-menu-type">
+                {{ itemData.name }}
+              </button>
+              <div v-if="index == selectedIndex"
+                   class="item-mobile-wrapper auth-item-wrapper">
+                <nuxt-link v-for="(mobileItem, index) in itemData.items" :key="index"
+                           @click.native="closeOverlay"
+                           :to="mobileItem.link"
+                           class="button-green-text item-mobile">
+                  {{ mobileItem.name }}
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+        </transition>
+        <div class="logout-wrapper">
+          <nuxt-link @click.native="closeOverlay" to="/admin/logout"
+                     class="button-green-text item-mobile button-logout">
+            Logout
           </nuxt-link>
         </div>
       </div>
@@ -45,47 +64,51 @@
   export default {
     name: "Header",
     data: () => ({
+      selectedIndex: -1,
       isOverlayShown: false,
       publicItems: [{
         name: 'Portfolio',
         link: '/portfolio'
-      },{
+      }, {
         name: 'Resume',
         link: '/resume'
-      },{
+      }, {
         name: 'About',
         link: '/about'
       }],
       authItems: [{
-        name: 'Projects',
-        link: '/admin/projects'
+        name: 'Portfolio',
+        items: [{
+          name: 'Projects',
+          link: '/admin/projects'
+        }, {
+          name: 'Skills',
+          link: '/admin/skills'
+        }, {
+          name: 'Skill scopes',
+          link: '/admin/scopes'
+        }, {
+          name: 'Types',
+          link: '/admin/types'
+        }, {
+          name: 'Categories',
+          link: '/admin/categories'
+        }]
       }, {
-        name: 'Skills',
-        link: '/admin/skills'
-      }, {
-        name: 'Skill scopes',
-        link: '/admin/scopes'
-      }, {
-        name: 'Types',
-        link: '/admin/types'
-      }, {
-        name: 'Categories',
-        link: '/admin/categories'
-      }, {
-        name: 'Experiences',
-        link: '/admin/experiences'
-      }, {
-        name: 'Educations',
-        link: '/admin/educations'
-      }, {
-        name: 'Personal Info',
-        link: '/admin/infos'
-      }, {
-        name: 'Info types',
-        link: '/admin/info-types'
-      }, {
-        name: 'Logout',
-        link: '/admin/logout'
+        name: 'Resume',
+        items: [{
+          name: 'Experiences',
+          link: '/admin/experiences'
+        }, {
+          name: 'Educations',
+          link: '/admin/educations'
+        }, {
+          name: 'Personal Info',
+          link: '/admin/infos'
+        }, {
+          name: 'Info types',
+          link: '/admin/info-types'
+        }]
       }]
     }),
     computed: {
@@ -94,6 +117,9 @@
       })
     },
     methods: {
+      showSelectedItems: function (index) {
+        this.selectedIndex = index
+      },
       toggleOverlay: function () {
         this.isOverlayShown = !this.isOverlayShown
       },
@@ -168,5 +194,26 @@
     border-bottom: 1px solid $green-main;
     font-size: 1rem;
     font-weight: 800;
+  }
+
+  .button-menu-type {
+    margin-top: 20px;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .auth-item-wrapper {
+    padding-left: 15px;
+  }
+
+  /* logout button */
+  .logout-wrapper {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .button-logout {
+    padding: 10px 20px;
   }
 </style>

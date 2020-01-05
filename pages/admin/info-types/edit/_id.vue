@@ -38,6 +38,8 @@
     },
     methods: {
       async editInfoType(data) {
+        data.id = this.infoType.id
+        console.log(data)
         let response = await this.$store.dispatch(UPDATE_INFO_TYPE, data)
         if (response) {
           return this.$router.push({path: '/admin/info-types'})

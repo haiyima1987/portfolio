@@ -58,7 +58,6 @@
         class="published-wrapper"
         :field-title="'Published'"
         :field-name="`published`"
-        :is-value-numeric="true"
         :value="experience.published"
         :placeholder="'Publish this experience?'">
       </CheckField>

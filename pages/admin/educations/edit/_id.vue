@@ -58,7 +58,6 @@
         class="published-wrapper"
         :field-title="'Published'"
         :field-name="`published`"
-        :is-value-numeric="true"
         :value="education.published"
         :placeholder="'Publish this education?'">
       </CheckField>

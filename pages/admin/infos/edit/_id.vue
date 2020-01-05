@@ -4,7 +4,7 @@
       <InputField
         :field-title="'Name'"
         :field-name="`key`"
-        :rule="'required'"
+        :rule="''"
         :type="'text'"
         :value="info.key"
         :placeholder="'Enter information name'">
@@ -18,12 +18,19 @@
         :placeholder="'Enter information content'">
       </InputField>
       <RadioGroup
-        :field-title="'Category'"
-        :field-name="'categoryId'"
+        :field-title="'Information type'"
+        :field-name="'infoTypeId'"
         :options="infoTypeOptions"
         :value="info.infoTypeId"
         :rule="'required'">
       </RadioGroup>
+      <CheckField
+        class="published-wrapper"
+        :field-title="'Published'"
+        :field-name="`published`"
+        :value="info.published"
+        :placeholder="'Publish this information?'">
+      </CheckField>
       <div class="button-submit-wrapper">
         <button type="submit" class="button-green button-save">
           SAVE
@@ -39,13 +46,14 @@
   import InputField from "../../../../components/form/InputField";
   import {UPDATE_INFO, GET_INFO_BY_ID} from "../../../../store/info/actions";
   import RadioGroup from "../../../../components/form/RadioGroup";
+  import CheckField from "../../../../components/form/CheckField";
 
   export default {
     name: "edit",
     layout: 'detail',
     middleware: 'authenticated',
     components: {
-      FormWrapper, InputField, RadioGroup
+      FormWrapper, InputField, RadioGroup, CheckField
     },
     data: () => ({
       infoTypeOptions: []
@@ -57,6 +65,8 @@
     },
     methods: {
       async editInfo(data) {
+        data.id = this.info.id
+        console.log(data)
         let response = await this.$store.dispatch(UPDATE_INFO, data)
         if (response) {
           return this.$router.push({path: '/admin/infos'})

@@ -39,7 +39,6 @@
         class="published-wrapper"
         :field-title="'Published'"
         :field-name="`published`"
-        :is-value-numeric="true"
         :placeholder="'Publish this project?'">
       </CheckField>
       <InputField
