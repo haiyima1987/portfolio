@@ -1,60 +1,30 @@
-import Skill from "~/models/Skill";
-import Scope from "~/models/Scope";
-import Category from "~/models/Category";
-import Type from "~/models/Type";
-import BasicProject from "~/models/BasicProject";
-import Project from "~/models/Project";
+import Experience from "~/models/Experience";
+import Education from "~/models/Education";
 
-export const SET_PROJECTS = 'setProjects';
-export const SET_SELECTED_PROJECT = 'setSelectedProject';
-export const SET_PROJECT_DATA = 'setProjectData';
-export const REMOVE_PROJECT_BY_ID = 'removeProjectById';
-export const SET_SKILLS = 'setSkills';
-export const REMOVE_SKILL_BY_ID = 'removeSkillById';
-export const SET_SCOPES = 'setScopes';
-export const REMOVE_SCOPE_BY_ID = 'removeScopeById';
-export const SET_CATEGORIES = 'setCategories';
-export const REMOVE_CATEGORY_BY_ID = 'removeCategoryById';
-export const SET_TYPES = 'setTypes';
-export const REMOVE_TYPE_BY_ID = 'removeTypeById';
+export const SET_EXPERIENCES = 'setExperiences';
+export const SET_SELECTED_EXPERIENCE = 'setSelectedExperience';
+export const REMOVE_EXPERIENCE_BY_ID = 'removeExperienceById';
+export const SET_EDUCATIONS = 'setEducations';
+export const SET_SELECTED_EDUCATION = 'setSelectedEducation';
+export const REMOVE_EDUCATION_BY_ID = 'removeEducationById';
 
 export default {
-  setProjects: function (state, projects) {
-    state.projects = projects.map(project => BasicProject.parseFromDataObject(project))
+  setExperiences: function (state, experiences) {
+    state.experiences = experiences.map(experience => Experience.parseFromDataObject(experience))
   },
-  setSelectedProject: function (state, {project}) {
-    state.selectedProject = Project.parseFromDataObject(project)
+  setSelectedExperience: function (state, experience) {
+    state.selectedExperience = Experience.parseFromDataObject(experience)
   },
-  setProjectData: function (state, {categories, skills, types}) {
-    state.categories = categories.map(category => Category.parseFromDataObject(category))
-    state.skills = skills.map(skill => Skill.parseFromDataObject(skill))
-    state.types = types.map(type => Type.parseFromDataObject(type))
+  removeExperienceById: function (state, id) {
+    state.experiences = state.experiences.filter(experience => experience.id != id)
   },
-  removeProjectById: function (state, id) {
-    state.projects = state.projects.filter(project => project.id != id)
+  setEducations: function (state, educations) {
+    state.educations = educations.map(education => Education.parseFromDataObject(education))
   },
-  setSkills: function (state, skills) {
-    state.skills = skills.map(skill => Skill.parseFromDataObject(skill))
+  setSelectedEducation: function (state, education) {
+    state.selectedEducation = Education.parseFromDataObject(education)
   },
-  removeSkillById: function (state, id) {
-    state.skills = state.skills.filter(skill => skill.id != id)
-  },
-  setScopes: function (state, scopes) {
-    state.scopes = scopes.map(scope => Scope.parseFromDataObject(scope))
-  },
-  removeScopeById: function (state, id) {
-    state.scopes = state.scopes.filter(scope => scope.id != id)
-  },
-  setCategories: function (state, categories) {
-    state.categories = categories.map(category => Category.parseFromDataObject(category))
-  },
-  removeCategoryById: function (state, id) {
-    state.categories = state.categories.filter(category => category.id != id)
-  },
-  setTypes: function (state, types) {
-    state.types = types.map(type => Type.parseFromDataObject(type))
-  },
-  removeTypeById: function (state, id) {
-    state.types = state.types.filter(type => type.id != id)
+  removeEducationById: function (state, id) {
+    state.educations = state.educations.filter(education => education.id != id)
   }
 }

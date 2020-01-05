@@ -119,6 +119,15 @@
     color: $textColor;
   }
 
+  .form-input-picker {
+    padding: 0 15px;
+    height: 40px;
+    border: 1px solid $borderColor;
+    border-radius: 4px;
+    background-color: $backgroundColor;
+    color: $textColor;
+  }
+
   /* button submit */
   .button-submit-wrapper {
     padding-top: 40px;

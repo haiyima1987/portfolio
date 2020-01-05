@@ -42,6 +42,7 @@
         :value="project.published"
         :field-title="'Published'"
         :field-name="`published`"
+        :is-value-numeric="true"
         :placeholder="'Publish this project?'">
       </CheckField>
       <InputField
@@ -104,6 +105,7 @@
 
   export default {
     name: 'edit',
+    layout: 'detail',
     middleware: 'authenticated',
     components: {
       FormWrapper, FileUploader, InputField, NumberField, RadioGroup, CheckBoxGroup, TextField, CheckField

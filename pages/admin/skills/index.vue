@@ -9,29 +9,14 @@
     <FormWrapper :send-form-data="updateSkills" class="update-skill-form">
       <DragList :drag-items="domSkills"
                 :header-height="60"
+                :on-edit-click="editSkill"
                 :on-delete-click="showDeleteModal">
         <template v-slot:item="{ item }">
-          <div class="input-wrapper">
-            <InputField
-              class="name-wrapper"
-              :field-title="''"
-              :field-name="`name-${item.id}`"
-              :rule="'required'"
-              :type="'text'"
-              :value="item.skill.name"
-              :placeholder="'Enter your skill'">
-            </InputField>
-            <NumberField
-              class="level-wrapper"
-              :field-title="''"
-              :field-width="'150px'"
-              :field-name="`level-${item.id}`"
-              :rule="'required'"
-              :value="item.skill.level"
-              :min="0"
-              :max="100"
-              :placeholder="'Level'">
-            </NumberField>
+          <h5 class="title-item">{{ item.skill.name }}</h5>
+          <div v-if="item.skill.projects.length > 0" class="tag-wrapper">
+            <div class="tag" v-for="project in item.skill.projects" :key="project.id">
+              {{ project.name }}
+            </div>
           </div>
         </template>
         <template v-slot:buttonUp>
@@ -47,6 +32,11 @@
         <template v-slot:buttonDrag>
           <button type="button" class="button button-blue">
             <font-awesome-icon :icon="['fas', 'arrows-alt']"/>
+          </button>
+        </template>
+        <template v-slot:buttonEdit>
+          <button type="button" class="button button-green">
+            <font-awesome-icon :icon="['fas', 'edit']"/>
           </button>
         </template>
         <template v-slot:buttonDelete>
@@ -67,7 +57,7 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {DELETE_SKILL, GET_SKILLS, UPDATE_SKILLS} from "../../../store/admin/actions";
+  import {DELETE_SKILL, GET_SKILLS, UPDATE_SKILL_DISPLAY_INDEX} from "../../../store/admin/actions";
   import InputField from "../../../components/form/InputField";
   import FormWrapper from "../../../components/form/FormWrapper";
   import NumberField from "../../../components/form/NumberField";
@@ -93,20 +83,12 @@
     methods: {
       async updateSkills(data) {
         // update display indexes
-        let updatedSkills = this.domSkills.map((domSkill, index) => {
-          // assign a new object to avoid mutating outside vuex store
-          let skill = Object.assign({}, domSkill.skill)
-          skill.name = data[`name-${skill.id}`]
-          skill.level = data[`level-${skill.id}`]
-          skill.displayIndex = index + 1
-          return skill
-        })
+        let updatedSkills = this.domSkills.map((domSkill, index) => ({id: domSkill.id, displayIndex: index + 1}))
         // send request
-        let skills = await this.$store.dispatch(UPDATE_SKILLS, updatedSkills)
-        if (skills) {
-          // update local skills
-          this.domSkills = skills.map(skill => new DomSkill(skill.id, skill))
-        }
+        await this.$store.dispatch(UPDATE_SKILL_DISPLAY_INDEX, updatedSkills)
+      },
+      editSkill: function (id) {
+        return this.$router.push({path: `/admin/skills/edit/${id}`})
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
@@ -138,27 +120,28 @@
   @import "../../../assets/css/base.variables";
   @import "../../../assets/css/base.mixins";
 
-  .title-wrapper {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-
   .title-page {
     margin: 0;
     flex-grow: 1;
   }
 
-  .input-wrapper {
-    display: flex;
-    align-items: center;
+  .title-item {
+    font-weight: bold;
   }
 
-  .name-wrapper {
-    margin: 0;
+  /* tags */
+  .tag-wrapper {
+    padding: 5px 0 10px 0;
   }
 
-  .level-wrapper {
-    margin: 0 0 0 15px;
+  .tag {
+    margin: 0 8px 4px 0;
+    padding: 2px 8px;
+    display: inline-block;
+    background-color: $green-main;
+    color: white;
+    @include border-radius(4px);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 </style>

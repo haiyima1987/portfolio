@@ -20,6 +20,11 @@
             :value="item.scope.name"
             :placeholder="'Enter skill scope'">
           </InputField>
+          <div class="tag-wrapper">
+            <div class="tag" v-for="skill in item.scope.skills" :key="skill.id">
+              {{ skill.name }}
+            </div>
+          </div>
         </template>
         <template v-slot:buttonUp>
           <button type="button" class="button-mobile button-blue">
@@ -122,12 +127,6 @@
   @import "../../../assets/css/base.variables";
   @import "../../../assets/css/base.mixins";
 
-  .title-wrapper {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-
   .title-page {
     margin: 0;
     flex-grow: 1;
@@ -135,5 +134,21 @@
 
   .name-wrapper {
     margin: 0;
+  }
+
+  /* tags */
+  .tag-wrapper {
+    padding: 5px 0 10px 0;
+  }
+
+  .tag {
+    margin: 0 8px 4px 0;
+    padding: 2px 8px;
+    display: inline-block;
+    background-color: $green-main;
+    color: white;
+    @include border-radius(4px);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 </style>

@@ -5,7 +5,6 @@
         <img class="logo" src="../assets/img/logo-haiyi-inverse.svg" alt="logo">
       </nuxt-link>
     </div>
-    <div class="text-white">{{ isAuthenticated }}</div>
     <div class="icon-menu-wrapper">
       <font-awesome-icon :icon="['fas', 'bars']"
                          @click="toggleOverlay"
@@ -72,6 +71,18 @@
       }, {
         name: 'Categories',
         link: '/admin/categories'
+      }, {
+        name: 'Experiences',
+        link: '/admin/experiences'
+      }, {
+        name: 'Educations',
+        link: '/admin/educations'
+      }, {
+        name: 'Personal Info',
+        link: '/admin/infos'
+      }, {
+        name: 'Info types',
+        link: '/admin/info-types'
       }, {
         name: 'Logout',
         link: '/admin/logout'

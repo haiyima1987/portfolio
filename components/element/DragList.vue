@@ -187,6 +187,13 @@
   @import "../../assets/css/base.variables";
   @import "../../assets/css/base.mixins";
 
+  .item-wrapper {
+    margin-bottom: 20px;
+    padding: 15px;
+    @include border-radius(10px);
+    @include box-shadow(0, 0, 20px, rgba(160, 160, 160, 0.5));
+  }
+
   .button-group {
     display: flex;
     justify-content: flex-end;
@@ -199,7 +206,7 @@
   }
 
   .button {
-    margin: 0 0 0.5rem 0.5rem;
+    margin: 0 0 0 0.5rem;
     padding: 10px 15px;
     font-size: 1rem;
     @include flex-center();
@@ -211,7 +218,7 @@
 
   .button-mobile {
     @extend .button;
-    margin: 0 0.5rem 0.5rem 0;
+    margin: 0 0.5rem 0 0;
   }
 
   .line-indicator {

@@ -2,6 +2,9 @@ export default {
   getSkills: function (state) {
     return state.skills
   },
+  getSelectedSkill: function (state) {
+    return state.selectedSkill
+  },
   getScopes: function (state) {
     return state.scopes
   },

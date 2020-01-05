@@ -122,12 +122,6 @@
   @import "../../../assets/css/base.variables";
   @import "../../../assets/css/base.mixins";
 
-  .title-wrapper {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-
   .title-page {
     margin: 0;
     flex-grow: 1;

@@ -1,20 +1,14 @@
 export default {
-  getSkills: function (state) {
-    return state.skills
+  getExperiences: function (state) {
+    return state.experiences
   },
-  getScopes: function (state) {
-    return state.scopes
+  getSelectedExperience: function (state) {
+    return state.selectedExperience
   },
-  getSelectedProject: function (state) {
-    return state.selectedProject
+  getEducations: function (state) {
+    return state.educations
   },
-  getProjects: function (state) {
-    return state.projects
-  },
-  getCategories: function (state) {
-    return state.categories
-  },
-  getTypes: function (state) {
-    return state.types
+  getSelectedEducation: function (state) {
+    return state.selectedEducation
   }
 }

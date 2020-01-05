@@ -1,20 +1,22 @@
 <template>
-  <div>
+  <div class="education-list-wrapper">
     <div class="title-wrapper">
-      <h4 class="title-page">My projects</h4>
-      <nuxt-link to="/admin/projects/create" class="button button-green">
+      <h4 class="title-page">My educations</h4>
+      <nuxt-link to="/admin/educations/create" class="button button-green">
         <font-awesome-icon :icon="['fa', 'plus']"/>
       </nuxt-link>
     </div>
-    <FormWrapper :send-form-data="updateDisplayIndex" class="project-list-form">
-      <DragList :drag-items="domProjects"
+    <FormWrapper :send-form-data="updateEducations" class="update-education-form">
+      <DragList :drag-items="domEducations"
                 :header-height="60"
-                :on-edit-click="editProject"
+                :on-edit-click="editEducation"
                 :on-delete-click="showDeleteModal">
         <template v-slot:item="{ item }">
-          <h5 class="title-item">{{ item.project.name }}</h5>
-          <p class="text-project">Year {{ item.project.year }}</p>
-          <p class="text-project">{{ item.project.link }}</p>
+          <h5 class="title-item">{{ item.education.major }}</h5>
+          <div class="text-item">
+            {{ formatDate(item.education.start) }}&nbsp;&nbsp;to&nbsp;&nbsp;{{ formatDate(item.education.end) }}
+          </div>
+          <div class="text-item">{{ item.education.college }}</div>
         </template>
         <template v-slot:buttonUp>
           <button type="button" class="button-mobile button-blue">
@@ -54,56 +56,70 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import {DELETE_PROJECT, GET_PROJECTS, UPDATE_PROJECT_DISPLAY_INDEX} from "../../../store/admin/actions";
+  import InputField from "../../../components/form/InputField";
+  import FormWrapper from "../../../components/form/FormWrapper";
+  import NumberField from "../../../components/form/NumberField";
+  import DomEducation from "../../../models/DomEducation";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";
-  import DomProject from "../../../models/DomProject";
-  import FormWrapper from "../../../components/form/FormWrapper";
+  import {DELETE_EDUCATION, GET_EDUCATIONS, UPDATE_EDUCATION_DISPLAY_INDEX} from "../../../store/resume/actions";
+  import {SHORT_MONTHS} from "../../../utils/DomHandler";
 
   export default {
-    name: 'create',
+    name: 'index',
     middleware: 'authenticated',
     components: {
-      DragList, FormWrapper, DynamicModal
+      FormWrapper, InputField, NumberField, DragList, DynamicModal
     },
     data: () => ({
-      domProjects: []
+      domEducations: []
     }),
     computed: {
       ...mapGetters('admin', {
-        projects: 'getProjects'
+        educations: 'getEducations'
       })
     },
     methods: {
-      async updateDisplayIndex () {
+      async updateEducations() {
         // update display indexes
-        let updatedIndexes = this.domProjects.map((domProject, index) => ({id: domProject.id, displayIndex: index + 1}))
+        let updatedEducations = this.domEducations.map((domEducation, index) => ({
+          id: domEducation.id,
+          displayIndex: index + 1
+        }))
         // send request
-        await this.$store.dispatch(UPDATE_PROJECT_DISPLAY_INDEX, updatedIndexes)
+        await this.$store.dispatch(UPDATE_EDUCATION_DISPLAY_INDEX, updatedEducations)
       },
-      editProject: function (id) {
-        return this.$router.push({path: `/admin/projects/edit/${id}`})
+      editEducation: function (id) {
+        return this.$router.push({path: `/admin/educations/edit/${id}`})
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
-          modalContent: 'project',
+          modalContent: 'education',
           data: id,
-          callback: this.deleteProject
+          callback: this.deleteEducation
         })
       },
-      async deleteProject(id) {
-        let projects = await this.$store.dispatch(DELETE_PROJECT, id)
-        if (projects) {
+      async deleteEducation(id) {
+        let educations = await this.$store.dispatch(DELETE_EDUCATION, id)
+        if (educations) {
+          // update local educations
+          this.domEducations = educations.map(education => new DomEducation(education.id, education))
           // close the modal and reset the options
           this.$store.commit(RESET_MODAL_DATA)
         }
+      },
+      formatDate: function (date) {
+        let temp = new Date(date)
+        let year = temp.getFullYear()
+        let month = temp.getMonth()
+        return `${SHORT_MONTHS[month]} - ${year}`
       }
     },
     async asyncData({store}) {
-      let projects = await store.dispatch(GET_PROJECTS);
-      if (projects) {
-        return {domProjects: projects.map(project => new DomProject(project.id, project))}
+      let educations = await store.dispatch(GET_EDUCATIONS);
+      if (educations) {
+        return {domEducations: educations.map(education => new DomEducation(education.id, education))}
       }
     }
   }
@@ -118,29 +134,11 @@
     flex-grow: 1;
   }
 
-  .item-project {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-
   .title-item {
     font-weight: bold;
   }
 
-  .text-project {
+  .text-item {
     margin-bottom: 5px;
-  }
-
-  /* buttons */
-  .button {
-    display: flex;
-    align-items: center;
-  }
-
-  .button-wrapper {
-    padding-left: 15px;
-    display: flex;
-    justify-content: flex-end;
   }
 </style>

@@ -28,6 +28,9 @@
       value: {
         required: false
       },
+      isValueNumeric: {
+        default: false
+      },
       fieldWidth: {
         default: '100%'
       },
@@ -53,7 +56,12 @@
       },
       // send the form data to the store
       setFormData: function () {
-        let data = {fieldName: this.$props.fieldName, data: this.input}
+        let input = this.input
+        // parse the value to numeric if necessary
+        if (this.$props.isValueNumeric) {
+          input = this.input ? 1 : 0
+        }
+        let data = {fieldName: this.$props.fieldName, data: input}
         // if it's a group value, we need to send the value with index (id in form data) and field name
         if (this.$props.groupIndex) {
           data.groupIndex = this.$props.groupIndex

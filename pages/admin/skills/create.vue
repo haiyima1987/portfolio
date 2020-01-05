@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormWrapper :send-form-data="createSkill" class="update-skill-form">
+    <FormWrapper :send-form-data="createSkill" class="create-skill-form">
       <InputField
         class="name-wrapper"
         :field-title="'Name'"

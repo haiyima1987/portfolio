@@ -105,11 +105,6 @@
     padding: 10px;
   }
 
-  .title-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
   .title-project {
     font-size: 1.2rem;
     font-weight: 800;

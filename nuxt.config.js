@@ -29,7 +29,8 @@ export default {
   */
   plugins: [
     '~/plugins/vee-validate.js',
-    '~/plugins/axios.js'
+    '~/plugins/axios.js',
+    {src: '~/plugins/vuejs-datepicker.js', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules

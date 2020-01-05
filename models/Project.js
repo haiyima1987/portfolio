@@ -17,11 +17,11 @@ export default class Project {
     this.previewLink = previewLink
     this.displayIndex = displayIndex
     this.published = published
-    this.category = Category.parseFromDataObject(category)
-    this.type = Type.parseFromDataObject(type)
-    this.skills = skills
+    this.category = category ? Category.parseFromDataObject(category) : null
+    this.type = type ? Type.parseFromDataObject(type) : null
+    this.skills = skills ? skills
       .map(skill => Skill.parseFromDataObject(skill))
-      .sort((skillA, skillB) => skillA.displayIndex > skillB.displayIndex)
+      .sort((skillA, skillB) => skillA.displayIndex > skillB.displayIndex) : null
   }
 
   static parseFromDataObject(data) {
