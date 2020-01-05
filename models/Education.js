@@ -15,6 +15,6 @@ export default class Education {
 
   static parseFromDataObject(data) {
     return new Education(data.id, data.start, data.end, data.college, data.major,
-      data.city, data.country, data.explanation, data.published, data.displayIndex)
+      data.city, data.country, data.explanation, data.published, data.display_index)
   }
 }

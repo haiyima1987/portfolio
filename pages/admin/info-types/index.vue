@@ -1,19 +1,18 @@
 <template>
-  <div class="info-list-wrapper">
+  <div class="info-type-list-wrapper">
     <div class="title-wrapper">
-      <h4 class="title-page">Personal information</h4>
-      <nuxt-link to="/admin/infos/create" class="button button-green">
+      <h4 class="title-page">Information types</h4>
+      <nuxt-link to="/admin/info-types/create" class="button button-green">
         <font-awesome-icon :icon="['fa', 'plus']"/>
       </nuxt-link>
     </div>
-    <FormWrapper :send-form-data="updateInfos" class="update-info-form">
-      <DragList :drag-items="domInfos"
+    <FormWrapper :send-form-data="updateInfoTypes" class="update-info-type-form">
+      <DragList :drag-items="domInfoTypes"
                 :header-height="60"
-                :on-edit-click="editInfo"
+                :on-edit-click="editInfoType"
                 :on-delete-click="showDeleteModal">
         <template v-slot:item="{ item }">
-          <h5 class="title-item">{{ item.info.key }}: {{ item.info.value }}</h5>
-          <div class="text-item">{{ item.info.infoType.name }}</div>
+          <h5 class="title-item">{{ item.infoType.name }}</h5>
         </template>
         <template v-slot:buttonUp>
           <button type="button" class="button-mobile button-blue">
@@ -56,12 +55,12 @@
   import InputField from "../../../components/form/InputField";
   import FormWrapper from "../../../components/form/FormWrapper";
   import NumberField from "../../../components/form/NumberField";
-  import DomInfo from "../../../models/DomInfo";
+  import DomInfoType from "../../../models/DomInfoType";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";
   import {SHORT_MONTHS} from "../../../utils/DomHandler";
-  import {DELETE_INFO, GET_INFOS, UPDATE_INFO_DISPLAY_INDEX} from "../../../store/info/actions";
+  import {DELETE_INFO_TYPE, GET_INFO_TYPES, UPDATE_INFO_TYPE_DISPLAY_INDEX} from "../../../store/info/actions";
 
   export default {
     name: 'index',
@@ -70,47 +69,47 @@
       FormWrapper, InputField, NumberField, DragList, DynamicModal
     },
     data: () => ({
-      domInfos: []
+      domInfoTypes: []
     }),
     computed: {
-      ...mapGetters('info', {
-        infos: 'getInfos'
+      ...mapGetters('infoType', {
+        infoTypes: 'getInfoTypes'
       })
     },
     methods: {
-      async updateInfos() {
+      async updateInfoTypes() {
         // update display indexes
-        let updatedInfos = this.domInfos.map((domInfo, index) => ({
-          id: domInfo.id,
+        let updatedInfoTypes = this.domInfoTypes.map((domInfoType, index) => ({
+          id: domInfoType.id,
           displayIndex: index + 1
         }))
         // send request
-        await this.$store.dispatch(UPDATE_INFO_DISPLAY_INDEX, updatedInfos)
+        await this.$store.dispatch(UPDATE_INFO_TYPE_DISPLAY_INDEX, updatedInfoTypes)
       },
-      editInfo: function (id) {
-        return this.$router.push({path: `/admin/infos/edit/${id}`})
+      editInfoType: function (id) {
+        return this.$router.push({path: `/admin/info-types/edit/${id}`})
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
-          modalContent: 'info',
+          modalContent: 'infoType',
           data: id,
-          callback: this.deleteInfo
+          callback: this.deleteInfoType
         })
       },
-      async deleteInfo(id) {
-        let infos = await this.$store.dispatch(DELETE_INFO, id)
-        if (infos) {
-          // update local infos
-          this.domInfos = infos.map(info => new DomInfo(info.id, info))
+      async deleteInfoType(id) {
+        let infoTypes = await this.$store.dispatch(DELETE_INFO_TYPE, id)
+        if (infoTypes) {
+          // update local infoTypes
+          this.domInfoTypes = infoTypes.map(infoType => new DomInfoType(infoType.id, infoType))
           // close the modal and reset the options
           this.$store.commit(RESET_MODAL_DATA)
         }
       }
     },
     async asyncData({store}) {
-      let infos = await store.dispatch(GET_INFOS);
-      if (infos) {
-        return {domInfos: infos.map(info => new DomInfo(info.id, info))}
+      let infoTypes = await store.dispatch(GET_INFO_TYPES);
+      if (infoTypes) {
+        return {domInfoTypes: infoTypes.map(infoType => new DomInfoType(infoType.id, infoType))}
       }
     }
   }

@@ -15,6 +15,6 @@ export default class Experience {
 
   static parseFromDataObject(data) {
     return new Experience(data.id, data.start, data.end, data.company, data.position,
-      data.city, data.country, data.explanation, data.published, data.displayIndex)
+      data.city, data.country, data.explanation, data.published, data.display_index)
   }
 }
