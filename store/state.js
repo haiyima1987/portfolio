@@ -1,8 +1,13 @@
 export default () => ({
+  // api calls
   isLoading: false,
   activeCalls: 0,
+  // website content
   publishedProjects: [],
-  types: [],
+  scopes: [],
+  experiences: [],
+  educations: [],
+  infoTypes: [],
   // form related props
   formData: {},
   // modal

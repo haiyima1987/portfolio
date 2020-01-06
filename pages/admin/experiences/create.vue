@@ -5,11 +5,13 @@
         :field-title="'Start date'"
         :field-name="`start`"
         :minimum-view="'month'"
+        :placeholder="'MM/YYYY'"
         :required="true">
       </DateField>
       <DateField
         :field-title="'End date'"
         :field-name="`end`"
+        :placeholder="'MM/YYYY'"
         :minimum-view="'month'">
       </DateField>
       <InputField

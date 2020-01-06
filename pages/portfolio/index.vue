@@ -8,7 +8,7 @@
         <div class="scope-project">{{ project.type.name }}</div>
       </div>
       <div class="content-wrapper">
-        <div class="title-wrapper">
+        <div class="title-project-wrapper">
           <h1 class="title-project">{{ project.name }}</h1>
           <div class="year">Year {{ project.year }}</div>
         </div>
@@ -49,7 +49,7 @@
         projects: 'getPublished'
       })
     },
-    async fetch({store}) {
+    async asyncData({store}) {
       return store.dispatch(GET_PUBLISHED);
     }
   }
@@ -103,6 +103,11 @@
   /* text content */
   .content-wrapper {
     padding: 10px;
+  }
+
+  .title-project-wrapper {
+    display: flex;
+    align-items: center;
   }
 
   .title-project {

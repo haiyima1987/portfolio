@@ -18,25 +18,15 @@
                              @click="toggleOverlay"
                              class="icon-menu"/>
         </div>
-        <transition name="basic">
-          <div v-if="!isAuthenticated" class="item-mobile-wrapper">
-            <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
-                       @click.native="closeOverlay"
-                       :to="mobileItem.link"
-                       class="button-green-text item-mobile">
-              {{ mobileItem.name }}
-            </nuxt-link>
-          </div>
-        </transition>
-        <transition name="basic">
-          <div v-if="isAuthenticated">
-            <div v-for="(itemData, index) in authItems">
-              <button @click="showSelectedItems(index)"
-                      type="button" class="button button-green button-menu-type">
-                {{ itemData.name }}
-              </button>
+        <div v-if="isAuthenticated">
+          <div v-for="(itemData, index) in authItems">
+            <button @click="showSelectedItems(index)"
+                    type="button" class="button button-green button-menu-type">
+              {{ itemData.name }}
+            </button>
+            <transition name="basic">
               <div v-if="index == selectedIndex"
-                   class="item-mobile-wrapper auth-item-wrapper">
+                   class="item-mobile-wrapper">
                 <nuxt-link v-for="(mobileItem, index) in itemData.items" :key="index"
                            @click.native="closeOverlay"
                            :to="mobileItem.link"
@@ -44,12 +34,20 @@
                   {{ mobileItem.name }}
                 </nuxt-link>
               </div>
-            </div>
+            </transition>
           </div>
-        </transition>
-        <div class="logout-wrapper">
-          <nuxt-link @click.native="closeOverlay" to="/admin/logout"
-                     class="button-green-text item-mobile button-logout">
+        </div>
+        <div class="item-mobile-wrapper public-item-wrapper">
+          <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
+                     @click.native="closeOverlay"
+                     :to="mobileItem.link"
+                     class="button-green-text item-mobile">
+            {{ mobileItem.name }}
+          </nuxt-link>
+          <nuxt-link v-if="isAuthenticated"
+                     @click.native="closeOverlay"
+                     to="/admin/logout"
+                     class="button-green-text item-mobile">
             Logout
           </nuxt-link>
         </div>
@@ -118,13 +116,22 @@
     },
     methods: {
       showSelectedItems: function (index) {
-        this.selectedIndex = index
+        if (this.selectedIndex != index) {
+          this.selectedIndex = index
+        } else {
+          this.selectedIndex = -1
+        }
       },
       toggleOverlay: function () {
         this.isOverlayShown = !this.isOverlayShown
+        // close menus
+        if (!this.isOverlayShown) {
+          this.selectedIndex = -1
+        }
       },
       closeOverlay: function () {
         this.isOverlayShown = false
+        this.selectedIndex = -1
       }
     }
   }
@@ -184,16 +191,25 @@
   /* mobile menu item */
   .item-mobile-wrapper {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
   }
 
   .item-mobile {
-    padding: 10px 0 10px 20px;
+    padding: 10px 10px 5px 20px;
     height: auto;
     border-bottom: 1px solid $green-main;
     font-size: 1rem;
     font-weight: 800;
+
+    &:nth-of-type(odd) {
+      width: 49%;
+      margin-right: 1%;
+    }
+
+    &:nth-of-type(even) {
+      width: 49%;
+      margin-left: 1%;
+    }
   }
 
   .button-menu-type {
@@ -202,18 +218,7 @@
     font-weight: bold;
   }
 
-  .auth-item-wrapper {
-    padding-left: 15px;
-  }
-
-  /* logout button */
-  .logout-wrapper {
-    margin-top: 40px;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .button-logout {
-    padding: 10px 20px;
+  .public-item-wrapper {
+    margin-top: 20px;
   }
 </style>

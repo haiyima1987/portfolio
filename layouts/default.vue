@@ -42,7 +42,7 @@
   }
 
   .title-wrapper {
-    margin: 0 0 30px 15px;
+    margin: 0 0 30px 0;
     display: flex;
     align-items: center;
   }

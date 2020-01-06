@@ -6,31 +6,32 @@
          @dragover="dragOver($event)"
          @dragenter="dragEnter(index)"
          @dragleave="dragLeave(index)"
-         @drop="dragFinish(index)"
-         class="item-wrapper">
+         @drop="dragFinish(index)">
       <hr v-show="enteredIndex == index && isUpwards" class="line-indicator">
-      <slot name="item"
-            :item="dragItem"
-            :index="index"/>
-      <div class="button-group">
-        <div v-if="isMobile" class="button-mobile-wrapper">
-          <div @click="moveItemByOne(index, index - 1)">
-            <slot name="buttonUp"/>
+      <div class="item-wrapper">
+        <slot name="item"
+              :item="dragItem"
+              :index="index"/>
+        <div class="button-group">
+          <div v-if="isMobile" class="button-mobile-wrapper">
+            <div @click="moveItemByOne(index, index - 1)">
+              <slot name="buttonUp"/>
+            </div>
+            <div @click="moveItemByOne(index, index + 1)">
+              <slot name="buttonDown"/>
+            </div>
           </div>
-          <div @click="moveItemByOne(index, index + 1)">
-            <slot name="buttonDown"/>
+          <div v-else
+               @mousedown="setDragEffect(true)"
+               @mouseup="setDragEffect(false)">
+            <slot name="buttonDrag"/>
           </div>
-        </div>
-        <div v-else
-             @mousedown="setDragEffect(true)"
-             @mouseup="setDragEffect(false)">
-          <slot name="buttonDrag"/>
-        </div>
-        <div @click="editItem(dragItem.id)">
-          <slot name="buttonEdit"/>
-        </div>
-        <div @click="deleteItem(dragItem.id)">
-          <slot name="buttonDelete"/>
+          <div @click="editItem(dragItem.id)">
+            <slot name="buttonEdit"/>
+          </div>
+          <div @click="deleteItem(dragItem.id)">
+            <slot name="buttonDelete"/>
+          </div>
         </div>
       </div>
       <hr v-show="enteredIndex == index && !isUpwards" class="line-indicator">
@@ -188,7 +189,7 @@
   @import "../../assets/css/base.mixins";
 
   .item-wrapper {
-    margin-bottom: 20px;
+    margin: 15px 0;
     padding: 15px;
     @include border-radius(10px);
     @include box-shadow(0, 0, 20px, rgba(160, 160, 160, 0.5));

@@ -119,9 +119,9 @@
       }
     },
     async asyncData({store}) {
-      let infoData = await store.dispatch(GET_INFOS);
-      if (infoData) {
-        infoData = infoData.map(data => ({
+      let infoTypes = await store.dispatch(GET_INFOS);
+      if (infoTypes) {
+        let infoData = infoTypes.map(data => ({
           name: data.name,
           infos: data.infos.map(info => new DomInfo(info.id, info))
         }))

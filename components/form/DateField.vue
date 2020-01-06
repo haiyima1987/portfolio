@@ -11,7 +11,7 @@
                      @selected="onPanelSelected"
                      :required="required"
                      :input-class="errors[0] ? 'form-input-picker field-error' : 'form-input-picker'"
-                     :placeholder="'DD/MM/YYYY'"
+                     :placeholder="placeholder"
                      :id="fieldName"
                      :name="fieldName"
                      :minimum-view="minimumView"/>
@@ -45,6 +45,9 @@
         required: true
       },
       // not required
+      placeholder: {
+        default: 'DD/MM/YYYY'
+      },
       minimumView: {
         default: 'day'
       },
@@ -52,7 +55,7 @@
         required: false
       },
       required: {
-        default: true
+        default: false
       },
       fieldWidth: {
         default: '100%'
@@ -137,5 +140,9 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: $red-main;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 </style>

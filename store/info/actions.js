@@ -1,9 +1,8 @@
 import apiHandler from "~/utils/ApiHandler";
 import {SET_ERROR_MESSAGE, SET_SUCCESS_MESSAGE} from "~/store/mutations";
 import {
-  REMOVE_INFO_BY_ID,
-  REMOVE_INFO_TYPE_BY_ID, SET_INFO_TYPES,
-  SET_INFOS,
+  REMOVE_INFO_TYPE_BY_ID,
+  SET_INFO_TYPES,
   SET_SELECTED_INFO,
   SET_SELECTED_INFO_TYPE
 } from "~/store/info/mutations";
@@ -27,8 +26,9 @@ export default {
     try {
       let response = await this.$axios.get('/info/infos')
       if (apiHandler.isSuccess(response.status)) {
-        commit(SET_SUCCESS_MESSAGE, undefined, {root: true})
-        return response.data.data
+        // here set info types due to the rendering of categorized infos (categorized by info types)
+        commit(SET_INFO_TYPES, response.data.data)
+        return state.infoTypes
       }
       return false
     } catch (e) {

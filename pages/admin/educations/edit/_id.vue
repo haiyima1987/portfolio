@@ -5,12 +5,14 @@
         :field-title="'Start date'"
         :field-name="`start`"
         :minimum-view="'month'"
+        :placeholder="'MM/YYYY'"
         :value="education.start"
         :required="true">
       </DateField>
       <DateField
         :field-title="'End date'"
         :field-name="`end`"
+        :placeholder="'MM/YYYY'"
         :value="education.end"
         :minimum-view="'month'">
       </DateField>

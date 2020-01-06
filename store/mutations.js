@@ -1,7 +1,13 @@
 import Project from "~/models/Project";
 import AppMessage from "~/models/AppMessage";
+import Experience from "~/models/Experience";
+import Education from "~/models/Education";
+import Scope from "~/models/Scope";
+import InfoType from "~/models/InfoType";
 
 export const SET_PUBLISHED = 'setPublished';
+export const SET_RESUME_DATA = 'setResumeData';
+export const SET_INFO_TYPES = 'setInfoTypes';
 export const SET_FORM_DATA = 'setFormData';
 export const SET_MODAL_DATA = 'setModalData';
 export const RESET_MODAL_DATA = 'resetModalData';
@@ -12,6 +18,7 @@ export const SET_SUCCESS_MESSAGE = 'setSuccessMessage';
 export const CLEAR_APP_MESSAGE = 'clearAppMessage';
 
 export default {
+  /** api **/
   setLoading: function (state, isLoading) {
     state.isLoading = isLoading
   },
@@ -21,9 +28,19 @@ export default {
   decreaseActiveCalls: function (state) {
     state.activeCalls--
   },
+  /** site content **/
   setPublished: function (state, projects) {
     state.publishedProjects = projects.map(project => Project.parseFromDataObject(project))
   },
+  setResumeData: function (state, {experiences, educations, scopes}) {
+    state.experiences = experiences.map(experience => Experience.parseFromDataObject(experience))
+    state.educations = educations.map(education => Education.parseFromDataObject(education))
+    state.scopes = scopes.map(scope => Scope.parseFromDataObject(scope))
+  },
+  setInfoTypes: function (state, infoTypes) {
+    state.infoTypes = infoTypes.map(infoType => InfoType.parseFromDataObject(infoType))
+  },
+  /** modal data **/
   setModalData: function (state, data) {
     state.modalOptions = data
     state.isModalShown = true
@@ -32,7 +49,7 @@ export default {
     state.modalOptions = {}
     state.isModalShown = false
   },
-  // form related mutations
+  /** form related mutations **/
   setFormData: function (state, {fieldName, data, groupIndex, groupName}) {
     // add group field
     if (groupName) {
@@ -66,7 +83,7 @@ export default {
   clearFormData: function (state) {
     state.formData = {}
   },
-  // for app messages
+  /** app messages **/
   setErrorMessage(state, errorData) {
     state.appMessage = new AppMessage(errorData.error, false, true)
   },

@@ -27,14 +27,15 @@
 
   .title-heading {
     margin: 0;
+    color: $blue-title;
     font-size: 1.2rem;
     font-weight: 800;
   }
 
   .line {
-    margin-left: 10px;
+    margin-left: 20px;
     flex-grow: 1;
-    height: 4px;
-    background-color: $grey-text;
+    height: 2px;
+    background-color: $grey-text-medium;
   }
 </style>

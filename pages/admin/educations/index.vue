@@ -110,6 +110,9 @@
         }
       },
       formatDate: function (date) {
+        if (!date) {
+          return 'present'
+        }
         let temp = new Date(date)
         let year = temp.getFullYear()
         let month = temp.getMonth()

@@ -1,7 +1,18 @@
 <template>
   <div class="home-wrapper">
-    <h1 class="heading">Haiyi Ma</h1>
-    <p class="text-description">My name is Haiyi. I am a full-stack developer.</p>
+
+
+    <div class="image-intro-wrapper">
+      <div class="image-wrapper">
+        <img class="image" src="../assets/img/selfie.png" alt="haiyi">
+      </div>
+      <div class="intro-wrapper">
+        <h1 class="heading">Haiyi Ma</h1>
+        <div class="text-description">My name is Haiyi. I am a full-stack developer.</div>
+      </div>
+    </div>
+
+
     <div class="button-group">
       <div class="button-wrapper">
         <nuxt-link to="/resume" class="btn button-green button-home">
@@ -40,9 +51,31 @@
   @import "../assets/css/base.variables";
   @import "../assets/css/base.mixins";
 
-  /* text */
+  /* intro text */
+  .image-intro-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .image-wrapper {
+    width: 30%;
+    @include border-radius(50%);
+    overflow: hidden;
+
+    .image {
+      width: 100%;
+    }
+  }
+
+  .intro-wrapper {
+    width: 70%;
+    padding-left: 15px;
+  }
+
+  /* position text */
   .heading {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
   }
 
