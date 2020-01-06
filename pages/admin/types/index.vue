@@ -60,7 +60,7 @@
   import {DELETE_TYPE, GET_TYPES, UPDATE_TYPES} from "../../../store/admin/actions";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import FormWrapper from "../../../components/form/FormWrapper";
-  import DomType from "../../../models/DomType";
+  import DomType from "../../../models/dom/DomType";
 
   export default {
     name: "index",

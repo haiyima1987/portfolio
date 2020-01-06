@@ -65,7 +65,7 @@
   import {DELETE_SCOPE, GET_SCOPES, UPDATE_SCOPES} from "../../../store/admin/actions";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import FormWrapper from "../../../components/form/FormWrapper";
-  import DomScope from "../../../models/DomScope";
+  import DomScope from "../../../models/dom/DomScope";
 
   export default {
     name: "index",

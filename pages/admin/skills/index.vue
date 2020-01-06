@@ -61,7 +61,7 @@
   import InputField from "../../../components/form/InputField";
   import FormWrapper from "../../../components/form/FormWrapper";
   import NumberField from "../../../components/form/NumberField";
-  import DomSkill from "../../../models/DomSkill";
+  import DomSkill from "../../../models/dom/DomSkill";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";

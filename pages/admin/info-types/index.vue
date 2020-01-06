@@ -60,7 +60,7 @@
   import InputField from "../../../components/form/InputField";
   import FormWrapper from "../../../components/form/FormWrapper";
   import NumberField from "../../../components/form/NumberField";
-  import DomInfoType from "../../../models/DomInfoType";
+  import DomInfoType from "../../../models/dom/DomInfoType";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";

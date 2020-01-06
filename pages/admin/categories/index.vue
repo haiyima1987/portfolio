@@ -60,7 +60,7 @@
   import {DELETE_CATEGORY, GET_CATEGORIES, UPDATE_CATEGORIES} from "../../../store/admin/actions";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import FormWrapper from "../../../components/form/FormWrapper";
-  import DomCategory from "../../../models/DomCategory";
+  import DomCategory from "../../../models/dom/DomCategory";
 
   export default {
     name: "index",

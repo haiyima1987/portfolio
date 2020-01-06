@@ -58,7 +58,7 @@
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";
-  import DomProject from "../../../models/DomProject";
+  import DomProject from "../../../models/dom/DomProject";
   import FormWrapper from "../../../components/form/FormWrapper";
 
   export default {
