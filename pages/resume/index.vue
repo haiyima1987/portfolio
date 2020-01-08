@@ -15,18 +15,20 @@
     </div>
     <Heading :name="'Skills'"/>
     <div class="content-wrapper">
-      <div v-for="scope in scopes" :key="scope.id"
-           class="scope-wrapper">
-        <template v-if="scope.skills.length > 0">
-          <h5 class="name-scope">{{ scope.name }}:</h5>
-          <div v-for="skill in scope.skills" :key="skill.id">
-            <div class="background-bar">
-              <div :style="{ width: `${skill.level}%` }" class="bar-skill">
-                {{ skill.name }}
+      <div class="scope-group">
+        <div v-for="scope in scopes" :key="scope.id"
+             class="scope-wrapper">
+          <template v-if="scope.skills.length > 0">
+            <h5 class="name-scope">{{ scope.name }}:</h5>
+            <div v-for="skill in scope.skills" :key="skill.id">
+              <div class="background-bar">
+                <div :style="{ width: `${skill.level}%` }" class="bar-skill">
+                  {{ skill.name }}
+                </div>
               </div>
             </div>
-          </div>
-        </template>
+          </template>
+        </div>
       </div>
     </div>
     <Heading :name="'Educations'"/>
@@ -79,7 +81,7 @@
       }
     },
     async asyncData({store}) {
-      return store.dispatch(GET_RESUME_DATA);
+      return store.dispatch(GET_RESUME_DATA)
     }
   }
 </script>
@@ -130,5 +132,15 @@
     align-items: center;
     color: white;
     font-weight: bold;
+  }
+
+  @media screen and (min-width: $screen-md) {
+    .scope-group {
+      @include grid(2, 20px);
+    }
+
+    .scope-wrapper {
+      margin-bottom: 0;
+    }
   }
 </style>

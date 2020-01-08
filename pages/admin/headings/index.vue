@@ -1,25 +1,25 @@
 <template>
-  <div class="info-list-wrapper">
+  <div class="heading-list-wrapper">
     <div class="title-wrapper">
-      <h4 class="title-page">Personal information</h4>
-      <nuxt-link to="/admin/infos/create" class="button button-green">
+      <h4 class="title-page">Home headings</h4>
+      <nuxt-link to="/admin/headings/create" class="button button-green">
         <font-awesome-icon :icon="['fa', 'plus']"/>
       </nuxt-link>
     </div>
-    <FormWrapper :send-form-data="updateInfos" class="update-info-form">
-      <div v-for="(dataItem, index) in infoData" class="info-data-wrapper">
-        <button @click="showSelectedInfos(index)"
-                type="button" class="button button-blue button-info-type">
+    <FormWrapper :send-form-data="updateHeadings" class="update-heading-form">
+      <div v-for="(dataItem, index) in headingData" class="heading-data-wrapper">
+        <button @click="showSelectedHeadingType(index)"
+                type="button" class="button button-blue button-heading-type">
           {{ dataItem.name }}
         </button>
-        <DragList v-if="index == selectedIndex && dataItem.infos.length > 0"
-                  :drag-items="dataItem.infos"
+        <DragList v-if="index == selectedIndex && dataItem.headings.length > 0"
+                  :drag-items="dataItem.headings"
                   :header-height="60"
-                  :on-edit-click="editInfo"
+                  :on-edit-click="editHeading"
                   :on-delete-click="showDeleteModal">
           <template v-slot:item="{ item }">
-            <h5 v-if="item.info.key" class="title-item">{{ item.info.key }}: {{ item.info.value }}</h5>
-            <h5 v-else class="title-item">{{ item.info.value }}</h5>
+            <h5 class="title-item">{{ item.heading.title }}</h5>
+            <div class="text-item">{{ item.heading.text }}</div>
           </template>
           <template v-slot:buttonUp>
             <button type="button" class="button-mobile button-blue">
@@ -47,7 +47,7 @@
             </button>
           </template>
         </DragList>
-        <div v-else-if="index == selectedIndex && dataItem.infos.length == 0"
+        <div v-else-if="index == selectedIndex && dataItem.headings.length == 0"
              class="text-no-info">
           No information here
         </div>
@@ -66,11 +66,11 @@
   import InputField from "../../../components/form/InputField";
   import FormWrapper from "../../../components/form/FormWrapper";
   import NumberField from "../../../components/form/NumberField";
-  import DomInfo from "../../../models/dom/DomInfo";
+  import DomHeading from "../../../models/dom/DomHeading";
   import {RESET_MODAL_DATA, SET_MODAL_DATA} from "../../../store/mutations";
   import DynamicModal from "../../../components/element/DynamicModal";
   import DragList from "../../../components/element/DragList";
-  import {DELETE_INFO, GET_INFOS, UPDATE_INFO_DISPLAY_INDEX} from "../../../store/info/actions";
+  import {DELETE_HEADING, GET_HEADINGS, UPDATE_HEADING_DISPLAY_INDEX} from "../../../store/home/actions";
 
   export default {
     name: 'index',
@@ -79,51 +79,51 @@
       FormWrapper, InputField, NumberField, DragList, DynamicModal
     },
     data: () => ({
-      infoData: [],
+      headingData: [],
       selectedIndex: 0
     }),
     methods: {
-      showSelectedInfos: function (index) {
+      showSelectedHeadingType: function (index) {
         this.selectedIndex = index
       },
-      async updateInfos() {
+      async updateHeadings() {
         // update display indexes
-        let updatedInfos = this.infoData[this.selectedIndex].infos.map((domInfo, index) => ({
-          id: domInfo.id,
+        let updatedHeadings = this.headingData[this.selectedIndex].headings.map((domHeading, index) => ({
+          id: domHeading.id,
           displayIndex: index + 1
         }))
         // send request
-        await this.$store.dispatch(UPDATE_INFO_DISPLAY_INDEX, updatedInfos)
+        await this.$store.dispatch(UPDATE_HEADING_DISPLAY_INDEX, updatedHeadings)
       },
-      editInfo: function (id) {
-        return this.$router.push({path: `/admin/infos/edit/${id}`})
+      editHeading: function (id) {
+        return this.$router.push({path: `/admin/headings/edit/${id}`})
       },
       showDeleteModal: function (id) {
         this.$store.commit(SET_MODAL_DATA, {
-          modalContent: 'information',
+          modalContent: 'heading',
           data: id,
-          callback: this.deleteInfo
+          callback: this.deleteHeading
         })
       },
-      async deleteInfo(id) {
-        let response = await this.$store.dispatch(DELETE_INFO, id)
+      async deleteHeading(id) {
+        let response = await this.$store.dispatch(DELETE_HEADING, id)
         if (response) {
-          // update local infos
-          this.infoData[this.selectedIndex].infos = this.infoData[this.selectedIndex].infos
-            .filter(domInfo => domInfo.id != id)
+          // update local headings
+          this.headingData[this.selectedIndex].headings = this.headingData[this.selectedIndex].headings
+            .filter(domHeading => domHeading.id != id)
           // close the modal and reset the options
           this.$store.commit(RESET_MODAL_DATA)
         }
       }
     },
     async asyncData({store}) {
-      let infoTypes = await store.dispatch(GET_INFOS);
-      if (infoTypes) {
-        let infoData = infoTypes.map(data => ({
+      let headingTypes = await store.dispatch(GET_HEADINGS);
+      if (headingTypes) {
+        let headingData = headingTypes.map(data => ({
           name: data.name,
-          infos: data.infos.map(info => new DomInfo(info.id, info))
+          headings: data.headings.map(heading => new DomHeading(heading.id, heading))
         }))
-        return {infoData}
+        return {headingData}
       }
     }
   }
@@ -146,7 +146,7 @@
     margin-bottom: 5px;
   }
 
-  .button-info-type {
+  .button-heading-type {
     margin: 10px 0;
     width: 100%;
     font-size: 1.2rem;

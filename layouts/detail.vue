@@ -25,6 +25,11 @@
   import {CLEAR_FORM_DATA} from "../store/mutations";
 
   export default {
+    head: {
+      bodyAttrs: {
+        class: "detail-class"
+      }
+    },
     components: {
       Header, MessageModal
     },
@@ -49,55 +54,37 @@
 <style lang="scss">
   @import "../assets/css/layout.shared";
 
-  .page-wrapper {
-    padding: 30px 15px;
-  }
+  .detail-class {
+    .page-wrapper {
+      padding: 30px 15px;
+    }
 
-  .back-wrapper {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-  }
+    .back-wrapper {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
 
-  .button-back {
-    height: auto;
-    padding: 0 15px;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
+    .button-back {
+      height: auto;
+      padding: 0 15px;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
 
-    .text-back {
-      margin-left: 8px;
-      color: $green-main;
-      font-size: 1rem;
+      .text-back {
+        margin-left: 8px;
+        color: $green-main;
+        font-size: 1rem;
+      }
     }
   }
 
-  /*ux element styles*/
-  .spinner {
-    height: 50px;
-    width: 50px;
-    @include center-element-fixed();
-    z-index: 500;
-
-    .fa-spinner {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      color: $green-main;
+  @media screen and (min-width: $screen-md) {
+    .detail-class {
+      .page-wrapper {
+        padding: 30px 40px;
+      }
     }
-  }
-
-  /* Define an animation behavior */
-  @keyframes spinner {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* This is the class name given by the Font Awesome component when icon contains 'spinner' */
-  .fa-spinner {
-    /* Apply 'spinner' keyframes looping once every second (1s)  */
-    animation: spinner 1.5s linear infinite;
   }
 </style>

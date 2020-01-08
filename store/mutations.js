@@ -4,10 +4,12 @@ import Experience from "~/models/Experience";
 import Education from "~/models/Education";
 import Scope from "~/models/Scope";
 import InfoType from "~/models/InfoType";
+import HeadingType from "~/models/HeadingType";
 
 export const SET_PUBLISHED = 'setPublished';
 export const SET_RESUME_DATA = 'setResumeData';
 export const SET_INFO_TYPES = 'setInfoTypes';
+export const SET_HEADING_TYPES = 'setHeadingTypes';
 export const SET_FORM_DATA = 'setFormData';
 export const SET_MODAL_DATA = 'setModalData';
 export const RESET_MODAL_DATA = 'resetModalData';
@@ -39,6 +41,9 @@ export default {
   },
   setInfoTypes: function (state, infoTypes) {
     state.infoTypes = infoTypes.map(infoType => InfoType.parseFromDataObject(infoType))
+  },
+  setHeadingTypes: function (state, headingTypes) {
+    state.headingTypes = headingTypes.map(headingType => HeadingType.parseFromDataObject(headingType))
   },
   /** modal data **/
   setModalData: function (state, data) {
@@ -73,7 +78,6 @@ export default {
       // add regular field
       state.formData[fieldName] = data
     }
-    // console.log(state.formData)
   },
   removeFormDataByName: function (state, {groupName, index}) {
     if (state.formData && state.formData[groupName]) {

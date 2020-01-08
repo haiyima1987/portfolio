@@ -8,6 +8,7 @@ export default () => ({
   experiences: [],
   educations: [],
   infoTypes: [],
+  headingTypes: [],
   // form related props
   formData: {},
   // modal

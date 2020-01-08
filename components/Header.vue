@@ -5,7 +5,22 @@
         <img class="logo" src="../assets/img/logo-haiyi-inverse.svg" alt="logo">
       </nuxt-link>
     </div>
+    <div class="menu-button-group">
+      <div class="menu-button-wrapper">
+        <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
+                   @click.native="closeOverlay"
+                   :to="mobileItem.link"
+                   class="button-white-text menu-button">
+          {{ mobileItem.name }}
+        </nuxt-link>
+      </div>
+    </div>
     <div class="icon-menu-wrapper">
+      <font-awesome-icon :icon="['fas', 'bars']"
+                         @click="toggleOverlay"
+                         class="icon-menu"/>
+    </div>
+    <div v-if="isAuthenticated" class="icon-menu-wrapper-admin">
       <font-awesome-icon :icon="['fas', 'bars']"
                          @click="toggleOverlay"
                          class="icon-menu"/>
@@ -26,28 +41,28 @@
             </button>
             <transition name="basic">
               <div v-if="index == selectedIndex"
-                   class="item-mobile-wrapper">
+                   class="menu-item-wrapper">
                 <nuxt-link v-for="(mobileItem, index) in itemData.items" :key="index"
                            @click.native="closeOverlay"
                            :to="mobileItem.link"
-                           class="button-green-text item-mobile">
+                           class="button-green-text menu-item">
                   {{ mobileItem.name }}
                 </nuxt-link>
               </div>
             </transition>
           </div>
         </div>
-        <div class="item-mobile-wrapper public-item-wrapper">
+        <div class="menu-item-wrapper public-item-wrapper">
           <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
                      @click.native="closeOverlay"
                      :to="mobileItem.link"
-                     class="button-green-text item-mobile">
+                     class="button-green-text menu-item">
             {{ mobileItem.name }}
           </nuxt-link>
           <nuxt-link v-if="isAuthenticated"
                      @click.native="closeOverlay"
                      to="/admin/logout"
-                     class="button-green-text item-mobile">
+                     class="button-green-text menu-item">
             Logout
           </nuxt-link>
         </div>
@@ -80,14 +95,14 @@
           name: 'Projects',
           link: '/admin/projects'
         }, {
+          name: 'Types',
+          link: '/admin/types'
+        }, {
           name: 'Skills',
           link: '/admin/skills'
         }, {
           name: 'Skill scopes',
           link: '/admin/scopes'
-        }, {
-          name: 'Types',
-          link: '/admin/types'
         }, {
           name: 'Categories',
           link: '/admin/categories'
@@ -106,6 +121,15 @@
         }, {
           name: 'Info types',
           link: '/admin/info-types'
+        }]
+      }, {
+        name: 'Home',
+        items: [{
+          name: 'Headings',
+          link: '/admin/headings'
+        },{
+          name: 'Heading Types',
+          link: '/admin/heading-types'
         }]
       }]
     }),
@@ -144,7 +168,7 @@
 
   .header-wrapper {
     height: 60px;
-    background-color: $grey-dark;
+    background-color: $grey-dark-opaque;
     @include flex-center();
     @include box-shadow(0, 0, 10px, $grey-shadow-opaque);
   }
@@ -161,6 +185,16 @@
   }
 
   .icon-menu-wrapper {
+    padding: 0 20px;
+    font-size: 1.5rem;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .icon-menu-wrapper-admin {
     padding: 0 20px;
     font-size: 1.5rem;
     color: white;
@@ -189,12 +223,12 @@
   }
 
   /* mobile menu item */
-  .item-mobile-wrapper {
+  .menu-item-wrapper {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .item-mobile {
+  .menu-item {
     padding: 10px 10px 5px 20px;
     height: auto;
     border-bottom: 1px solid $green-main;
@@ -220,5 +254,30 @@
 
   .public-item-wrapper {
     margin-top: 20px;
+  }
+
+  @media screen and (min-width: $screen-md) {
+    .icon-logo-wrapper {
+      flex-grow: unset;
+    }
+
+    .menu-button-group {
+      padding-left: 20px;
+      flex-grow: 1;
+    }
+
+    .menu-button {
+      padding: 0 20px;
+    }
+
+    .icon-menu-wrapper {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: $screen-lg) {
+  }
+
+  @media screen and (min-width: $screen-xl) {
   }
 </style>

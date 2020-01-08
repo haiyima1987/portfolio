@@ -35,7 +35,6 @@ class ApiHandler {
             // the value is an object, so loop through each key
             for (const childKey in value) {
               if (value.hasOwnProperty(childKey)) {
-                console.log(`${key}[${index}].${childKey}`, value[childKey])
                 // parse the data to correct format for array of objects
                 formData.append(`${key}[${index}].${childKey}`, value[childKey])
               }

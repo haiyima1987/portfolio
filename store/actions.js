@@ -1,11 +1,12 @@
 import apiHandler from "~/utils/ApiHandler";
-import {SET_ERROR_MESSAGE, SET_INFO_TYPES, SET_PUBLISHED, SET_RESUME_DATA} from "~/store/mutations";
+import {SET_ERROR_MESSAGE, SET_HEADING_TYPES, SET_INFO_TYPES, SET_PUBLISHED, SET_RESUME_DATA} from "~/store/mutations";
 import LocalDataHandler from "~/utils/LocalDataHandler";
 import {SET_ACCESS_TOKEN} from "~/store/auth/mutations";
 
 export const GET_PUBLISHED = 'getPublished';
 export const GET_RESUME_DATA = 'getResumeData';
 export const GET_ABOUT_DATA = 'getAboutData';
+export const GET_HOME_DATA = 'getHomeData';
 
 export default {
   async getPublished({commit}) {
@@ -40,6 +41,20 @@ export default {
       if (apiHandler.isSuccess(response.status)) {
         commit(SET_INFO_TYPES, response.data.data)
         return true
+      }
+      return false
+    } catch (e) {
+      commit(SET_ERROR_MESSAGE, e.response.data)
+      return false
+    }
+  },
+  async getHomeData({commit, state}) {
+    try {
+      let response = await this.$axios.get('/home')
+      if (apiHandler.isSuccess(response.status)) {
+        commit(SET_HEADING_TYPES, response.data.data)
+        // return true
+        return state.headingTypes
       }
       return false
     } catch (e) {

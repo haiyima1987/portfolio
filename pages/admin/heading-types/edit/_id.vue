@@ -1,13 +1,13 @@
 <template>
   <div>
-    <FormWrapper :send-form-data="editInfoType" class="edit-info-type-form">
+    <FormWrapper :send-form-data="editHeadingType" class="edit-heading-type-form">
       <InputField
         :field-title="'Name'"
         :field-name="`name`"
         :rule="'required'"
         :type="'text'"
-        :value="infoType.name"
-        :placeholder="'Enter information type name'">
+        :value="headingType.name"
+        :placeholder="'Enter heading type name'">
       </InputField>
       <div class="button-submit-wrapper">
         <button type="submit" class="button-green button-save">
@@ -22,7 +22,7 @@
   import {mapGetters} from "vuex";
   import FormWrapper from "../../../../components/form/FormWrapper";
   import InputField from "../../../../components/form/InputField";
-  import {GET_INFO_TYPE_BY_ID, UPDATE_INFO_TYPE} from "../../../../store/info/actions";
+  import {GET_HEADING_TYPE_BY_ID, UPDATE_HEADING_TYPE} from "../../../../store/home/actions";
 
   export default {
     name: "edit",
@@ -32,21 +32,21 @@
       FormWrapper, InputField
     },
     computed: {
-      ...mapGetters('info', {
-        infoType: 'getSelectedInfoType'
+      ...mapGetters('home', {
+        headingType: 'getSelectedHeadingType'
       })
     },
     methods: {
-      async editInfoType(data) {
-        data.id = this.infoType.id
-        let response = await this.$store.dispatch(UPDATE_INFO_TYPE, data)
+      async editHeadingType(data) {
+        data.id = this.headingType.id
+        let response = await this.$store.dispatch(UPDATE_HEADING_TYPE, data)
         if (response) {
-          return this.$router.push({path: '/admin/info-types'})
+          return this.$router.push({path: '/admin/heading-types'})
         }
       }
     },
     async asyncData({store, params}) {
-      await store.dispatch(GET_INFO_TYPE_BY_ID, params.id);
+      await store.dispatch(GET_HEADING_TYPE_BY_ID, params.id);
     }
   }
 </script>

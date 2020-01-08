@@ -17,6 +17,9 @@ export default {
   getInfoTypes: function (state) {
     return state.infoTypes
   },
+  getHeadingTypes: function (state) {
+    return state.headingTypes
+  },
   getFormData: function (state) {
     return state.formData
   },

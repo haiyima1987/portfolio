@@ -23,15 +23,17 @@
       </div>
       <div class="button-group-wrapper">
         <div class="button-wrapper">
-          <a :href="project.siteLink" class="button-left">
-            <font-awesome-icon :icon="['fa', 'home']"/>
-            Website
+          <a v-if="project.repository" :href="project.repository"
+             target="_blank" class="button-right">
+            <font-awesome-icon :icon="['fab', 'github']"/>
+            GitHub
           </a>
         </div>
         <div class="button-wrapper">
-          <a :href="project.repository" class="button-right">
-            <font-awesome-icon :icon="['fab', 'github']"/>
-            GitHub
+          <a v-if="project.siteLink" :href="project.siteLink"
+             target="_blank" class="button-left">
+            <font-awesome-icon :icon="['fa', 'home']"/>
+            Website
           </a>
         </div>
       </div>
@@ -50,7 +52,7 @@
       })
     },
     async asyncData({store}) {
-      return store.dispatch(GET_PUBLISHED);
+      return store.dispatch(GET_PUBLISHED)
     }
   }
 </script>
@@ -102,7 +104,7 @@
 
   /* text content */
   .content-wrapper {
-    padding: 10px;
+    padding: 10px 20px;
   }
 
   .title-project-wrapper {
@@ -169,5 +171,23 @@
     @extend .button-left;
     color: $green-dark;
     border: 2px solid $green-dark;
+  }
+
+  @media screen and (min-width: $screen-md) {
+    .project-list-wrapper {
+      @include grid(2, 20px);
+    }
+
+    .card-project {
+      margin-bottom: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .button-group-wrapper {
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+    }
   }
 </style>

@@ -5,7 +5,11 @@
       <div class="content-wrapper">
         <div v-for="info in infoType.infos" :key="info.id"
              class="item-wrapper">
-          <div v-if="info.key" class="text-item">{{ info.key }}: {{ info.value }}</div>
+          <div v-if="info.key" class="text-item">
+            {{ info.key }}:&nbsp;
+            <a v-if="isLink(info.value)" :href="info.value" target="_blank">{{ info.value }}</a>
+            <template v-else>{{ info.value }}</template>
+          </div>
           <div v-else class="text-item">{{ info.value }}</div>
         </div>
       </div>
@@ -28,8 +32,13 @@
         infoTypes: 'getInfoTypes'
       })
     },
+    methods: {
+      isLink: function (value) {
+        return value.includes('http')
+      }
+    },
     async asyncData({store}) {
-      return store.dispatch(GET_ABOUT_DATA);
+      return store.dispatch(GET_ABOUT_DATA)
     }
   }
 </script>

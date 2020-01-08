@@ -20,7 +20,7 @@
   export default {
     head: {
       bodyAttrs: {
-        class: 'default-class'
+        class: "home-class"
       }
     },
     components: {
@@ -42,23 +42,6 @@
 <style lang="scss">
   @import "../assets/css/layout.shared";
 
-  .default-class {
-    .page-wrapper {
-      padding: 30px 15px;
-    }
-
-    .title-wrapper {
-      margin: 0 0 30px 0;
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  @media screen and (min-width: $screen-md) {
-    .default-class {
-      .page-wrapper {
-        padding: 30px 40px;
-      }
-    }
+  .home-class {
   }
 </style>

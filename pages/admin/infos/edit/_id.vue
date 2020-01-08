@@ -44,7 +44,7 @@
   import {mapGetters} from "vuex";
   import FormWrapper from "../../../../components/form/FormWrapper";
   import InputField from "../../../../components/form/InputField";
-  import {UPDATE_INFO, GET_INFO_BY_ID} from "../../../../store/info/actions";
+  import {GET_INFO_BY_ID, UPDATE_INFO} from "../../../../store/info/actions";
   import RadioGroup from "../../../../components/form/RadioGroup";
   import CheckField from "../../../../components/form/CheckField";
 
@@ -66,7 +66,6 @@
     methods: {
       async editInfo(data) {
         data.id = this.info.id
-        console.log(data)
         let response = await this.$store.dispatch(UPDATE_INFO, data)
         if (response) {
           return this.$router.push({path: '/admin/infos'})
