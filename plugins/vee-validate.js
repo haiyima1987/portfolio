@@ -1,5 +1,5 @@
 import {extend} from "vee-validate";
-import {required, ext, size, integer} from "vee-validate/dist/rules";
+import {ext, integer, required, size} from "vee-validate/dist/rules";
 
 extend("required", {
   ...required,

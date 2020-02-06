@@ -88,7 +88,7 @@
   const introBottomDisplayName = 'introBottomDisplay'
   const headingBottomDisplayName = 'headingBottomDisplay'
   // display arrays
-  const initializationDisplays = [introImageDisplayName, introTopDisplayName,  buttonTopDisplayName, introBottomDisplayName, introBottomDisplayName, headingBottomDisplayName]
+  const initializationDisplays = [introImageDisplayName, introTopDisplayName, buttonTopDisplayName, introBottomDisplayName, introBottomDisplayName, headingBottomDisplayName]
   const contentDisplays = [introBottomDisplayName, headingBottomDisplayName]
   const imageDisplays = [introImageDisplayName]
   const displayOffset = 80
