@@ -1,33 +1,44 @@
 /* other colors */
-$green-main: #7ED321;
-$green-secondary: #7AC142;
-$green-third: #2EC350;
-$green-forth: #37B553;
-$green-fifth: #17C912;
-$green-dark: #2AC125;
-$green-light: #C6E5AA;
-$blue-main: #0069D9;
-$blue-title: #3F9CD7;
+$green-main-1: #7ED321;
+$green-main-2: #7AC142;
+$green-3: #2EC350;
+$green-4: #37B553;
+$green-5: #17C912;
+$green-6: #2AC125;
+$green-pale-1: #C6E5AA;
+$blue-dark-1: #0069D9;
+$blue-light-1: #3F9CD7;
 $red-main: #FF2151;
-$brown-main: #9C652C;
-$brown-light: #F99E37;
-$orange-light: #EFEA3F;
-$white-opaque: rgba(255, 255, 255, 0.6);
+$red-2: #D12741;
+$brown-main-1: #9C652C;
+$brown-2: #E2763F;
+$brown-light-1: #F99E37;
+$orange-light-1: #EFEA3F;
 
 /* grey colors */
-$grey-title: #1B263B;
-$grey-dark: #231F20;
-$grey-text: #4A4B4C;
-$grey-text-input: #979797;
-$grey-text-medium: #666567;
-$grey-line: #CFD3DE;
-$grey-pale: #DEDEDE;
-$grey-pale-light: #ABACAD;
-$grey-dark-opaque: rgba(35, 31, 32, 0.9);
-$grey-secondary-opaque: rgba(151, 140, 159, 0.4);
-$grey-medium-opaque: rgba(192, 192, 192, 0.5);
-$grey-light-opaque: rgba(247, 247, 247, 0.5);
-$grey-shadow-opaque: rgba(215, 215, 215, 0.5);
+$grey-dark-1: #1B263B;
+$grey-dark-2: #231F20;
+$grey-dark-3: #303437;
+$grey-medium-4: #4A4B4C;
+$grey-medium-6: #666567;
+$grey-medium-9: #979797;
+$grey-pale-a: #ABACAD;
+$grey-pale-c: #CFD3DE;
+$grey-pale-d: #DEDEDE;
+$grey-pale-e: #EDEDED;
+$grey-pale-f: #FBFBFB;
+$grey-opaque-03: rgba(35, 31, 32, 0.9);
+$grey-opaque-07: rgba(72, 72, 72, 0.5);
+$grey-opaque-15: rgba(151, 140, 159, 0.4);
+$grey-opaque-19: rgba(192, 192, 192, 0.5);
+$grey-opaque-21: rgba(215, 215, 215, 0.5);
+$grey-opaque-24: rgba(247, 247, 247, 0.5);
+$grey-opaque-25: rgba(255, 255, 255, 0.6);
+
+/* main colors */
+$color-main: $green-main-1;
+$color-secondary: $green-main-2;
+$color-accent: $grey-dark-3;
 
 /* starting point for XS */
 $screen-xs: 320px !default;
@@ -46,3 +57,6 @@ $screen-xl-minus: 1199px !default;
 /* starting point for XXL */
 $screen-xxl: 1600px !default;
 $screen-xxl-minus: 1599px !default;
+/* starting point for TV */
+$screen-tv: 2000px !default;
+$screen-tv-minus: 1999px !default;

@@ -96,7 +96,7 @@ export default {
       if (apiHandler.isSuccess(response.status)) {
         commit(REMOVE_HEADING_BY_ID, id);
         commit(SET_SUCCESS_MESSAGE, undefined, {root: true})
-        return state.headings
+        return state.headingTypes
       }
       return false
     } catch (e) {

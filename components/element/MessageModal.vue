@@ -45,11 +45,11 @@
     max-width: 360px;
     @include center-element-fixed();
     z-index: 2000;
-    color: $green-main;
+    color: $green-main-1;
     font-weight: bold;
     background-color: white;
     @include border-radius(5px);
-    border: 1px solid $green-main;
+    border: 1px solid $green-main-1;
     @include box-shadow(0, 0, 20px, rgba(215, 215, 215, 0.5));
 
     &:hover {

@@ -14,6 +14,18 @@
     opacity: 0;
 }
 
+.fade-enter-active {
+    @include transition(all, .5s, ease);
+}
+
+.fade-leave-active {
+    @include transition(all, .3s, ease);
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
 /** sliding transition fading **/
 .prev-fade-enter-active {
     transition: 0.5s ease-in-out;
@@ -88,4 +100,76 @@
 .next-move {
     opacity: 0.5;
     transition: 0.5s ease-in-out;
+}
+
+/** sliding transition for image preview **/
+.image-preview-enter-active {
+  transition: 0.3s ease-out;
+}
+
+.image-preview-leave-active {
+  transition: 0.2s ease-in;
+}
+
+.image-preview-enter {
+  @include translate(-200%, 0);
+}
+
+.image-preview-leave-to {
+  @include translate(200%, 0);
+}
+
+/** DOM element transition **/
+.move-right-enter-active {
+  transition: all .3s ease-out;
+}
+
+.move-right-leave-active {
+  transition: all .2s ease-in;
+}
+
+.move-right-enter {
+  opacity: 0;
+  @include translate(-20px, 0);
+}
+
+.move-right-leave-to {
+  opacity: 0;
+  @include translate(20px, 0);
+}
+
+.move-left-enter-active {
+  transition: all .3s ease-out;
+}
+
+.move-left-leave-active {
+  transition: all .2s ease-in;
+}
+
+.move-left-enter {
+  opacity: 0;
+  @include translate(20px, 0);
+}
+
+.move-left-leave-to {
+  opacity: 0;
+  @include translate(-20px, 0);
+}
+
+.move-up-enter-active {
+  transition: all .5s ease-in-out;
+}
+
+.move-up-leave-active {
+  transition: all .2s ease-in-out;
+}
+
+.move-up-enter {
+  opacity: 0;
+  @include translate(0, 50px);
+}
+
+.move-up-leave-to {
+  opacity: 0;
+  @include translate(50px, 0);
 }

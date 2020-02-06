@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="full-page-wrapper">
     <Header/>
     <div class="page-wrapper">
       <div class="back-wrapper">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import Header from '~/components/Header.vue'
+  import Header from '../components/Header.vue'
   import MessageModal from "../components/element/MessageModal.vue";
   import {mapGetters} from "vuex";
   import {CLEAR_FORM_DATA} from "../store/mutations";
@@ -74,7 +74,7 @@
 
       .text-back {
         margin-left: 8px;
-        color: $green-main;
+        color: $green-main-1;
         font-size: 1rem;
       }
     }
@@ -84,6 +84,22 @@
     .detail-class {
       .page-wrapper {
         padding: 30px 40px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-lg) {
+    .detail-class {
+      .page-wrapper {
+        padding: 30px 8%;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-xl) {
+    .detail-class {
+      .page-wrapper {
+        padding: 30px 10%;
       }
     }
   }

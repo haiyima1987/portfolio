@@ -11,8 +11,12 @@ export default () => ({
   headingTypes: [],
   // form related props
   formData: {},
-  // modal
+  // DOM
   isModalShown: false,
   modalOptions: {},
-  appMessage: null
+  appMessage: null,
+  previewProject: undefined,
+  windowHeight: 0,
+  // menu
+  selectedMenuId: -1
 })

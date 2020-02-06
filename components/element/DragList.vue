@@ -224,7 +224,7 @@
 
   .line-indicator {
     margin: 0;
-    border-top: 2px solid $blue-main;
-    @include box-shadow(0, 0, 5px, $blue-main);
+    border-top: 2px solid $blue-dark-1;
+    @include box-shadow(0, 0, 5px, $blue-dark-1);
   }
 </style>

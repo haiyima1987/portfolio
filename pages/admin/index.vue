@@ -1,7 +1,7 @@
 <template>
   <div class="admin-wrapper">
     <FormWrapper :send-form-data="login"
-          class="create-account-form">
+                 class="create-account-form">
       <InputField
         :field-title="'Username'"
         :field-name="'email'"
@@ -54,6 +54,17 @@
 </script>
 
 <style scoped lang="scss">
+  .admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .create-account-form {
+    width: 600px;
+    max-width: 100%;
+  }
+
   .button-submit-wrapper {
     text-align: right;
   }

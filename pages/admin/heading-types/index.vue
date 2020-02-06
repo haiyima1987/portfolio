@@ -148,7 +148,7 @@
 
   /* tags */
   .heading-wrapper {
-    border-top: 2px solid $green-main;
+    border-top: 2px solid $green-main-1;
     padding: 10px;
   }
 </style>

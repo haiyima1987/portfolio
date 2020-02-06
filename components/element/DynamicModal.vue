@@ -56,7 +56,7 @@
   @import "../../assets/css/base.mixins";
 
   .overlay-panel-background {
-    background-color: $grey-medium-opaque;
+    background-color: $grey-opaque-19;
     @include position(fixed, $top: 0, $right: 0, $bottom: 0, $left: 0);
     @include flex-center();
     z-index: 100;

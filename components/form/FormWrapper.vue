@@ -41,12 +41,12 @@
   @import "../../assets/css/base.mixins";
 
   $backgroundColor: white;
-  $borderColor: $grey-line;
-  $titleColor: $grey-title;
-  $textColor: $grey-text;
-  $placeholderColor: $grey-line;
-  $mainColor: $green-main;
-  $indicatorColor: $grey-line;
+  $borderColor: $grey-pale-c;
+  $titleColor: $grey-dark-1;
+  $textColor: $grey-medium-4;
+  $placeholderColor: $grey-pale-c;
+  $mainColor: $green-main-1;
+  $indicatorColor: $grey-pale-c;
 
   /* form elements */
   input, select, textarea {

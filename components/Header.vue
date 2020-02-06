@@ -1,91 +1,71 @@
 <template>
   <div class="header-wrapper">
     <div class="icon-logo-wrapper">
-      <nuxt-link to="/">
-        <img class="logo" src="../assets/img/logo-haiyi-inverse.svg" alt="logo">
+      <nuxt-link to="/" @click.native="setMenuId(1)">
+        <img class="logo-image" src="../assets/img/logo-haiyi-inverse.svg" alt="logo">
       </nuxt-link>
     </div>
     <div class="menu-button-group">
       <div class="menu-button-wrapper">
         <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
-                   @click.native="closeOverlay"
+                   @click.native="setMenuId(mobileItem.id)"
                    :to="mobileItem.link"
+                   :class="{ 'menu-button-selected': mobileItem.id == selectedMenuId, 'about-button': mobileItem.id == 4 }"
                    class="button-white-text menu-button">
           {{ mobileItem.name }}
         </nuxt-link>
       </div>
     </div>
-    <div class="icon-menu-wrapper">
-      <font-awesome-icon :icon="['fas', 'bars']"
-                         @click="toggleOverlay"
-                         class="icon-menu"/>
+    <div v-if="isAuthenticated" class="button-logout-wrapper">
+      <nuxt-link to="/admin/logout" @click.native="setMenuId(1)"
+                 class="button-green-text button-logout">
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']"
+                           class="icon-menu"/>
+      </nuxt-link>
     </div>
     <div v-if="isAuthenticated" class="icon-menu-wrapper-admin">
       <font-awesome-icon :icon="['fas', 'bars']"
-                         @click="toggleOverlay"
+                         @click="openOverlay"
+                         class="icon-menu"/>
+    </div>
+    <div v-else class="icon-menu-wrapper">
+      <font-awesome-icon :icon="['fas', 'bars']"
+                         @click="openOverlay"
                          class="icon-menu"/>
     </div>
     <transition name="basic">
-      <div v-if="isOverlayShown"
-           class="overlay-wrapper">
-        <div class="icon-cancel-wrapper">
-          <font-awesome-icon :icon="['fas', 'times']"
-                             @click="toggleOverlay"
-                             class="icon-menu"/>
-        </div>
-        <div v-if="isAuthenticated">
-          <div v-for="(itemData, index) in authItems">
-            <button @click="showSelectedItems(index)"
-                    type="button" class="button button-green button-menu-type">
-              {{ itemData.name }}
-            </button>
-            <transition name="basic">
-              <div v-if="index == selectedIndex"
-                   class="menu-item-wrapper">
-                <nuxt-link v-for="(mobileItem, index) in itemData.items" :key="index"
-                           @click.native="closeOverlay"
-                           :to="mobileItem.link"
-                           class="button-green-text menu-item">
-                  {{ mobileItem.name }}
-                </nuxt-link>
-              </div>
-            </transition>
-          </div>
-        </div>
-        <div class="menu-item-wrapper public-item-wrapper">
-          <nuxt-link v-for="(mobileItem, index) in publicItems" :key="index"
-                     @click.native="closeOverlay"
-                     :to="mobileItem.link"
-                     class="button-green-text menu-item">
-            {{ mobileItem.name }}
-          </nuxt-link>
-          <nuxt-link v-if="isAuthenticated"
-                     @click.native="closeOverlay"
-                     to="/admin/logout"
-                     class="button-green-text menu-item">
-            Logout
-          </nuxt-link>
-        </div>
-      </div>
+      <HeaderOverlay :is-overlay-shown="isOverlayShown"
+                     :on-overlay-close="closeOverlay"/>
     </transition>
   </div>
 </template>
 
 <script>
   import {mapGetters} from "vuex";
+  import HeaderOverlay from "./HeaderOverlay";
+  import {SET_SELECTED_MENU} from "../store/mutations";
 
   export default {
     name: "Header",
+    components: {
+      HeaderOverlay
+    },
     data: () => ({
-      selectedIndex: -1,
       isOverlayShown: false,
       publicItems: [{
+        id: 1,
+        name: 'Home',
+        link: '/'
+      }, {
+        id: 2,
         name: 'Portfolio',
         link: '/portfolio'
       }, {
+        id: 3,
         name: 'Resume',
         link: '/resume'
       }, {
+        id: 4,
         name: 'About',
         link: '/about'
       }],
@@ -127,36 +107,39 @@
         items: [{
           name: 'Headings',
           link: '/admin/headings'
-        },{
+        }, {
           name: 'Heading Types',
           link: '/admin/heading-types'
         }]
       }]
     }),
     computed: {
-      ...mapGetters('auth', {
-        isAuthenticated: 'isAuthenticated'
+      ...mapGetters({
+        selectedMenuId: 'getSelectedMenuId',
+        isAuthenticated: 'auth/isAuthenticated'
       })
     },
     methods: {
-      showSelectedItems: function (index) {
-        if (this.selectedIndex != index) {
-          this.selectedIndex = index
-        } else {
-          this.selectedIndex = -1
-        }
+      setMenuId: function (id) {
+        this.$store.commit(SET_SELECTED_MENU, id)
       },
-      toggleOverlay: function () {
-        this.isOverlayShown = !this.isOverlayShown
-        // close menus
-        if (!this.isOverlayShown) {
-          this.selectedIndex = -1
-        }
+      openOverlay: function () {
+        this.isOverlayShown = true
       },
       closeOverlay: function () {
         this.isOverlayShown = false
-        this.selectedIndex = -1
+      },
+      setMenuIdOnLoad: function () {
+        if (process.browser && this.selectedMenuId == -1) {
+          let path = window.location.pathname
+          let item = this.publicItems.find(item => item.link == path)
+          if (!item) return
+          this.setMenuId(item.id)
+        }
       }
+    },
+    created() {
+      this.setMenuIdOnLoad();
     }
   }
 </script>
@@ -168,9 +151,9 @@
 
   .header-wrapper {
     height: 60px;
-    background-color: $grey-dark-opaque;
+    background-color: $grey-opaque-03;
     @include flex-center();
-    @include box-shadow(0, 0, 10px, $grey-shadow-opaque);
+    @include box-shadow(0, 0, 10px, $grey-opaque-21);
   }
 
   .icon-logo-wrapper {
@@ -179,9 +162,25 @@
     flex-grow: 1;
   }
 
-  .logo {
+  .logo-image {
     height: 40px;
     width: 40px;
+  }
+
+  .menu-button-group {
+    display: none;
+  }
+
+  .menu-button-wrapper {
+    display: flex;
+  }
+
+  /* logout button */
+  .button-logout {
+    padding: 0 15px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.2rem;
   }
 
   .icon-menu-wrapper {
@@ -204,70 +203,32 @@
     }
   }
 
-  /* styles for the overlay */
-  .overlay-wrapper {
-    padding: 15px 20px;
-    background-color: white;
-    @include position-equal(fixed, 0, $elevation: 50);
-  }
-
-  .icon-cancel-wrapper {
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: flex-end;
-    color: $green-main;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  /* mobile menu item */
-  .menu-item-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .menu-item {
-    padding: 10px 10px 5px 20px;
-    height: auto;
-    border-bottom: 1px solid $green-main;
-    font-size: 1rem;
-    font-weight: 800;
-
-    &:nth-of-type(odd) {
-      width: 49%;
-      margin-right: 1%;
-    }
-
-    &:nth-of-type(even) {
-      width: 49%;
-      margin-left: 1%;
-    }
-  }
-
-  .button-menu-type {
-    margin-top: 20px;
-    width: 100%;
-    font-weight: bold;
-  }
-
-  .public-item-wrapper {
-    margin-top: 20px;
-  }
-
   @media screen and (min-width: $screen-md) {
     .icon-logo-wrapper {
       flex-grow: unset;
     }
 
+    .logo {
+      height: 40px;
+      width: 40px;
+    }
+
     .menu-button-group {
+      display: block;
       padding-left: 20px;
       flex-grow: 1;
     }
 
     .menu-button {
       padding: 0 20px;
+      height: 60px;
+      line-height: 60px;
+    }
+
+    .menu-button-selected {
+      background-color: $green-main-1;
+      color: $grey-opaque-03;
+      font-weight: 800;
     }
 
     .icon-menu-wrapper {
@@ -276,8 +237,18 @@
   }
 
   @media screen and (min-width: $screen-lg) {
+    .about-button {
+      display: none;
+    }
   }
 
   @media screen and (min-width: $screen-xl) {
+    .icon-logo-wrapper {
+      width: 10%;
+    }
+
+    .menu-button-group {
+      padding-left: 0;
+    }
   }
 </style>

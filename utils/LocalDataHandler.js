@@ -1,15 +1,18 @@
 class LocalDataHandler {
-  constructor () {
+  constructor() {
     this.KEY_LOCAL_KEYS = 'local_keys'
     this.KEY_ACTIVE_USER = 'active_user'
+    this.KEY_ACCESS_TOKEN = 'access_token'
     this.KEY_REFRESH_TOKEN = 'refresh_token'
+    this.KEY_MENU_ID = 'menu_id'
+    this.PERSISTENT_KEYS = [this.KEY_REFRESH_TOKEN]
   }
 
   /**
    * Function to get the instance of the cookie handler
    */
-  static getInstance () {
-    if (this.instance == null) {
+  static getInstance() {
+    if (!this.instance) {
       this.instance = new LocalDataHandler()
     }
     return this.instance
@@ -19,7 +22,7 @@ class LocalDataHandler {
    * Function to retrieve a cookie
    * @param sKey key of the cookie
    */
-  get (sKey) {
+  get(sKey) {
     if (!sKey) {
       return null
     }
@@ -34,7 +37,7 @@ class LocalDataHandler {
    * @param sPath path of the cookie
    * @param sDomain domain of the cookie
    */
-  set (sKey, sValue, vEnd = 3600, sPath = null, sDomain = null) {
+  set(sKey, sValue, vEnd = 3600, sPath = null, sDomain = null) {
     if (!sKey || /^(?:expires|max-age|path|domain|secure)$/i.test(sKey)) {
       return false
     }
@@ -59,7 +62,7 @@ class LocalDataHandler {
    * @param sPath path of the cookie
    * @param sDomain domain of the cookie
    */
-  remove (sKey, sPath = '', sDomain = null) {
+  remove(sKey, sPath = '', sDomain = null) {
     if (!this.has(sKey)) {
       return false
     }
@@ -70,17 +73,18 @@ class LocalDataHandler {
   /**
    * Function to destroy all cookies
    */
-  destroy () {
+  destroy() {
     // clear all cookies
-    this.keys().forEach(key => {
-      // this.remove(key, '/', `${process.env.NUXT_ENV_HOST}`)
-      this.remove(key, '/')
-    })
+    for (let key of this.keys()) {
+      if (!this.PERSISTENT_KEYS.includes(key)) {
+        this.remove(key, '/')
+      }
+    }
     // clear all local storage
     this.clearLocalData()
   }
 
-  clearLocalData () {
+  clearLocalData() {
     let keys = localStorage.getItem(this.KEY_LOCAL_KEYS)
     if (keys == null) {
       return
@@ -96,7 +100,7 @@ class LocalDataHandler {
    * Function to check if cookie exists
    * @param sKey key of the cookie
    */
-  has (sKey) {
+  has(sKey) {
     if (!sKey || /^(?:expires|max-age|path|domain|secure)$/i.test(sKey)) {
       return false
     }
@@ -106,7 +110,7 @@ class LocalDataHandler {
   /**
    * Function to retrieve all stored cookie keys
    */
-  keys () {
+  keys() {
     let aKeys = document.cookie.replace(/((?:^|\s*;)[^=]+)(?=;|$)|^\s*|\s*(?:=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:=[^;]*)?;\s*/)
     for (let nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) {
       aKeys[nIdx] = decodeURIComponent(aKeys[nIdx])
@@ -114,29 +118,39 @@ class LocalDataHandler {
     return aKeys
   }
 
-  end (maxAge) {
+  end(maxAge) {
     return maxAge === Infinity ? 'Fri, 31 Dec 9999 23:59:59 GMT' : (new Date(maxAge * 1e3 + Date.now())).toUTCString()
   }
 
   /** functions to deal with access token **/
-  getAccessToken () {
-    return this.get('access_token')
+  getAccessToken() {
+    return this.get(this.KEY_ACCESS_TOKEN)
   }
 
-  updateAccessToken (token) {
-    // return this.set('access_token', token, 3600, '/', `${process.env.NUXT_ENV_HOST}`)
-    return this.set('access_token', token, 3600 * 24, '/')
+  updateAccessToken(token) {
+    return this.set(this.KEY_ACCESS_TOKEN, token, 3600 * 24, '/')
   }
 
-  getTokenByHeader(cookies) {
+  updateRefreshToken(token) {
+    return this.set(this.KEY_REFRESH_TOKEN, token, 3600 * 24 * 30, '/')
+  }
+
+  getAccessTokenByHeader(cookies) {
     let cookieArray = cookies.split(';')
-    let needle = 'access_token='
+    let needle = `${this.KEY_ACCESS_TOKEN}=`
     let cookieString = cookieArray.find(cookie => cookie.includes(needle))
-    return cookieArray ? cookieString.substr(needle.length) : null
+    return cookieString ? cookieString.substr(needle.length) : null
+  }
+
+  getRefreshTokenByHeader(cookies) {
+    let cookieArray = cookies.split(';')
+    let needle = `${this.KEY_REFRESH_TOKEN}=`
+    let cookieString = cookieArray.find(cookie => cookie.includes(needle))
+    return cookieString ? cookieString.substr(needle.length) : null
   }
 
   /** general functions to save data into local storage **/
-  saveLocalKey (keyName) {
+  saveLocalKey(keyName) {
     let keys = localStorage.getItem(this.KEY_LOCAL_KEYS)
     if (keys == null) {
       localStorage.setItem(this.KEY_LOCAL_KEYS, JSON.stringify([keyName]))
@@ -149,7 +163,7 @@ class LocalDataHandler {
     }
   }
 
-  saveLocalData (keyName, data) {
+  saveLocalData(keyName, data) {
     this.saveLocalKey(keyName)
     if (typeof data === 'string') {
       localStorage.setItem(keyName, data)
@@ -158,7 +172,7 @@ class LocalDataHandler {
     localStorage.setItem(keyName, JSON.stringify(data))
   }
 
-  persistLocalData (keyName, data) {
+  persistLocalData(keyName, data) {
     if (typeof data === 'string') {
       localStorage.setItem(keyName, data)
       return
@@ -166,7 +180,7 @@ class LocalDataHandler {
     localStorage.setItem(keyName, JSON.stringify(data))
   }
 
-  getLocalData (keyName) {
+  getLocalData(keyName) {
     let data = localStorage.getItem(keyName)
     if (data == null) return data
     try {
@@ -178,7 +192,7 @@ class LocalDataHandler {
     }
   }
 
-  removeLocalKey (keyName) {
+  removeLocalKey(keyName) {
     let keys = localStorage.getItem(this.KEY_LOCAL_KEYS)
     if (keys == null) {
       return
@@ -191,23 +205,32 @@ class LocalDataHandler {
     }
   }
 
-  removeLocalData (keyName) {
+  removeLocalData(keyName) {
     this.removeLocalKey(keyName)
     localStorage.removeItem(keyName)
   }
 
   /** key-specific functions to save data into local storage **/
-  updateUser (user) {
+  updateUser(user) {
     this.saveLocalData(this.KEY_ACTIVE_USER, user)
   }
 
-  getUser () {
+  getUser() {
     // get the active user from local storage
     if (localStorage.getItem(this.KEY_ACTIVE_USER) != null) {
       // return the user after parsing
       return JSON.parse(localStorage.getItem(this.KEY_ACTIVE_USER))
     }
     return null
+  }
+
+  /** UX **/
+  saveMenuId(id) {
+    this.saveLocalData(this.KEY_MENU_ID, id)
+  }
+
+  getMenuId() {
+    return this.getLocalData(this.KEY_MENU_ID)
   }
 }
 

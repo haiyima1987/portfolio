@@ -1,15 +1,18 @@
 <template>
-  <div class="heading-wrapper">
+  <div class="heading-wrapper"
+       :style="{ 'background-color': backgroundColor }">
     <h1 class="title-heading">{{ name }}</h1>
-    <div class="line"></div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "Heading",
+    name: "HeadingSolid",
     props: {
       name: {
+        type: String
+      },
+      backgroundColor: {
         type: String
       }
     }
@@ -21,21 +24,25 @@
   @import "../assets/css/base.mixins";
 
   .heading-wrapper {
+    padding: 10px;
     display: flex;
     align-items: center;
+    background-color: $green-4;
+    text-align: center;
   }
 
   .title-heading {
     margin: 0;
-    color: $blue-title;
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: 900;
+    color: $grey-dark-2;
+    text-transform: uppercase;
+    flex-grow: 1;
   }
 
-  .line {
-    margin-left: 20px;
-    flex-grow: 1;
-    height: 2px;
-    background-color: $grey-text-medium;
+  @media screen and (min-width: $screen-lg) {
+    .heading-wrapper {
+      padding: 15px;
+    }
   }
 </style>

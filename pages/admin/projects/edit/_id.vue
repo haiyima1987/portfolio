@@ -38,11 +38,18 @@
         :placeholder="'Enter project year'">
       </InputField>
       <CheckField
-        class="published-wrapper"
+        class="single-check-wrapper"
         :value="project.published"
         :field-title="'Published'"
         :field-name="`published`"
         :placeholder="'Publish this project?'">
+      </CheckField>
+      <CheckField
+        class="single-check-wrapper"
+        :value="project.internal"
+        :field-title="'Internal'"
+        :field-name="`internal`"
+        :placeholder="'Internal project?'">
       </CheckField>
       <InputField
         :value="project.repository"
@@ -182,6 +189,7 @@
   /* image content */
   .image-wrapper {
     position: relative;
+    max-width: 900px;
   }
 
   .image-wrapper-margin {
@@ -197,7 +205,7 @@
     padding-left: 15px;
   }
 
-  .published-wrapper {
+  .single-check-wrapper {
     margin-bottom: 1rem;
   }
 </style>

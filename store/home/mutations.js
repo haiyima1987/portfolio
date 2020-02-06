@@ -16,7 +16,11 @@ export default {
     state.selectedHeading = Heading.parseFromDataObject(heading)
   },
   removeHeadingById: function (state, id) {
-    state.headings = state.headings.filter(heading => heading.id != id)
+    state.headingTypes = state.headingTypes.map(headingType => {
+      headingType.headings = headingType.headings.filter(heading => heading.id != id)
+      return headingType
+    })
+
   },
   setHeadingTypes: function (state, headingTypes) {
     state.headingTypes = headingTypes.map(headingType => HeadingType.parseFromDataObject(headingType))

@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="full-page-wrapper">
     <Header/>
     <div class="page-wrapper">
       <nuxt/>
     </div>
+    <Footer/>
     <div class="spinner" v-show="isLoading">
       <font-awesome-icon :icon="['fa', 'spinner']"/>
     </div>
@@ -12,7 +13,8 @@
 </template>
 
 <script>
-  import Header from '~/components/Header.vue'
+  import Header from '../components/Header.vue'
+  import Footer from "../components/Footer";
   import MessageModal from "../components/element/MessageModal.vue";
   import {mapGetters} from "vuex";
   import {CLEAR_FORM_DATA} from "../store/mutations";
@@ -24,7 +26,7 @@
       }
     },
     components: {
-      Header, MessageModal
+      Header, Footer, MessageModal
     },
     computed: {
       ...mapGetters({
@@ -58,6 +60,22 @@
     .default-class {
       .page-wrapper {
         padding: 30px 40px;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-lg) {
+    .default-class {
+      .page-wrapper {
+        padding: 30px 8%;
+      }
+    }
+  }
+
+  @media screen and (min-width: $screen-xl) {
+    .default-class {
+      .page-wrapper {
+        padding: 30px 10%;
       }
     }
   }

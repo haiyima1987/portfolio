@@ -1,3 +1,4 @@
+import LocalDataHandler from "~/utils/LocalDataHandler";
 import Project from "~/models/Project";
 import AppMessage from "~/models/AppMessage";
 import Experience from "~/models/Experience";
@@ -6,6 +7,7 @@ import Scope from "~/models/Scope";
 import InfoType from "~/models/InfoType";
 import HeadingType from "~/models/HeadingType";
 
+export const SET_LOADING = 'setLoading';
 export const SET_PUBLISHED = 'setPublished';
 export const SET_RESUME_DATA = 'setResumeData';
 export const SET_INFO_TYPES = 'setInfoTypes';
@@ -13,11 +15,15 @@ export const SET_HEADING_TYPES = 'setHeadingTypes';
 export const SET_FORM_DATA = 'setFormData';
 export const SET_MODAL_DATA = 'setModalData';
 export const RESET_MODAL_DATA = 'resetModalData';
+export const SET_PREVIEW_PROJECT = 'setPreviewProject';
+export const CLEAR_PREVIEW_PROJECT = 'clearPreviewProject';
+export const SET_WINDOW_HEIGHT = 'setWindowHeight';
 export const REMOVE_FORM_DATA_BY_NAME = 'removeFormDataByName';
 export const CLEAR_FORM_DATA = 'clearFormData';
 export const SET_ERROR_MESSAGE = 'setErrorMessage';
 export const SET_SUCCESS_MESSAGE = 'setSuccessMessage';
 export const CLEAR_APP_MESSAGE = 'clearAppMessage';
+export const SET_SELECTED_MENU = 'setSelectedMenu';
 
 export default {
   /** api **/
@@ -34,10 +40,11 @@ export default {
   setPublished: function (state, projects) {
     state.publishedProjects = projects.map(project => Project.parseFromDataObject(project))
   },
-  setResumeData: function (state, {experiences, educations, scopes}) {
+  setResumeData: function (state, {experiences, educations, scopes, info_types}) {
     state.experiences = experiences.map(experience => Experience.parseFromDataObject(experience))
     state.educations = educations.map(education => Education.parseFromDataObject(education))
     state.scopes = scopes.map(scope => Scope.parseFromDataObject(scope))
+    state.infoTypes = info_types.map(infoType => InfoType.parseFromDataObject(infoType))
   },
   setInfoTypes: function (state, infoTypes) {
     state.infoTypes = infoTypes.map(infoType => InfoType.parseFromDataObject(infoType))
@@ -45,7 +52,7 @@ export default {
   setHeadingTypes: function (state, headingTypes) {
     state.headingTypes = headingTypes.map(headingType => HeadingType.parseFromDataObject(headingType))
   },
-  /** modal data **/
+  /** DOM related data **/
   setModalData: function (state, data) {
     state.modalOptions = data
     state.isModalShown = true
@@ -53,6 +60,15 @@ export default {
   resetModalData: function (state) {
     state.modalOptions = {}
     state.isModalShown = false
+  },
+  setPreviewProject: function (state, project) {
+    state.previewProject = project
+  },
+  clearPreviewProject: function (state) {
+    state.previewProject = undefined
+  },
+  setWindowHeight: function (state) {
+    state.windowHeight = window.innerHeight
   },
   /** form related mutations **/
   setFormData: function (state, {fieldName, data, groupIndex, groupName}) {
@@ -96,5 +112,10 @@ export default {
   },
   clearAppMessage(state) {
     state.appMessage = null
+  },
+  /** menu **/
+  setSelectedMenu (state, menuId) {
+    state.selectedMenuId = menuId
+    LocalDataHandler.saveMenuId(menuId)
   }
 }

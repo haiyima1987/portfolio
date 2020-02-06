@@ -23,13 +23,22 @@ export default {
   getFormData: function (state) {
     return state.formData
   },
-  isModalShown (state) {
+  isModalShown: function (state) {
     return state.isModalShown
   },
-  getModalOptions (state) {
+  getModalOptions: function (state) {
     return state.modalOptions
   },
-  getAppMessage(state) {
+  getPreviewProject: function (state) {
+    return state.previewProject
+  },
+  getWindowHeight: function (state) {
+    return state.windowHeight
+  },
+  getAppMessage: function (state) {
     return state.appMessage;
+  },
+  getSelectedMenuId: function (state) {
+    return state.selectedMenuId
   }
 }

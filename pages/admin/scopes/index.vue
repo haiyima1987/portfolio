@@ -145,7 +145,7 @@
     margin: 0 8px 4px 0;
     padding: 2px 8px;
     display: inline-block;
-    background-color: $green-main;
+    background-color: $green-main-1;
     color: white;
     @include border-radius(4px);
     font-size: 0.8rem;
