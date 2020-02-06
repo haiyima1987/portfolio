@@ -23,10 +23,10 @@
                            class="icon-menu"/>
       </nuxt-link>
     </div>
-    <div v-if="isAuthenticated" class="icon-menu-wrapper-admin">
-      <font-awesome-icon :icon="['fas', 'bars']"
-                         @click="openOverlay"
-                         class="icon-menu"/>
+    <div v-if="isAuthenticated"
+         @click="openOverlay"
+         class="icon-menu-wrapper-admin">
+      <font-awesome-icon :icon="['fas', 'bars']" class="icon-menu"/>
     </div>
     <div v-else class="icon-menu-wrapper">
       <font-awesome-icon :icon="['fas', 'bars']"
