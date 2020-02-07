@@ -62,7 +62,7 @@ export default {
     }
   },
   async nuxtServerInit({dispatch, commit}, {req}) {
-    if (req.headers && req.headers.cookie) {
+    if (req && req.headers && req.headers.cookie) {
       let accessToken = LocalDataHandler.getAccessTokenByHeader(req.headers.cookie)
       let refreshToken = LocalDataHandler.getRefreshTokenByHeader(req.headers.cookie)
       if (accessToken) {
