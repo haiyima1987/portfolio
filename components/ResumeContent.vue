@@ -10,11 +10,14 @@
           <div class="date-item text-item">
             {{ formatDate(experience.start) }}&nbsp;&nbsp;--&nbsp;&nbsp;{{ formatDate(experience.end) }}
           </div>
-          <h5 class="title-item text-item">{{ experience.position }}</h5>
-          <div class="text-item">
+          <h5 class="title-item">{{ experience.position }}</h5>
+          <div class="location-item text-item">
             {{ parseValue(experience.company) }}
             {{ parseValue(experience.city) }}
             {{ parseValueLast(experience.country)}}
+          </div>
+          <div v-if="experience.explanation" class="tex-item">
+            {{ experience.explanation }}
           </div>
         </div>
       </div>
@@ -47,11 +50,14 @@
           <div class="date-item text-item">
             {{ formatDate(education.start) }}&nbsp;&nbsp;--&nbsp;&nbsp;{{ formatDate(education.end) }}
           </div>
-          <h5 class="title-item text-item">{{ education.major }}</h5>
-          <div class="text-item">
+          <h5 class="title-item">{{ education.major }}</h5>
+          <div class="location-item text-item">
             {{ parseValue(education.college) }}
             {{ parseValue(education.city) }}
             {{ parseValueLast(education.country)}}
+          </div>
+          <div v-if="education.explanation" class="tex-item">
+            {{ education.explanation }}
           </div>
         </div>
       </div>
@@ -132,6 +138,12 @@
     font-size: 1.2rem;
     font-weight: 800;
     text-transform: uppercase;
+  }
+
+  .location-item {
+    color: $blue-light-1;
+    font-style: italic;
+    font-weight: bold;
   }
 
   .text-item {

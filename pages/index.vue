@@ -1,6 +1,7 @@
 <template>
   <div class="home-wrapper">
     <div ref="introTopDisplay"
+         :class="{ 'background-pale-light': imageLoaded }"
          class="intro-top-wrapper">
       <transition name="move-right">
         <div v-show="introTopDisplay"
@@ -101,7 +102,9 @@
       introImageDisplay: false,
       buttonTopDisplay: false,
       introBottomDisplay: false,
-      headingBottomDisplay: false
+      headingBottomDisplay: false,
+      // image loading flags
+      imageLoaded: false
     }),
     computed: {
       ...mapGetters({
@@ -137,6 +140,7 @@
       },
       onImageLoaded: function () {
         this.$store.commit(SET_LOADING, false)
+        this.imageLoaded = true
         this.initializeDisplays()
       }
     },
@@ -156,7 +160,7 @@
   @import "../assets/css/transition";
 
   /* intro top layouts  */
-  .intro-top-wrapper {
+  .background-pale-light {
     background-color: $grey-pale-f;
   }
 

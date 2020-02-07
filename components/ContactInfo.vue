@@ -1,5 +1,8 @@
 <template>
   <div class="contact-wrapper">
+    <div class="image-wrapper">
+      <img class="image" src="../assets/img/selfie_red_square.png" alt="selfie">
+    </div>
     <div v-for="(infoType, index) in infoTypes" :key="infoType.id">
       <HeadingSolid :name="infoType.name"
                     :background-color="backColors[index % infoTypes.length]"/>
@@ -63,6 +66,16 @@
   .contact-wrapper {
     padding-top: 30px;
     background-color: $grey-opaque-03;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    text-align: center;
+  }
+
+  .image {
+    width: 80%;
+    max-width: 320px;
   }
 
   .content-wrapper {
