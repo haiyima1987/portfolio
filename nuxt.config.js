@@ -65,6 +65,9 @@ export default {
   ** Build configuration
   */
   build: {
+    filenames: {
+      chunk: ({isDev}) => isDev ? '[name].js' : '[id].[contenthash].js'
+    },
     transpile: ["vee-validate/dist/rules"],
     /*
     ** You can extend webpack config here
