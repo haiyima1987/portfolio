@@ -128,11 +128,7 @@ class LocalDataHandler {
   }
 
   updateAccessToken(token) {
-    return this.set(this.KEY_ACCESS_TOKEN, token, 3600 * 24, '/')
-  }
-
-  updateRefreshToken(token) {
-    return this.set(this.KEY_REFRESH_TOKEN, token, 3600 * 24 * 30, '/')
+    return this.set(this.KEY_ACCESS_TOKEN, token, 3600 * 24, '/', process.env.NUXT_ENV_HOST)
   }
 
   getAccessTokenByHeader(cookies) {
@@ -140,6 +136,14 @@ class LocalDataHandler {
     let needle = `${this.KEY_ACCESS_TOKEN}=`
     let cookieString = cookieArray.find(cookie => cookie.includes(needle))
     return cookieString ? cookieString.substr(needle.length) : null
+  }
+
+  getRefreshToken() {
+    return this.get(this.KEY_REFRESH_TOKEN)
+  }
+
+  updateRefreshToken(token) {
+    return this.set(this.KEY_REFRESH_TOKEN, token, 3600 * 24 * 30, '/', process.env.NUXT_ENV_HOST)
   }
 
   getRefreshTokenByHeader(cookies) {

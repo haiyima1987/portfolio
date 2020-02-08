@@ -189,15 +189,13 @@
   .image-wrapper {
     display: flex;
     justify-content: center;
-  }
-
-  .image-wrapper {
     overflow: hidden;
   }
 
   .image {
     width: 100%;
     min-width: 420px;
+    align-self: center;
   }
 
   /* buttons */

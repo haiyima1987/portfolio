@@ -102,6 +102,7 @@
 
   export default {
     name: 'create',
+    layout: 'detail',
     middleware: 'authenticated',
     components: {
       FormWrapper, FileUploader, InputField, NumberField, RadioGroup, CheckBoxGroup, TextField, CheckField
@@ -164,6 +165,7 @@
   /* image content */
   .image-wrapper {
     position: relative;
+    max-width: 900px;
   }
 
   .image-wrapper-margin {

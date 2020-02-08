@@ -43,6 +43,7 @@
 
   export default {
     name: "create",
+    layout: 'detail',
     middleware: 'authenticated',
     components: {
       FormWrapper, InputField, NumberField, RadioGroup
