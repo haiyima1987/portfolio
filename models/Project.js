@@ -16,8 +16,8 @@ export default class Project {
     this.mediaLink = mediaLink
     this.previewLink = previewLink
     this.displayIndex = displayIndex
-    this.published = published
-    this.internal = internal
+    this.published = published == 1
+    this.internal = internal == 1
     this.category = category ? Category.parseFromDataObject(category) : null
     this.type = type ? Type.parseFromDataObject(type) : null
     this.skills = skills ? skills
