@@ -155,6 +155,7 @@
 
   .image-overlay {
     @include position-equal(absolute, 0, $elevation: 5);
+    @include border-radius(10px, 10px, 0, 0);
     background-color: $grey-opaque-03;
     display: none;
   }
