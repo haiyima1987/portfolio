@@ -75,7 +75,7 @@
   @media screen and (min-width: $screen-xl) {
     .default-class {
       .page-wrapper {
-        padding: 30px 10%;
+        padding: 40px 10% 90px 10%;
       }
     }
   }

@@ -1,7 +1,7 @@
 require('./config.js')
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   server: {
     port: 8080
   },

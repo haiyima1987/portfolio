@@ -48,14 +48,13 @@
         :value="education.country"
         :placeholder="'Enter your country'">
       </InputField>
-      <InputField
+      <TextField
         :field-title="'Explanation'"
-        :field-name="`explanation`"
+        :field-name="'explanation'"
         :rule="''"
-        :type="'text'"
         :value="education.explanation"
         :placeholder="'Enter your explanation'">
-      </InputField>
+      </TextField>
       <CheckField
         class="published-wrapper"
         :field-title="'Published'"
@@ -79,13 +78,14 @@
   import CheckField from "../../../../components/form/CheckField";
   import DateField from "../../../../components/form/DateField";
   import {GET_EDUCATION_BY_ID, UPDATE_EDUCATION} from "../../../../store/resume/actions";
+  import TextField from "../../../../components/form/TextField";
 
   export default {
     name: 'edit',
     layout: 'detail',
     middleware: 'authenticated',
     components: {
-      FormWrapper, InputField, CheckField, DateField
+      FormWrapper, InputField, CheckField, DateField, TextField
     },
     computed: {
       ...mapGetters('resume', {

@@ -116,7 +116,7 @@
   .card-project {
     margin-bottom: 15px;
     @include border-radius(10px);
-    @include box-shadow(0, 0, 20px, $grey-opaque-15);
+    @include box-shadow(0, 0, 20px, $grey-opaque-09);
     border: 1px solid white;
   }
 
@@ -282,6 +282,12 @@
   }
 
   @media screen and (min-width: $screen-xl) {
+    .project-list-wrapper {
+      @include grid(2, 40px);
+    }
+  }
+
+  @media screen and (min-width: $screen-xxl) {
     .project-list-wrapper {
       @include grid(3, 40px);
     }

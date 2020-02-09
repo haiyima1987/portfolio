@@ -198,22 +198,13 @@
   }
 
   .menu-item-public {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding: 10px;
+    width: 100%;
     color: $green-main-1;
     font-size: 1rem;
     font-weight: 800;
     border: 1px solid $green-main-1;
-
-    &:nth-of-type(odd) {
-      width: 49%;
-      margin-right: 1%;
-    }
-
-    &:nth-of-type(even) {
-      width: 49%;
-      margin-left: 1%;
-    }
   }
 
   .menu-item-selected {

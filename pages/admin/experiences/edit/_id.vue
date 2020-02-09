@@ -48,14 +48,13 @@
         :value="experience.country"
         :placeholder="'Enter your country'">
       </InputField>
-      <InputField
+      <TextField
         :field-title="'Explanation'"
-        :field-name="`explanation`"
+        :field-name="'explanation'"
         :rule="''"
-        :type="'text'"
         :value="experience.explanation"
         :placeholder="'Enter your explanation'">
-      </InputField>
+      </TextField>
       <CheckField
         class="published-wrapper"
         :field-title="'Published'"
@@ -78,6 +77,7 @@
   import InputField from "../../../../components/form/InputField";
   import CheckField from "../../../../components/form/CheckField";
   import DateField from "../../../../components/form/DateField";
+  import TextField from "../../../../components/form/TextField";
   import {GET_EXPERIENCE_BY_ID, UPDATE_EXPERIENCE} from "../../../../store/resume/actions";
 
   export default {
@@ -85,7 +85,7 @@
     layout: 'detail',
     middleware: 'authenticated',
     components: {
-      FormWrapper, InputField, CheckField, DateField
+      FormWrapper, InputField, CheckField, DateField, TextField
     },
     computed: {
       ...mapGetters('resume', {
