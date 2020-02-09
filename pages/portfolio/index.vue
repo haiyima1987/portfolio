@@ -170,7 +170,7 @@
 
   .title-project {
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: bold;
     color: $grey-medium-4;
   }
 
@@ -184,9 +184,9 @@
   }
 
   .description-project {
-    padding: 5px 0 0 0;
+    padding: 10px 0 0 0;
     @include line-clamp(3);
-    line-height: 1rem;
+    line-height: 1.2rem;
   }
 
   /* tags */

@@ -27,10 +27,10 @@
       <div class="scope-group">
         <div v-for="scope in scopes" :key="scope.id"
              class="scope-wrapper">
-          <template v-if="scope.skills.length > 0">
+          <template v-if="isValidScope(scope)">
             <h5 class="name-scope">{{ scope.name }}:</h5>
             <div v-for="skill in scope.skills" :key="skill.id">
-              <div class="background-bar">
+              <div v-if="isValidSkill(skill)" class="background-bar">
                 <div :style="{ width: `${skill.level}%` }" class="bar-skill">
                   {{ skill.name }}
                 </div>
@@ -71,6 +71,8 @@
   import {SHORT_MONTHS} from "../utils/DomHandler";
   import {GET_RESUME_DATA} from "../store/actions";
 
+  const minSkillLevel = 49
+
   export default {
     name: "ResumeContent",
     components: {
@@ -84,6 +86,22 @@
       })
     },
     methods: {
+      isValidScope: function (scope) {
+        // if there is no skill
+        if (scope.skills.length == 0) {
+          return false
+        }
+        // if at least one skill level above 50
+        for (let skill of scope.skills) {
+          if (skill.level > 50) {
+            return true
+          }
+        }
+        return true
+      },
+      isValidSkill: function (skill) {
+        return skill.level > minSkillLevel
+      },
       parseValue: function (location) {
         return location ? `${location}, ` : ''
       },

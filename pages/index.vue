@@ -176,7 +176,6 @@
   .heading {
     font-size: 2.4rem;
     font-weight: bold;
-    font-family: 'Raleway', Helvetica, Arial, sans-serif;
   }
 
   .heading-text {
@@ -258,7 +257,6 @@
     padding: 8px;
     font-size: 1.2rem;
     font-weight: bold;
-    font-family: 'Raleway', Helvetica, Arial, sans-serif;
     border-bottom: 2px solid $green-main-1;
   }
 
