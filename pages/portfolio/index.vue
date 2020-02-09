@@ -129,6 +129,7 @@
   .image-wrapper {
     position: relative;
     overflow: hidden;
+    @include border-radius-separate(10px, 10px, 0, 0);
 
     &:hover {
       cursor: pointer;
@@ -149,13 +150,11 @@
 
   .image-preview {
     width: 100%;
-    @include border-radius-separate(10px, 10px, 0, 0);
     transition: all .2s ease-in-out;
   }
 
   .image-overlay {
     @include position-equal(absolute, 0, $elevation: 5);
-    @include border-radius(10px, 10px, 0, 0);
     background-color: $grey-opaque-03;
     display: none;
   }
