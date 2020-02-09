@@ -146,7 +146,7 @@
       font-size: 1.2rem;
       font-weight: bold;
       color: white;
-      background-color: $grey-opaque-03;
+      background-color: $grey-dark-3;
     }
   }
 

@@ -35,7 +35,7 @@
     margin: 0;
     font-size: 1.2rem;
     font-weight: 900;
-    color: $grey-dark-2;
+    color: $grey-dark-3;
     text-transform: uppercase;
     flex-grow: 1;
   }

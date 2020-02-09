@@ -151,7 +151,7 @@
 
   .header-wrapper {
     height: 60px;
-    background-color: $grey-opaque-03;
+    background-color: $grey-dark-3;
     @include flex-center();
     @include box-shadow(0, 0, 10px, $grey-opaque-21);
   }
@@ -227,7 +227,7 @@
 
     .menu-button-selected {
       background-color: $green-main-1;
-      color: $grey-opaque-03;
+      color: $grey-dark-3;
       font-weight: 800;
     }
 

@@ -65,7 +65,7 @@
 
   .contact-wrapper {
     padding-top: 30px;
-    background-color: $grey-opaque-03;
+    background-color: $grey-dark-3;
   }
 
   .image-wrapper {

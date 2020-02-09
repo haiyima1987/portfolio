@@ -8,8 +8,10 @@
         <div class="image-wrapper"
              @click="setPreviewProject(project)"
              :class="{ 'no-image-wrapper': !project.previewLink }">
-          <img v-if="project.previewLink" :src="project.previewLink" :alt="project.name"
-               class="image-preview">
+          <template v-if="project.previewLink">
+            <div class="image-overlay"></div>
+            <img :src="project.previewLink" :alt="project.name" class="image-preview">
+          </template>
           <div class="scope-project">{{ project.type.name }}</div>
         </div>
         <div class="content-wrapper">
@@ -24,6 +26,9 @@
           </div>
           <div class="description-project">
             {{ project.description }}
+          </div>
+          <div class="read-more-wrapper">
+            <button @click="setPreviewProject(project)" class="button-green-text button-read-more">Read more</button>
           </div>
         </div>
         <div v-if="!project.internal" class="button-group-wrapper">
@@ -123,9 +128,18 @@
   /* image content */
   .image-wrapper {
     position: relative;
+    overflow: hidden;
 
     &:hover {
       cursor: pointer;
+
+      .image-overlay {
+        display: block;
+      }
+
+      .image-preview {
+        @include scale(1.1, 1.1);
+      }
     }
   }
 
@@ -136,6 +150,13 @@
   .image-preview {
     width: 100%;
     @include border-radius-separate(10px, 10px, 0, 0);
+    transition: all .2s ease-in-out;
+  }
+
+  .image-overlay {
+    @include position-equal(absolute, 0, $elevation: 5);
+    background-color: $grey-opaque-03;
+    display: none;
   }
 
   .scope-project {
@@ -143,7 +164,7 @@
     background-color: $green-main-1;
     color: white;
     font-weight: bold;
-    @include position(absolute, $right: 0, $bottom: 0);
+    @include position-elevation(absolute, $right: 0, $bottom: 0, $elevation: 10);
     height: 26px;
     display: flex;
     align-items: center;
@@ -187,6 +208,16 @@
     padding: 10px 0 0 0;
     @include line-clamp(3);
     line-height: 1.2rem;
+  }
+
+  .read-more-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .button-read-more {
+    font-weight: bold;
   }
 
   /* tags */

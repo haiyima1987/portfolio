@@ -21,7 +21,7 @@
 
   .footer-wrapper {
     height: 50px;
-    background-color: $grey-opaque-03;
+    background-color: $grey-dark-3;
     color: white;
     @include flex-center();
   }
