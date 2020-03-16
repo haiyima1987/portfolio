@@ -1,7 +1,7 @@
 require('./config.js')
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   server: {
     port: 8080
   },
@@ -9,7 +9,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: `Portfolio`,
+    title: `Portfolio - Haiyi Ma`,
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
