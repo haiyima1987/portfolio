@@ -3,76 +3,57 @@
     <div ref="introTopDisplay"
          :class="{ 'background-pale-light': imageLoaded }"
          class="intro-top-wrapper">
-      <transition name="move-right">
-        <div v-show="introTopDisplay"
-             class="intro-top-group">
-          <div v-for="heading in headingTypes[0].headings" :key="heading.id"
-               class="heading-wrapper">
-            <h1 v-if="heading.title" class="heading">{{ heading.title }}</h1>
-            <div v-if="heading.text" class="heading-text">{{ heading.text }}</div>
-          </div>
-          <div class="intro-button-group">
-            <div class="intro-button-wrapper">
-              <nuxt-link to="/resume" @click.native="setMenuId(3)"
-                         class="button-green button-home">
-                Resume
-              </nuxt-link>
-            </div>
-            <div class="intro-button-wrapper">
-              <nuxt-link to="/portfolio" @click.native="setMenuId(2)"
-                         class="button-green button-home">
-                Projects
-              </nuxt-link>
-            </div>
-          </div>
+      <div class="intro-top-group lazy left-in-start" data-transition="left-in">
+        <div v-for="heading in headingTypes[0].headings" :key="heading.id"
+             class="heading-wrapper">
+          <h1 v-if="heading.title" class="heading">{{ heading.title }}</h1>
+          <div v-if="heading.text" class="heading-text">{{ heading.text }}</div>
         </div>
-      </transition>
-      <div ref="introImageDisplay"
-           class="image-wrapper">
-        <transition name="fade">
-          <img v-show="introImageDisplay"
-               class="image" @load="onImageLoaded" src="../assets/img/haiyi_home.png" alt="haiyi">
-        </transition>
-      </div>
-    </div>
-    <div ref="buttonTopDisplay"
-         class="button-top-wrapper">
-      <transition name="move-left">
-        <div v-if="buttonTopDisplay"
-             ref="buttonTopGroup"
-             class="button-group">
-          <div class="button-wrapper">
+        <div class="intro-button-group">
+          <div class="intro-button-wrapper">
             <nuxt-link to="/resume" @click.native="setMenuId(3)"
                        class="button-green button-home">
               Resume
             </nuxt-link>
           </div>
-          <div class="button-wrapper">
+          <div class="intro-button-wrapper">
             <nuxt-link to="/portfolio" @click.native="setMenuId(2)"
                        class="button-green button-home">
               Projects
             </nuxt-link>
           </div>
         </div>
-      </transition>
+      </div>
+      <div class="image-wrapper">
+        <img @load="onImageLoaded" class="image lazy fade-in-start" data-transition="fade-in"
+             src="../assets/img/haiyi_home.png" alt="haiyi">
+      </div>
     </div>
-    <div ref="introBottomDisplay">
-      <transition name="move-up">
-        <div v-show="introBottomDisplay"
-             class="intro-bottom-wrapper">
-          <h1 class="heading">Who I am</h1>
-          <div ref="headingBottomDisplay">
-            <transition-group name="move-up" tag="div" class="heading-bottom-wrapper">
-              <div v-show="headingBottomDisplay"
-                   v-for="heading in headingTypes[1].headings" :key="heading.id"
-                   class="sub-heading-wrapper">
-                <h2 class="sub-heading">{{ heading.title }}</h2>
-                <div class="sub-heading-text">{{ heading.text }}</div>
-              </div>
-            </transition-group>
-          </div>
+    <div class="button-top-wrapper lazy right-in-start" data-transition="right-in">
+      <div class="button-group">
+        <div class="button-wrapper">
+          <nuxt-link to="/resume" @click.native="setMenuId(3)"
+                     class="button-green button-home">
+            Resume
+          </nuxt-link>
         </div>
-      </transition>
+        <div class="button-wrapper">
+          <nuxt-link to="/portfolio" @click.native="setMenuId(2)"
+                     class="button-green button-home">
+            Projects
+          </nuxt-link>
+        </div>
+      </div>
+    </div>
+    <div class="intro-bottom-wrapper">
+      <h1 class="heading lazy up-in-start" data-transition="up-in">Who I am</h1>
+      <div class="heading-bottom-wrapper">
+        <div v-for="heading in headingTypes[1].headings" :key="heading.id"
+             class="sub-heading-wrapper lazy up-in-start" data-transition="up-in">
+          <h2 class="sub-heading">{{ heading.title }}</h2>
+          <div class="sub-heading-text">{{ heading.text }}</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -80,32 +61,17 @@
 <script>
   import {mapGetters} from "vuex";
   import {GET_HOME_DATA} from "../store/actions";
+  import {observerMixin} from "../mixins/observerMixin";
   import {SET_LOADING, SET_SELECTED_MENU} from "../store/mutations";
-
-  // display names
-  const introTopDisplayName = 'introTopDisplay'
-  const introImageDisplayName = 'introImageDisplay'
-  const buttonTopDisplayName = 'buttonTopDisplay'
-  const introBottomDisplayName = 'introBottomDisplay'
-  const headingBottomDisplayName = 'headingBottomDisplay'
-  // display arrays
-  const initializationDisplays = [introImageDisplayName, introTopDisplayName, buttonTopDisplayName, introBottomDisplayName, introBottomDisplayName, headingBottomDisplayName]
-  const contentDisplays = [introBottomDisplayName, headingBottomDisplayName]
-  const imageDisplays = [introImageDisplayName]
-  const displayOffset = 80
 
   export default {
     name: 'index',
     layout: 'home',
     data: () => ({
-      introTopDisplay: false,
-      introImageDisplay: false,
-      buttonTopDisplay: false,
-      introBottomDisplay: false,
-      headingBottomDisplay: false,
-      // image loading flags
+      // image loading flag
       imageLoaded: false
     }),
+    mixins: [observerMixin],
     computed: {
       ...mapGetters({
         headingTypes: 'getHeadingTypes',
@@ -116,37 +82,11 @@
       setMenuId: function (id) {
         this.$store.commit(SET_SELECTED_MENU, id)
       },
-      checkElementDisplay: function (elementName) {
-        let displayHeight = window.scrollY + window.innerHeight - displayOffset
-        if (!this[elementName]) {
-          this[elementName] = displayHeight > this.$refs[elementName].offsetTop
-        }
-      },
-      checkDisplays: function () {
-        for (let display of contentDisplays) {
-          this.checkElementDisplay(display)
-        }
-      },
-      initializeDisplays: function () {
-        for (let display of initializationDisplays) {
-          this.checkElementDisplay(display)
-        }
-      },
-      loadImageDisplays: function () {
-        this.$store.commit(SET_LOADING, true)
-        for (let display of imageDisplays) {
-          this.checkElementDisplay(display)
-        }
-      },
       onImageLoaded: function () {
         this.$store.commit(SET_LOADING, false)
         this.imageLoaded = true
-        this.initializeDisplays()
+        this.initializeObserver()
       }
-    },
-    mounted() {
-      this.loadImageDisplays()
-      window.addEventListener('scroll', this.checkDisplays)
     },
     async asyncData({store}) {
       return store.dispatch(GET_HOME_DATA)
@@ -157,7 +97,6 @@
 <style scoped lang="scss">
   @import "../assets/css/base.variables";
   @import "../assets/css/base.mixins";
-  @import "../assets/css/transition";
 
   /* intro top layouts  */
   .background-pale-light {

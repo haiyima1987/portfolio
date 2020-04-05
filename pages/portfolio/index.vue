@@ -1,10 +1,8 @@
 <template>
-  <div ref="listDisplay"
-       class="portfolio-wrapper">
+  <div class="portfolio-wrapper">
     <TitlePage :name="'My projects'"/>
-    <transition-group name="move-left" tag="div" class="project-list-wrapper">
-      <div v-show="listDisplay"
-           v-for="project in projects" :key="project.id" class="card-project">
+    <div class="project-list-wrapper">
+      <div v-for="project in projects" :key="project.id" class="card-project lazy right-in-start" data-transition="right-in">
         <div class="image-wrapper"
              @click="setPreviewProject(project)"
              :class="{ 'no-image-wrapper': !project.previewLink }">
@@ -55,7 +53,7 @@
           </div>
         </div>
       </div>
-    </transition-group>
+    </div>
     <ImageModal/>
   </div>
 </template>
@@ -66,19 +64,13 @@
   import TitlePage from "../../components/element/TitlePage";
   import {SET_PREVIEW_PROJECT} from "../../store/mutations";
   import ImageModal from "../../components/element/ImageModal";
-
-  const listDisplayName = 'listDisplay'
-  const initializationDisplays = [listDisplayName]
-  const displayOffset = 60
+  import {observerMixin} from "../../mixins/observerMixin";
 
   export default {
     components: {
-      ImageModal,
-      TitlePage
+      ImageModal, TitlePage
     },
-    data: () => ({
-      listDisplay: false
-    }),
+    mixins: [observerMixin],
     computed: {
       ...mapGetters({
         projects: 'getPublished',
@@ -90,21 +82,10 @@
         if (project.previewLink) {
           this.$store.commit(SET_PREVIEW_PROJECT, project)
         }
-      },
-      checkElementDisplay: function (elementName) {
-        let displayHeight = window.scrollY + window.innerHeight - displayOffset
-        if (!this[elementName]) {
-          this[elementName] = displayHeight > this.$refs[elementName].offsetTop
-        }
-      },
-      initializeDisplays: function () {
-        for (let display of initializationDisplays) {
-          this.checkElementDisplay(display)
-        }
       }
     },
     mounted() {
-      this.initializeDisplays()
+      this.initializeObserver()
     },
     async asyncData({store}) {
       return store.dispatch(GET_PUBLISHED)
@@ -115,7 +96,6 @@
 <style scoped lang="scss">
   @import "../../assets/css/base.variables";
   @import "../../assets/css/base.mixins";
-  @import "../../assets/css/transition";
 
   /* layout */
   .card-project {

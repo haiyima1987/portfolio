@@ -2,7 +2,8 @@
   <div class="resume-wrapper">
     <HeadingLine :name="'Experiences'"/>
     <div class="content-wrapper">
-      <div v-for="experience in experiences" :key="experience.id" class="item-wrapper">
+      <div v-for="experience in experiences" :key="experience.id"
+           class="item-wrapper lazy up-in-start" data-transition="up-in">
         <div class="date-item date-side">
           {{ formatDate(experience.start) }}&nbsp;&nbsp;--&nbsp;&nbsp;{{ formatDate(experience.end) }}
         </div>
@@ -26,7 +27,7 @@
     <div class="content-wrapper">
       <div class="scope-group">
         <div v-for="scope in scopes" :key="scope.id"
-             class="scope-wrapper">
+             class="scope-wrapper lazy up-in-start" data-transition="up-in">
           <template v-if="isValidScope(scope)">
             <h5 class="name-scope">{{ scope.name }}:</h5>
             <div v-for="skill in scope.skills" :key="skill.id">
@@ -42,7 +43,8 @@
     </div>
     <HeadingLine :name="'Educations'"/>
     <div class="content-wrapper">
-      <div v-for="education in educations" :key="education.id" class="item-wrapper">
+      <div v-for="education in educations" :key="education.id"
+           class="item-wrapper lazy up-in-start" data-transition="up-in">
         <div class="date-item date-side">
           {{ formatDate(education.start) }}&nbsp;&nbsp;--&nbsp;&nbsp;{{ formatDate(education.end) }}
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="full-page-wrapper">
     <Header/>
-    <div class="page-wrapper">
+    <div class="page-wrapper page-wrapper-default">
       <nuxt/>
     </div>
     <Footer/>
@@ -20,11 +20,6 @@
   import {CLEAR_FORM_DATA} from "../store/mutations";
 
   export default {
-    head: {
-      bodyAttrs: {
-        class: 'default-class'
-      }
-    },
     components: {
       Header, Footer, MessageModal
     },
@@ -43,40 +38,33 @@
 
 <style lang="scss">
   @import "../assets/css/layout.shared";
+  @import "../assets/css/animation.observer";
 
-  .default-class {
-    .page-wrapper {
-      padding: 30px 15px;
-    }
+  .page-wrapper-default {
+    padding: 30px 15px;
+  }
 
-    .title-wrapper {
-      margin: 0 0 30px 0;
-      display: flex;
-      align-items: center;
-    }
+  .title-wrapper {
+    margin: 0 0 30px 0;
+    display: flex;
+    align-items: center;
   }
 
   @media screen and (min-width: $screen-md) {
-    .default-class {
-      .page-wrapper {
-        padding: 30px 40px;
-      }
+    .page-wrapper-default {
+      padding: 30px 40px;
     }
   }
 
   @media screen and (min-width: $screen-lg) {
-    .default-class {
-      .page-wrapper {
-        padding: 30px 8%;
-      }
+    .page-wrapper-default {
+      padding: 30px 8%;
     }
   }
 
   @media screen and (min-width: $screen-xl) {
-    .default-class {
-      .page-wrapper {
-        padding: 40px 10% 90px 10%;
-      }
+    .page-wrapper-default {
+      padding: 40px 10% 90px 10%;
     }
   }
 </style>

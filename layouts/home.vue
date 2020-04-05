@@ -20,11 +20,6 @@
   import {CLEAR_FORM_DATA, SET_WINDOW_HEIGHT} from "../store/mutations";
 
   export default {
-    head: {
-      bodyAttrs: {
-        class: "home-class"
-      }
-    },
     components: {
       Header, Footer, MessageModal
     },
@@ -46,7 +41,5 @@
 
 <style lang="scss">
   @import "../assets/css/layout.shared";
-
-  .home-class {
-  }
+  @import "../assets/css/animation.observer";
 </style>

@@ -1,24 +1,19 @@
 <template>
-  <div ref="contentDisplay">
-    <transition name="move-up">
-      <div v-show="contentDisplay"
-           class="resume-page-wrapper">
-        <div class="section-wrapper title-section">
-          <div class="content-left title-content title-box">
-            <div class="title-text title-name">Haiyi Ma</div>
-            <div class="title-text">Web developer</div>
-            <div class="title-text">Software engineer</div>
-          </div>
-          <div class="content-right title-content intro-box">
-            A passionate web developer and software engineer, hard-working, creative, and responsible.
-          </div>
-        </div>
-        <div class="section-wrapper">
-          <ContactInfo class="content-left contact-info"/>
-          <ResumeContent class="content-right"/>
-        </div>
+  <div class="resume-page-wrapper">
+    <div class="section-wrapper title-section">
+      <div class="content-left title-content title-box">
+        <div class="title-text title-name">Haiyi Ma</div>
+        <div class="title-text">Web developer</div>
+        <div class="title-text">Software engineer</div>
       </div>
-    </transition>
+      <div class="content-right title-content intro-box">
+        A passionate web developer and software engineer, hard-working, creative, and responsible.
+      </div>
+    </div>
+    <div class="section-wrapper">
+      <ContactInfo class="content-left contact-info"/>
+      <ResumeContent class="content-right"/>
+    </div>
   </div>
 </template>
 
@@ -29,19 +24,13 @@
   import {SHORT_MONTHS} from "../../utils/DomHandler";
   import ContactInfo from "../../components/ContactInfo";
   import ResumeContent from "../../components/ResumeContent";
-
-  const contentDisplayName = 'contentDisplay'
-  const initializationDisplays = [contentDisplayName]
-  const displayOffset = 60
+  import {observerMixin} from "../../mixins/observerMixin";
 
   export default {
     components: {
-      ResumeContent,
-      HeadingLine, ContactInfo
+      ResumeContent, HeadingLine, ContactInfo
     },
-    data: () => ({
-      contentDisplay: false
-    }),
+    mixins: [observerMixin],
     computed: {
       ...mapGetters({
         scopes: 'getScopes',
@@ -64,21 +53,7 @@
         let year = temp.getFullYear()
         let month = temp.getMonth()
         return `${SHORT_MONTHS[month]} - ${year}`
-      },
-      checkElementDisplay: function (elementName) {
-        let displayHeight = window.scrollY + window.innerHeight - displayOffset
-        if (!this[elementName]) {
-          this[elementName] = displayHeight > this.$refs[elementName].offsetTop
-        }
-      },
-      initializeDisplays: function () {
-        for (let display of initializationDisplays) {
-          this.checkElementDisplay(display)
-        }
       }
-    },
-    mounted() {
-      this.initializeDisplays()
     },
     async asyncData({store}) {
       return store.dispatch(GET_RESUME_DATA)
@@ -89,7 +64,6 @@
 <style scoped lang="scss">
   @import "../../assets/css/base.variables";
   @import "../../assets/css/base.mixins";
-  @import "../../assets/css/transition";
 
   .title-section {
     display: none;

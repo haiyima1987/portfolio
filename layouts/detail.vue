@@ -1,7 +1,7 @@
 <template>
   <div class="full-page-wrapper">
     <Header/>
-    <div class="page-wrapper">
+    <div class="page-wrapper page-wrapper-detail">
       <div class="back-wrapper">
         <button @click="redirectBack"
                 type="button" class="button button-green-text button-back">
@@ -25,11 +25,6 @@
   import {CLEAR_FORM_DATA} from "../store/mutations";
 
   export default {
-    head: {
-      bodyAttrs: {
-        class: "detail-class"
-      }
-    },
     components: {
       Header, MessageModal
     },
@@ -54,53 +49,45 @@
 <style lang="scss">
   @import "../assets/css/layout.shared";
 
-  .detail-class {
-    .page-wrapper {
-      padding: 30px 15px;
-    }
+  .page-wrapper-detail {
+    padding: 30px 15px;
+  }
 
-    .back-wrapper {
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-    }
+  .back-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+  }
 
-    .button-back {
-      height: auto;
-      padding: 0 15px;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
+  .button-back {
+    height: auto;
+    padding: 0 15px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
 
-      .text-back {
-        margin-left: 8px;
-        color: $green-main-1;
-        font-size: 1rem;
-      }
+    .text-back {
+      margin-left: 8px;
+      color: $green-main-1;
+      font-size: 1rem;
     }
   }
 
   @media screen and (min-width: $screen-md) {
-    .detail-class {
-      .page-wrapper {
-        padding: 30px 40px;
-      }
+    .page-wrapper-detail {
+      padding: 30px 40px;
     }
   }
 
   @media screen and (min-width: $screen-lg) {
-    .detail-class {
-      .page-wrapper {
-        padding: 30px 8%;
-      }
+    .page-wrapper-detail {
+      padding: 30px 8%;
     }
   }
 
   @media screen and (min-width: $screen-xl) {
-    .detail-class {
-      .page-wrapper {
-        padding: 30px 10%;
-      }
+    .page-wrapper-detail {
+      padding: 30px 10%;
     }
   }
 </style>
