@@ -226,9 +226,10 @@
   }
 
   .internal-text-wrapper {
-    @extend .button-wrapper;
     padding: 10px 20px;
-    flex-basis: unset;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
   }
 
   .button-site {

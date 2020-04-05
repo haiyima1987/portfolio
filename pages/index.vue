@@ -237,7 +237,7 @@
     }
 
     .image {
-      width: unset;
+      width: auto;
       @include position(absolute, $right: -36px, $bottom: 0);
       max-height: 100%;
     }

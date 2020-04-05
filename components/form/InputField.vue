@@ -12,8 +12,7 @@
           :id="fieldName"
           :name="fieldName"
           :placeholder="placeholder"
-          v-model="input"
-          :value="value"/>
+          v-model="input"/>
       </label>
       <p v-show="errors[0]" class="text-error">{{ errors[0] }}</p>
     </ValidationProvider>

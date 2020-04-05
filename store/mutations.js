@@ -105,7 +105,7 @@ export default {
   },
   /** app messages **/
   setErrorMessage(state, errorData) {
-    state.appMessage = new AppMessage(errorData.error, false, true)
+    state.appMessage = new AppMessage(errorData.error, !!errorData.isPersistent, true)
   },
   setSuccessMessage(state, message = null) {
     state.appMessage = new AppMessage(message ? message : 'Success')
@@ -114,7 +114,7 @@ export default {
     state.appMessage = null
   },
   /** menu **/
-  setSelectedMenu (state, menuId) {
+  setSelectedMenu(state, menuId) {
     state.selectedMenuId = menuId
     LocalDataHandler.saveMenuId(menuId)
   }

@@ -88,11 +88,11 @@
     }
 
     .content-left {
-      flex: 0 0 32%;
+      flex-basis: 32%;
     }
 
     .content-right {
-      flex: 0 0 68%;
+      flex-basis: 68%;
     }
 
     /* title texts */
@@ -126,11 +126,11 @@
 
   @media screen and (min-width: $screen-xl) {
     .content-left {
-      flex: 0 0 30%;
+      flex-basis: 30%;
     }
 
     .content-right {
-      flex: 0 0 70%;
+      flex-basis: 70%;
     }
   }
 </style>

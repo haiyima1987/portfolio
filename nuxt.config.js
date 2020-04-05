@@ -35,6 +35,31 @@ export default {
     '~/plugins/axios.js',
     {src: '~/plugins/vuejs-datepicker.js', ssr: false}
   ],
+  // Configure polyfills:
+  polyfill: {
+    features: [
+      /* Feature without detect: This is not recommended for most polyfills
+         because the polyfill will always be loaded, parsed and executed. */
+      {
+        require: 'url-polyfill' // NPM package or require path of file
+      },
+      /* Feature with detect: Detection is better because the polyfill will not be
+         loaded, parsed and executed if it's not necessary.*/
+      {
+        require: 'intersection-observer',
+        detect: () => 'IntersectionObserver' in window,
+      },
+      /* Feature with detect & install: Some polyfills require a installation step
+         Hence you could supply a install function which accepts the require result */
+      {
+        require: 'smoothscroll-polyfill',
+        // Detection found in source: https://github.com/iamdustan/smoothscroll/blob/master/src/smoothscroll.js
+        detect: () => 'scrollBehavior' in document.documentElement.style && window.__forceSmoothScrollPolyfill__ !== true,
+        // Optional install function called client side after the package is required:
+        install: (smoothscroll) => smoothscroll.polyfill()
+      }
+    ]
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -44,6 +69,8 @@ export default {
   */
   modules: [
     'bootstrap-vue/nuxt',
+    // Add it to the modules section:
+    'nuxt-polyfill',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     ['nuxt-fontawesome', {

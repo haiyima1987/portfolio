@@ -205,7 +205,7 @@
 
   @media screen and (min-width: $screen-md) {
     .icon-logo-wrapper {
-      flex-grow: unset;
+      flex-grow: 0;
     }
 
     .logo {

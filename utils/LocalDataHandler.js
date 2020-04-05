@@ -5,6 +5,7 @@ class LocalDataHandler {
     this.KEY_ACCESS_TOKEN = 'access_token'
     this.KEY_REFRESH_TOKEN = 'refresh_token'
     this.KEY_MENU_ID = 'menu_id'
+    this.KEY_WARNING = 'warning'
     this.PERSISTENT_KEYS = [this.KEY_REFRESH_TOKEN]
   }
 
