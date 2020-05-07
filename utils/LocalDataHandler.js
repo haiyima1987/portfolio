@@ -6,7 +6,7 @@ class LocalDataHandler {
     this.KEY_REFRESH_TOKEN = 'refresh_token'
     this.KEY_MENU_ID = 'menu_id'
     this.KEY_WARNING = 'warning'
-    this.PERSISTENT_KEYS = [this.KEY_REFRESH_TOKEN]
+    this.PERSISTENT_KEYS = []
   }
 
   /**
@@ -78,7 +78,7 @@ class LocalDataHandler {
     // clear all cookies
     for (let key of this.keys()) {
       if (!this.PERSISTENT_KEYS.includes(key)) {
-        this.remove(key, '/')
+        this.remove(key, '/', process.env.NUXT_ENV_HOST)
       }
     }
     // clear all local storage
