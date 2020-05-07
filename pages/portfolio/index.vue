@@ -2,7 +2,7 @@
   <div class="portfolio-wrapper">
     <TitlePage :name="'My projects'"/>
     <div class="project-list-wrapper">
-      <div v-for="project in projects" :key="project.id" class="card-project lazy right-in-start" data-transition="right-in">
+      <div v-for="project in projects" :key="project.id" class="card-project lazy left-in-start" data-transition="left-in">
         <div class="image-wrapper"
              @click="setPreviewProject(project)"
              :class="{ 'no-image-wrapper': !project.previewLink }">

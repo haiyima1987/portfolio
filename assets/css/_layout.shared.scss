@@ -4,6 +4,10 @@
 @import "./base.mixins";
 
 /* layout */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -23,6 +27,7 @@ body {
   flex-grow: 1;
 }
 
+/* scrollbar */
 * {
   scrollbar-color: $green-main-1 $green-pale-1;
   scrollbar-width: thin;

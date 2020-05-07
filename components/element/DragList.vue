@@ -6,7 +6,8 @@
          @dragover="dragOver($event)"
          @dragenter="dragEnter(index)"
          @dragleave="dragLeave(index)"
-         @drop="dragFinish(index)">
+         @drop="dragFinish(index)"
+         class="drag-item">
       <hr v-show="enteredIndex == index && isUpwards" class="line-indicator">
       <div class="item-wrapper">
         <slot name="item"
@@ -147,8 +148,15 @@
         if (this.startIndex != -1) {
           // get the reference of the destination element before manipulating
           let domSkill = this.dragItems[to]
+          // modify the destination index
+          let destination = to
+          if (this.startIndex < to) {
+            destination = this.isUpwards ? to - 1 : to
+          } else if (this.startIndex > to) {
+            destination = this.isUpwards ? to : to + 1
+          }
           // re-order the list
-          this.dragItems.splice(to, 0, this.dragItems.splice(this.startIndex, 1)[0])
+          this.dragItems.splice(destination, 0, this.dragItems.splice(this.startIndex, 1)[0])
           // set the hover to false to remove hover effect
           domSkill.isHovered = false
           // end the drag and reset
