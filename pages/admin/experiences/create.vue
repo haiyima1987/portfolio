@@ -91,6 +91,6 @@
 
 <style scoped lang="scss">
   .published-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: 2.6rem;
   }
 </style>

@@ -81,7 +81,7 @@
       })
     },
     methods: {
-      async updateSkills(data) {
+      async updateSkills() {
         // update display indexes
         let updatedSkills = this.domSkills.map((domSkill, index) => ({id: domSkill.id, displayIndex: index + 1}))
         // send request
@@ -141,7 +141,7 @@
     background-color: $green-main-1;
     color: white;
     @include border-radius(4px);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 </style>

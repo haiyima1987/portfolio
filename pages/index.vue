@@ -1,8 +1,6 @@
 <template>
   <div class="home-wrapper">
-    <div ref="introTopDisplay"
-         :class="{ 'background-pale-light': imageLoaded }"
-         class="intro-top-wrapper">
+    <div ref="introTopDisplay" class="intro-top-wrapper">
       <div class="intro-top-group lazy left-in-start" data-transition="left-in">
         <div v-for="heading in headingTypes[0].headings" :key="heading.id"
              class="heading-wrapper">
@@ -26,7 +24,7 @@
       </div>
       <div class="image-wrapper">
         <img @load="onImageLoaded" class="image lazy fade-in-start" data-transition="fade-in"
-             src="../assets/img/haiyi_home.png" alt="haiyi">
+             src="../assets/img/haiyi_selfie_with_background.png" alt="haiyi">
       </div>
     </div>
     <div class="button-top-wrapper lazy right-in-start" data-transition="right-in">
@@ -113,13 +111,13 @@
   }
 
   .heading {
-    font-size: 2.4rem;
+    font-size: 3.6rem;
     font-weight: bold;
   }
 
   .heading-text {
     color: $grey-medium-9;
-    line-height: 1.2rem;
+    line-height: 2rem;
     font-weight: 600;
   }
 
@@ -168,7 +166,8 @@
     width: 100%;
     text-transform: uppercase;
     font-weight: bold;
-    @include border-radius(25px);
+    @include border-radius(8px);
+    box-shadow: 0 1px 5px 1px $grey-pale-d
   }
 
   /* intro bottom wrapper  */
@@ -194,7 +193,7 @@
   .sub-heading {
     margin: 0;
     padding: 8px;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     border-bottom: 2px solid $green-main-1;
   }
@@ -268,11 +267,11 @@
 
     .heading {
       margin-bottom: 20px;
-      font-size: 2.8rem;
+      font-size: 4.4rem;
     }
 
     .heading-text {
-      font-size: 1.2rem;
+      font-size: 2rem;
     }
 
     .image {
@@ -287,12 +286,12 @@
 
   @media screen and (min-width: $screen-xl) {
     .intro-top-wrapper {
-      padding: 120px 10%;
+      padding: 80px 10%;
     }
 
     .heading-text {
-      font-size: 1.5rem;
-      line-height: 1.8rem;
+      font-size: 2.4rem;
+      line-height: 2.8rem;
     }
 
     .image {
@@ -307,9 +306,8 @@
 
     .button-home {
       height: 50px;
-      @include border-radius(25px);
       line-height: 50px;
-      font-size: 1.2rem;
+      font-size: 2rem;
     }
 
     /* headings bottom */
@@ -330,12 +328,12 @@
     }
 
     .heading {
-      font-size: 3.6rem;
+      font-size: 5.8rem;
     }
 
     .heading-text {
-      font-size: 1.8rem;
-      line-height: 2.0rem;
+      font-size: 2.8rem;
+      line-height: 3.6rem;
     }
 
     .intro-bottom-wrapper {
@@ -343,11 +341,11 @@
     }
 
     .sub-heading {
-      font-size: 1.8rem;
+      font-size: 2.8rem;
     }
 
     .sub-heading-text {
-      font-size: 1.5rem;
+      font-size: 2.4rem;
     }
   }
 </style>

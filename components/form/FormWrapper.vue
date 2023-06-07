@@ -96,7 +96,7 @@
     padding-left: 15px;
     text-align: left;
     color: $titleColor;
-    font-size: 1rem;
+    font-size: 1.6rem;
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -115,7 +115,7 @@
     border: 1px solid $borderColor;
     border-radius: 8px;
     background-color: $backgroundColor;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: $textColor;
   }
 

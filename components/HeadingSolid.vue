@@ -27,13 +27,13 @@
     padding: 10px;
     display: flex;
     align-items: center;
-    background-color: $green-4;
+    background-color: $green-main-1;
     text-align: center;
   }
 
   .title-heading {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 900;
     color: $grey-dark-3;
     text-transform: uppercase;

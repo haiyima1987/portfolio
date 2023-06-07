@@ -2,11 +2,11 @@
   <div class="contact-wrapper">
     <div class="image-wrapper">
       <img @load="initializeObserver" class="image lazy fade-in-start" data-transition="fade-in"
-           src="../assets/img/selfie_red_square.png" alt="selfie">
+           src="../assets/img/haiyi_selfie_red_square.png" alt="selfie">
     </div>
-    <div v-for="(infoType, index) in infoTypes" :key="infoType.id" class="lazy up-in-start" data-transition="up-in">
+    <div v-for="infoType in infoTypes" :key="infoType.id" class="lazy up-in-start" data-transition="up-in">
       <HeadingSolid :name="infoType.name"
-                    :background-color="backColors[index % infoTypes.length]"/>
+                    :background-color="'#37B553'"/>
       <div class="content-wrapper">
         <div v-for="info in infoType.infos" :key="info.id"
              class="item-wrapper">

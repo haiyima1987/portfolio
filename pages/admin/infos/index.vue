@@ -149,7 +149,7 @@
   .button-info-type {
     margin: 10px 0;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
   }
 

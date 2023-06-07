@@ -62,14 +62,14 @@
   .button-back {
     height: auto;
     padding: 0 15px;
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     display: flex;
     align-items: center;
 
     .text-back {
       margin-left: 8px;
       color: $green-main-1;
-      font-size: 1rem;
+      font-size: 1.6rem;
     }
   }
 

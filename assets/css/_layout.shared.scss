@@ -8,13 +8,41 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 4.4rem;
+}
+
+h2 {
+  font-size: 3.6rem;
+}
+
+h3 {
+  font-size: 2.8rem;
+}
+
+h4 {
+  font-size: 2.4rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.6rem;
 }
 
 .full-page-wrapper {
@@ -65,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .page-title {
-  font-size: 2rem;
+  font-size: 3.6rem;
   font-weight: 900;
   color: $grey-dark-1;
 }
@@ -245,15 +273,15 @@ textarea {
 
 /*ux element styles*/
 .spinner {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   @include center-element-fixed();
   z-index: 500;
 
   .fa-spinner {
     position: relative;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     color: $green-main-1;
   }
 }
@@ -273,7 +301,7 @@ textarea {
 
 @media screen and (min-width: $screen-sm) {
   body {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 }
 

@@ -47,11 +47,11 @@
             </a>
           </div>
         </div>
-        <div v-else class="button-group-wrapper">
-          <div class="internal-text-wrapper">
-            <div>Links unavailable due to privacy (internal project)</div>
-          </div>
-        </div>
+<!--        <div v-else class="button-group-wrapper">-->
+<!--          <div class="internal-text-wrapper">-->
+<!--            <div>Links unavailable due to privacy (internal project)</div>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
     </div>
     <ImageModal/>
@@ -148,7 +148,7 @@
     height: 26px;
     display: flex;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
 
     &:before {
       content: "";
@@ -170,14 +170,14 @@
   }
 
   .title-project {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: $grey-medium-4;
   }
 
   .year {
     color: $grey-medium-4;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 800;
     text-align: right;
     flex-grow: 1;
@@ -187,7 +187,7 @@
   .description-project {
     padding: 10px 0 0 0;
     @include line-clamp(3);
-    line-height: 1.2rem;
+    line-height: 2rem;
   }
 
   .read-more-wrapper {
@@ -208,7 +208,7 @@
     background-color: $green-main-1;
     color: white;
     @include border-radius(4px);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 

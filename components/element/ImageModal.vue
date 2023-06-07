@@ -87,7 +87,7 @@
   }
 
   .icon-cancel-wrapper {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: $green-main-1;
     @include position(absolute, $top: 5px, $right: 15px);
 

@@ -24,7 +24,7 @@
   }
 
   .title {
-    font-size: 2.2rem;
+    font-size: 3.6rem;
     font-weight: bold;
     color: $color-main;
     text-transform: uppercase;

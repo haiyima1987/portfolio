@@ -77,6 +77,8 @@
     /* layout wrappers */
     .resume-page-wrapper {
       @include box-shadow(0, 0, 20px, $grey-opaque-15);
+      @include border-radius(6px);
+      overflow: hidden;
     }
 
     .section-wrapper {
@@ -109,7 +111,7 @@
     }
 
     .title-name {
-      font-size: 2.4rem;
+      font-size: 3.6rem;
       font-weight: bold;
       text-transform: uppercase;
     }
@@ -117,7 +119,7 @@
     .intro-box {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
+      font-size: 2rem;
       font-weight: bold;
       color: white;
       background-color: $grey-dark-3;

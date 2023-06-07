@@ -27,7 +27,7 @@
 
   .title-heading {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 2.6rem;
     font-weight: 800;
     text-transform: uppercase;
   }

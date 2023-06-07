@@ -155,7 +155,7 @@
   }
 
   .title-item {
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 800;
     text-transform: uppercase;
   }
@@ -181,7 +181,7 @@
 
   .name-scope {
     margin-bottom: 8px;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     font-weight: bold;
     text-transform: uppercase;
   }
@@ -195,7 +195,7 @@
 
   .bar-skill {
     padding-left: 10px;
-    background-color: $green-6;
+    background-color: $green-main-1;
     @include position(absolute, $top: 0, $bottom: 0, $left: 0);
     display: flex;
     align-items: center;

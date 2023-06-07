@@ -83,7 +83,7 @@
       onPanelSelected: function () {
         this.$refs.datePicker.close()
       },
-      onClearClick: function (event) {
+      onClearClick: function () {
         this.input = ''
       },
       setInputTimeout: function () {
@@ -127,7 +127,7 @@
   @import "../../assets/css/base.mixins";
 
   .date-picker-field {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.4rem;
   }
 
   .label-picker {
@@ -137,7 +137,7 @@
   .button-clear {
     @include position(absolute, $top: 50%, $right: 16px);
     @include translate(0, -50%);
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: bold;
     color: $red-main;
 

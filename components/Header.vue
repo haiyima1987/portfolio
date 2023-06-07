@@ -180,12 +180,12 @@
     padding: 0 15px;
     height: 60px;
     line-height: 60px;
-    font-size: 1.2rem;
+    font-size: 2rem;
   }
 
   .icon-menu-wrapper {
     padding: 0 20px;
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: white;
 
     &:hover {
@@ -195,7 +195,7 @@
 
   .icon-menu-wrapper-admin {
     padding: 0 20px;
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     color: white;
 
     &:hover {

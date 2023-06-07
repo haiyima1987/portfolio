@@ -163,7 +163,7 @@
   }
 
   .icon-cancel-wrapper {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     display: flex;
     justify-content: flex-end;
     color: $green-main-1;
@@ -183,7 +183,7 @@
     padding: 10px 10px 5px 20px;
     height: auto;
     border-bottom: 1px solid $green-main-1;
-    font-size: 1rem;
+    font-size: 1.6rem;
     font-weight: 800;
 
     &:nth-of-type(odd) {
@@ -202,7 +202,7 @@
     padding: 10px;
     width: 100%;
     color: $green-main-1;
-    font-size: 1rem;
+    font-size: 1.6rem;
     font-weight: 800;
     border: 1px solid $green-main-1;
   }

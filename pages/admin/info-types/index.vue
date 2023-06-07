@@ -148,7 +148,7 @@
     background-color: $green-main-1;
     color: white;
     @include border-radius(4px);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
 </style>

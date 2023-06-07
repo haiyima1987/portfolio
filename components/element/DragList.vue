@@ -215,9 +215,9 @@
   }
 
   .button {
-    margin: 0 0 0 0.5rem;
+    margin: 0 0 0 0.8rem;
     padding: 10px 15px;
-    font-size: 1rem;
+    font-size: 1.6rem;
     @include flex-center();
 
     &:hover {
